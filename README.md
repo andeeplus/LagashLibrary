@@ -1,68 +1,180 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Lagash Library
 
-## Available Scripts
+## Why Lagash?
 
-In the project directory, you can run:
+LAGASH, or Sirpurla, one of the oldest centres of Sumerian civilization in Babylonia. It is represented by a rather low, long line of ruin mounds, along the dry bed of an ancient canal, some 3 m. E. of the Shatt-el-Haī and a little less than 10 m. N. of the modern Turkish town of Shatra. These ruins were discovered in 1877 by Ernest de Sarzec, at that time French consul at Basra, who was allowed, by the Montefich chief, Nasir Pasha, the first Wali-Pasha, or governor-general, of Basra, to excavate at his pleasure in the territories subject to that official. At the outset on his own account, and later as a representative of the French government, under a Turkish firman, de Sarzec continued excavations at this site, with various intermissions, until his death in 1901, after which the work was continued under the supervision of the Commandant Cros. The principal excavations were made in two larger mounds, one of which proved to be the site of the temple, E-Ninnu, the shrine of the patron god of Lagash, Nin-girsu or Ninib. This temple had been razed and a fortress built upon its ruins, in the Greek or Seleucid period, some of the bricks found bearing the inscription in Aramaic and Greek of a certain Hadad-nadin-akhe, king of a small Babylonian kingdom. It was beneath this fortress that the numerous statues of Gudea were found, which constitute the gem of the Babylonian collections at the Louvre. These had been decapitated and otherwise mutilated, and thrown into the foundations of the new fortress. From this stratum came also various fragments of bas reliefs of high artistic excellence. [...]
 
-### `npm start`
+**In a small outlying mound de Sarzec discovered __the archives of the temple, about 30,000 inscribed clay tablets__, containing the business records, and revealing with extraordinary minuteness the administration of an ancient Babylonian temple, the character of its property, the method of farming its lands, herding its flocks, and its commercial and industrial dealings and enterprises; for an ancient Babylonian temple was a great industrial, commercial, agricultural and stock-raising establishment.**
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/The_name_of_Enannatum_I%2C_ruler_or_king_of_Lagash_is_mentioned_in_this_inscribed_cuneiform_text._Detail_of_a_stone_plaque._Circa_2420_BCE._From_Girsu%2C_Iraq._The_British_Museum%2C_London.jpg/1920px-thumbnail.jpg)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+[More Infos](https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Lagash)
 
-### `npm test`
+## Ok, but why Lagash?
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Keeping alive forgotten music and create a good channel where to discover relevant information outside the mass channels at our disposal has been always something that interested me. 
 
-### `npm run build`
+Based on the Discogs API this simple project born to make possible collecting valuable infos from the largest music database on the planet, thanks to the help of, initially, a reduced amount of passionate user.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All this information can be seen by everybody on the web but just selected users can edit and add items to it.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+As a plus I'd like also the idea of sharing and interchange records, sometimes we are tired about them and we would like to sell it, why not change it?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Not many web platforms are exchange-based, at least musically speaking.
+This small application potentially could fill the gap.
 
-### `npm run eject`
+**Sharing is living**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+_Peace_	☮
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## API Database
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+[Discogs API](https://www.discogs.com/developers/)
+[Node.js - Disconnect](https://github.com/bartve/disconnect)
 
-## Learn More
+## Structure & Pages
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1.  Lagash Library Pages
+    - **Home**
+    - **Search**
+    - **Artist Detail**
+    - **Record Detail**
+    - **Label Detail**
+    - **Library**
+    - **LogIn**
+      - **Interchange** *(isLogged)*
+      - **User Area** *(isLogged)*
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+2.  Pages Detail / Comoponents
+    - **Common Components**
+    - Header --> *Sticky Header - Always*
+      - Navbar
+        - Home
+        - Search
+        - Library
+        - User Area
+    - Footer --> *Sticky Footer - Always*
+    - **Home**
+      - Hot now *(Editorial record picks)*
+      - Recently added as favourites
+      - Random Selections by users collections
+    - **Search**
+      - Search Component
+      - **Record List**
+        - **Record Card**
+          - **Action Bar** *(Always visible, active if logged)*
+            - Add to faves
+            - Add to collection
+            - Add to wantlist
+            - Add to interchange
+            - Link to detail page
+    - **Library**
+      - Hot now artist *(Artist with most articles added recently)*
+      - Editorial picks *(Editorial chosen artist)*
+      - Recently added articles *(Latest articles uploaded)*
+    - **Login**
+      - LogIn Module
+    - **Interchange**
+      - Record List
+        - Record Card
+      - Interchange Form Area
+    - **User Area**
+      - Personal Details 
+      - Message Area 
+        - Message page
+          - Message Compo
+      - Collection 
+        - Wantlist 
+        - Owned 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Built With
 
-### Analyzing the Bundle Size
+* [React](https://reactjs.org/)
+* [React-Router](https://reacttraining.com/react-router/)
+* [Sass](https://sass-lang.com/)
+* [Firebase](https://firebase.google.com/)
+* [Redux](https://redux.js.org/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```
+npm install create-react-app
+npm install node-sass
+npm install redux
+npm install axios
+npm install react-redux
+npm install redux-thunk
+npm install redux-logger
+npm install redux-promise-middleware
+```
 
-### Making a Progressive Web App
+# Modelo de Datos
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## User
 
-### Advanced Configuration
+```
+  static propTypes = {
+    age: PropTypes.number,
+    name: PropTypes.string,
+    userName: PropTypes.string,
+    profilePic: PropTypes.string,
+    genreFave: PropTypes.array,
+    recordCollection: {
+      faves: PropTypes.array,
+      wantlist: PropTypes.array,
+      collection/interchange? : PropTypes.array,
+    }
+  }
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Record
 
-### Deployment
+```
+  static propTypes = {
+    id: PropTypes.number,
+    title: PropTypes.string,
+    year: PropTypes.string,
+    cover_image: PropTypes.string,
+    versions: PropTypes.array,
+    label: PropTypes.array,
+    style: PropTypes.array,
+    genre: PropTypes.array,
+    format: PropTypes.array,
+    country: PropTypes.string,
+    catno: PropTypes.string,
+    tag: PropTypes.string // extra API
+  }
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Artist
 
-### `npm run build` fails to minify
+```
+  static propTypes = {
+    id: PropTypes.number,
+    name: PropTypes.string,
+    websites: PropTypes.array,
+    aliases: PropTypes.array,
+    country: PropTypes.string,
+    genre: PropTypes.array,
+    labels: PropTypes.array,
+    releases: {
+      albums: PropTypes.array,
+      singles: PropTypes.array, 
+      compilations: PropTypes.array,
+      videos: PropTypes.array,
+      misc: PropTypes.array
+    }
+  }
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+
+# Discogs API
+https://www.discogs.com/applications/edit/21925
+
+```
+Consumer Key	SjjOjqWnqWohCWnuPfro
+Consumer Secret	diyiYYaRVmAMBaqizxudyAhrBdHlVwbd
+Request Token URL	https://api.discogs.com/oauth/request_token
+Authorize URL	https://www.discogs.com/oauth/authorize
+Access Token URL	https://api.discogs.com/oauth/access_token
+```
