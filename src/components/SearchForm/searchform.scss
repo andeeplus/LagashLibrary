@@ -1,0 +1,82 @@
+.search-bar-box{
+  overflow: hidden;
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.search-bar-box input#search{
+  width: 300px;
+  height: 25px;
+  background: white;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: $text-color;
+  padding-left: 23px;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  cursor: text;
+}
+
+.search-bar-box input#search::-webkit-input-placeholder {
+   color: $primary-color;
+}
+ 
+.search-bar-box input#search:-moz-placeholder { /* Firefox 18- */
+   color: $primary-color;  
+}
+ 
+.search-bar-box input#search::-moz-placeholder {  /* Firefox 19+ */
+   color: $primary-color;  
+}
+ 
+.search-bar-box input#search:-ms-input-placeholder {  
+   color: $primary-color;  
+}
+
+.search-bar-box button.icon{
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+ 
+  border: none;
+  background: white;
+  height: 21px;
+  width: 50px;
+  color: #4f5b66;
+  opacity: 0;
+  font-size: 10pt;
+
+ 
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -ms-transition: all .55s ease;
+  -o-transition: all .55s ease;
+  transition: all .55s ease;
+}
+
+.search-bar-box:hover button.icon, .search-bar-box:active button.icon, .search-bar-box:focus button.icon{
+  outline: none;
+  opacity: 1;
+  margin-left: -50px;
+
+}
+ 
+.search-bar-box:hover button.icon:hover{
+  background: white;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  // -webkit-appearance:none;
+  position: relative;
+  right: 280px;
+}

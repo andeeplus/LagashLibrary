@@ -1,0 +1,146 @@
+
+.RecordList{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 10px 0;
+  justify-content: space-around;
+  align-content: stretch;
+  font-family: $font-type-b;
+  padding-bottom: 15px;
+}
+
+.list-card{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 270px;
+  padding: $five-pix;
+  border-radius: $radius-b;
+  margin: $five-pix;
+}
+
+.list-card-type-a{
+  font-size: $font-size-card-el;
+  font-weight: 400;
+  margin: 0px;
+  margin-right: 0.25em;
+  background-color: $dark-sub;
+  border-radius: 3px;
+  color: $clear-color;
+  padding: 2px 4px;
+  align-self: center;
+}
+
+.list-card-type-l{
+  font-size: $font-size-card-el;
+  font-weight: 400;
+  margin: 0px;
+  margin-right: 0.25em;
+  background-color: $high-sub;
+  border-radius: 3px;
+  color: $clear-color;
+  padding: 2px 4px;
+  align-self: center;
+}
+
+.list-card-t-line{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.list-card-title{
+  font-size: $font-size-card;
+  font-weight: 400;
+  margin: 0px;
+  font-style: italic;
+}
+
+.list-card-artist{
+  font-size: $font-size-card;
+  font-weight: 700;
+  margin: 0px;
+}
+
+.list-card-line{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow:1;
+  margin: 2px 2px;
+}
+
+.list-card-year{
+  font-size: $font-size-card;
+  font-weight: 300;
+  margin: 0px;
+}
+
+.list-card-catno{
+  font-size: $font-size-card;
+  font-weight: 500;
+  margin: 0px;
+}
+
+.list-card:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.figure-card{
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  margin: 10px;
+  position: relative;
+
+  & .img-card {
+    max-height: 250px;
+    width: auto;
+    position: absolute;
+    left: -1000%;
+    right: -1000%;
+    top: -1000%;
+    bottom: -1000%;
+    margin: auto;
+    
+  }
+
+}
+
+.list-card-action{
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 6px;
+  color: $clear-color;
+}
+
+.list-card-button{
+  background: none;
+	color: $clear-color;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+  outline: inherit;
+  
+  & :hover{
+    color: $mid-sub;
+  }
+}
+
+.list-card-body{
+  padding: 2px 12px;
+  margin: 0px;
+  background-color: $secondary-color;
+  border-bottom-left-radius: $radius-b;
+  border-bottom-right-radius: $radius-b;
+}
+
+@media all and (max-width: 750px) {
+
+
+}

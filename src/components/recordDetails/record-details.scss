@@ -1,0 +1,194 @@
+.block-rec{
+  display:flex;
+  flex-direction: row;
+  padding-top: 16px;
+  justify-content: center;
+  padding-bottom: 5vh;
+}
+
+.record-details{
+  display:flex;
+  flex-direction: column;
+}
+
+.main-rec-image{
+  height: auto;
+  max-width: 300px;
+}
+
+.record-det-artist{
+  font-family: $font-type-b;
+  font-size: $text-size-xxl;
+  font-weight: $font-w-normal;
+  margin: 0px;
+}
+.record-det-title{
+  font-size: $text-size-xl;
+  font-weight: $font-w-normal;
+  margin: 0px;
+  font-style: italic;
+}
+
+.genre-block {
+  padding: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-genre{
+  font-family: $font-type-b;
+  font-size: $text-size-m;
+  padding: 2px 3px;
+  border-radius: 3px;
+  color: $secondary-color;
+  width: auto;
+  display:inline-block;
+  margin: 0 3px;
+  background-color: $label-two;
+  margin-bottom: 6px;
+}
+.main-style{
+  @extend .main-genre;
+  background-color: $label-one;
+}
+
+.tracklist-record{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+.track-rec{
+  font-family: $font-type-b;
+  font-size: $text-size-m;
+  padding: 3px 0;
+  display: inline;
+  border-bottom: 1px solid rgb(243, 233, 233);
+  
+  & span{
+    padding: 0 3px;
+    border-radius: 5px;
+    font-size: $text-size-s;
+    margin: 0 5px;
+  }
+
+  & i {
+    padding-left: 10px;
+  }
+
+  & .heading-rec{
+    font-size: $text-size-m;
+    font-weight: 400;
+    margin: 0px;
+    margin-right: 0.25em;
+    font-style: italic;
+    border-radius: 3px;
+    color: $mid-sub;
+    padding: 2px 4px;
+    align-self: center;
+    margin-left: auto;
+    text-align: right;
+  }
+}
+  .label-track{
+    background-color: $secondary-color;
+    color: $secondary-darker;
+  }
+
+  .country-rec{
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+    font-weight: $font-w-normal;
+  }
+  .year{
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+    font-weight: $font-w-bold;
+    font-style: italic;
+  }
+  .format-rec{
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+    font-weight: $font-w-normal;
+  }
+  .rec-label{
+    font-family: $font-type-b;
+    font-size: $text-size-l;
+    font-weight: $font-w-bold;
+    
+    & span {
+      padding-right: 5px;
+      font-size: $text-size-m;
+      text-transform: uppercase; 
+      font-weight: $font-w-normal;
+    }
+  }
+
+  .format-year{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px 0;
+
+    & div {
+      padding-right: 8px;
+    }
+  }
+
+  .label-block {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .label-description{
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+    padding: 3px 0;
+    font-style: italic;
+  }
+
+  .label-name{
+    @extend .record-det-artist;
+    text-transform: capitalize;
+  }
+
+  .web-label {
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+    text-decoration: none;
+  }
+
+  .label-contact{
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+    text-decoration: none;
+  }
+
+@media all and (max-width: 750px) {
+  
+  .block-rec{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vw;
+    padding-bottom: 5vh;
+  }
+
+  .main-genre {
+    display: block;
+    flex: 1 0 40%
+  }
+
+  .record-details {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+}
+
+  .label-block {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vw;
+    padding-bottom: 5vh;
+  }
+}

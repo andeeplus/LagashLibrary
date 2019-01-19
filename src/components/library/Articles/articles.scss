@@ -1,0 +1,26 @@
+.slick-slider{
+  padding: 0 5vw;
+
+  & a{
+    text-decoration: none;
+  }
+}
+
+.slick-slide img {
+  display: block;
+  height: 200px;
+  border-radius:$radius-a;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: $primary-darker;
+}
+
+.articles-carousel{
+  width: 600px;
+  justify-content: center;
+}
+
+.slick-initialized{
+  border-radius:$radius-a;
+}

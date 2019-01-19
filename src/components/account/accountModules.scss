@@ -1,0 +1,73 @@
+.login-block{
+  font-family: $font-type-b;
+  font-size: $text-size-s;
+  width: 200px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin:0 auto;
+}
+
+.logModules{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+.signup-block{
+  font-family: $font-type-b;
+  font-size: $text-size-s;
+  width: 400px;
+  height: auto;
+  margin:0 auto;
+
+}
+
+input[type=text], input[type=password], input[type=email]  {
+  width: 100%;
+  padding: 8px 8px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: $radius-a;
+}
+
+.buttonSubmit {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: $radius-a;
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+
+  &:hover {
+  opacity: 0.8;
+  }
+}
+
+.loginContainer {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+.low-bar-form{
+  display: flex;
+  flex-direction: row;
+  & :last-child{
+    margin-left: auto;
+  }
+}
+
+.log-error{
+  margin-top: 16px;
+  width: 240px;
+  font-style: italic;
+}

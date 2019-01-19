@@ -1,0 +1,13 @@
+.table-versions{
+  padding-bottom: 40px;
+  padding: 0 5vw;
+  width: 90vw;
+  padding-bottom: 40px;
+  font-family: $font-type-b;
+}
+
+@media all and (max-width: 750px) {
+  .table-versions{
+  width: -webkit-fill-available;
+  }
+}

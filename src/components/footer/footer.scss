@@ -1,0 +1,133 @@
+footer {
+  position:fixed;  
+  bottom:0; 
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  line-height: 30px;
+  justify-content: space-between;
+  background-color: $navbar-dark;
+}
+
+.foot-bar {
+
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  background-color: $navbar-dark;
+  align-content: center;
+  justify-content: center;
+
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+  & .foot-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: $navbar-dark;
+    color: $navbar-text;
+    font-size: $text-size-s;
+    text-align: center;
+    font-family: $font-type-a;
+    font-weight: $font-w-bold;
+    padding: 0 10px;
+
+    & a{
+      text-decoration: none;
+      color: $navbar-text;
+      font-weight: 400;
+      width: 100%;
+    }
+
+  }
+
+  .foot-bar li a .active{
+    background-color: $secondary-color;
+  }
+
+}
+
+.foot-logo{
+  display: flex;
+  flex-direction: row;
+  background-color: $navbar-dark;
+  color: $navbar-text;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+
+  & img{
+    width: 20px;
+    height: 20px;
+  }
+  & p{
+    font-family: $font-type-a;
+    font-size: $text-size-m;
+    font-weight: $font-w-bold;
+  }
+}
+
+.footerAZ{
+
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: $navbar-dark;
+  font-family: $font-type-a;
+  font-size: $text-size-s;
+
+  & p{
+    margin: 0;
+    padding: 0 5px;
+  }
+
+}
+
+
+.rotating-block {
+-webkit-animation: spin1 2s infinite linear;
+-moz-animation: spin1 2s infinite linear;
+-o-animation: spin1 2s infinite linear;
+-ms-animation: spin1 2s infinite linear;
+animation: spin1 2s infinite linear;
+    display: block;
+
+    vertical-align: 12px;
+    height: 14px;
+    width: 14px;
+}
+ 
+@-webkit-keyframes spin1 {
+0% { -webkit-transform: rotate(0deg);}
+100% { -webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes spin1 {
+0% { -moz-transform: rotate(0deg);}
+100% { -moz-transform: rotate(360deg);}
+}
+@-o-keyframes spin1 {
+0% { -o-transform: rotate(0deg);}
+100% { -o-transform: rotate(360deg);}
+}
+@-ms-keyframes spin1 {
+0% { -ms-transform: rotate(0deg);}
+100% { -ms-transform: rotate(360deg);}
+}
+@-keyframes spin1 {
+0% { transform: rotate(0deg);}
+100% { transform: rotate(360deg);}
+} 
+
+
+
+@media all and (max-width: 750px) {
+  
+  .footerAZ{
+    display:none;
+  }
+
+}

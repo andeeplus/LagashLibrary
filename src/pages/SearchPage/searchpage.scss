@@ -1,0 +1,13 @@
+.button-line-move{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 15px;;
+  margin: 0 0 40px 0;
+}
+
+.butt-move{
+  border-radius: 4px;
+  font-family: $font-type-a;
+  text-shadow: $text-shadow;
+}
