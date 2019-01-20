@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import vinyl from '../../../img/vinyl.svg'
-import ReleasesTable from '../ReleasesTable/ReleasesTable'
-import { NavLink } from 'react-router-dom'
 import Articles from '../../library/Articles/Articles'
-import AddArticles from '../../library/AddArticles/AddArticles'
+import RecordList from '../../../components/recordList/RecordList'
 
 class LabelDetail extends Component {
   render() {
@@ -12,7 +10,7 @@ class LabelDetail extends Component {
 
     return (
       <React.Fragment>
-        <div className="label-block">
+        <div className="page-block">
           <figure>
           <img className="main-rec-image" 
           src={
@@ -21,23 +19,23 @@ class LabelDetail extends Component {
             : vinyl
           } alt='record' />
         </figure>
-          <div className="record-details">
-            <p className="label-name">{results.name}</p>
-            <p className="label-description"><span>Info: </span>{results.profile}</p>
-            <p className="label-contact"><span>Contact: </span>{results.contact_info}</p>
-            <p className="web-label"><span>Sites:</span></p>
+          <div className="page-details">
+            <p className="page-name">{results.name}</p>
+            <p className="page-desc"><strong>Info: </strong><p dangerouslySetInnerHTML={{__html:results.profile_html}} ></p></p>
+            <p className="label-contact"><strong>Contact: </strong>{results.contact_info}</p>
+            <p className="web-page"><strong>Sites:</strong></p>
             {results.urls.map((i,index) => <a 
               key={index} 
-              className="web-label" 
+              className="web-page" 
               href={i}>{
                 i.replace('http://www.','')
                  .replace('http://','')}</a>)}
             
           </div>
         </div>
-        <AddArticles idLabel={results.id} type={'label'} />
+
         <Articles idLabel={results.id} type={'label'} />
-        <ReleasesTable releases={releases}/>
+        <RecordList records={releases.releases} comingFrom={'labelDetail'}/>
       </React.Fragment>
     );
   }

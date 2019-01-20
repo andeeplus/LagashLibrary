@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import { NavLink } from "react-router-dom";
 import SearchForm from '../SearchForm/SearchForm'
-import { connect } from 'react-redux';
 
+import { connect } from 'react-redux';
 import DatabaseApi from '../../../src/services/dbApi'
 import AuthApi from '../../../src/services/authApi'
 import { setUserInfo } from '../../../src/redux/actions/authActions';
@@ -29,14 +29,6 @@ class NavBar extends Component {
     });
   }
 
-  logout = () => {
-    const error = AuthApi.logout();
-
-    if(!error){
-      console.log("Has salido mu bien");
-    }
-  }
-
   render() {
 
     const {user} = this.state
@@ -44,38 +36,40 @@ class NavBar extends Component {
 
     return (
     <div className="full-nav">
-    <div className="navLinks foot-logo">
-    <p>LAGASH LIBRARY</p>
+    <div className="logo-ll">
+      <NavLink exact to='/'>
+      <p>LAGASH LIBRARY</p>
+    </NavLink>
+
     </div>
       <ul className="nav-bar">
         <li className="nav-links">
-          <NavLink exact to='/' 
-            activeStyle={activeCss}>
-              Home
-          </NavLink>
-        </li>
-        <li className="nav-links">
-          <NavLink to='/search' 
+          <NavLink exact to='/search' 
             activeStyle={activeCss}>
               Search
           </NavLink>
-          </li>
+        </li>
         <li className="nav-links">
           <NavLink to='/library' 
             activeStyle={activeCss}>
               Library
           </NavLink>
         </li>
+        <li className="nav-links">
+          <NavLink to='/about' 
+            activeStyle={activeCss}>
+              About
+          </NavLink>
+        </li>
         {!user
           ? <li className="nav-links">
-            <NavLink to='/login' 
-              activeStyle={activeCss}>
-                LogIn
-            </NavLink>
-        </li>
+          <NavLink to='/login'>
+            LogIn
+          </NavLink>
+          </li>
           : <li className="nav-links">
-            <NavLink to='' onClick={() => this.logout()}>
-                LogOut
+            <NavLink to={`/user/${user.id}`}>
+                Profile
             </NavLink>
           </li>  
         }
@@ -100,3 +94,10 @@ const mapDispatchToProps = (dispatch) => {
 
 export default withRouter(connect(null, mapDispatchToProps)(NavBar));
 
+
+// <li className="nav-links">
+// <NavLink to='/search' 
+//   activeStyle={activeCss}>
+//     Search
+// </NavLink>
+// </li>

@@ -3,16 +3,15 @@
 @import './components/footer/footer.scss';
 @import './components/SearchForm/searchform.scss';
 @import './components/account/accountModules.scss';
-@import './pages/UserArea/userarea.scss';
 @import './components/recordList/RecordCard/recordcard.scss';
+@import './components/recordList/RecordCard/recordcard-sm.scss';
 @import './pages/SearchPage/searchpage.scss';
 @import './components/recordDetails/record-details.scss';
 @import './components/Loading/loading.scss';
 @import './components/recordDetails/VersionList/versions.scss';
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
-@import './components/Articles/articles.scss';
-
+@import './components/library/Articles/articles.scss';
+@import './components/recordList/ActionBar/actionbar.scss';
+@import './components/Modal/modal.scss';
 
 html,body,p{
   margin:0;
@@ -33,3 +32,4 @@ textarea:focus, input:focus{
   font-size: $text-size-l;
   text-align: center;
 }
+

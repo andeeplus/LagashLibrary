@@ -57,12 +57,14 @@ footer {
   justify-content: center;
   align-items: center;
   width: 150px;
+  color: white;
+  text-decoration: none;
 
-  & img{
+  img{
     width: 20px;
     height: 20px;
   }
-  & p{
+  p{
     font-family: $font-type-a;
     font-size: $text-size-m;
     font-weight: $font-w-bold;

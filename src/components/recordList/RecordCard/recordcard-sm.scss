@@ -1,4 +1,4 @@
-.RecordList{
+.RecordList-sm{
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -9,16 +9,16 @@
   padding-bottom: 15px;
 }
 
-.list-card{
+.list-card-sm{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 270px;
+  width: 165px;
   padding: $five-pix;
   border-radius: $radius-b;
   margin: $five-pix;
 }
 
-.list-card-type-a{
+.list-card-type-a-sm{
   font-size: $font-size-card-el;
   font-weight: 400;
   margin: 0px;
@@ -30,7 +30,7 @@
   align-self: center;
 }
 
-.list-card-type-l{
+.list-card-type-l-sm{
   font-size: $font-size-card-el;
   font-weight: 400;
   margin: 0px;
@@ -42,60 +42,63 @@
   align-self: center;
 }
 
-.list-card-t-line{
+.list-card-t-line-sm{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
 }
 
-.list-card-title{
+.list-card-line-sm{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow:1;
+  margin: 2px 2px;
+}
+
+
+.list-card-title-sm{
   font-size: $font-size-card;
   font-weight: 400;
   margin: 0px;
   font-style: italic;
 }
 
-.list-card-artist{
+.list-card-artist-sm{
   font-size: $font-size-card;
   font-weight: 700;
   margin: 0px;
 }
 
-.list-card-line{
-  display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-grow:1;
-  margin: 2px 2px;
-}
-
-.list-card-year{
+.list-card-year-sm{
   font-size: $font-size-card;
   font-weight: 300;
   margin: 0px;
 }
 
-.list-card-catno{
+.list-card-catno-sm{
   font-size: $font-size-card;
   font-weight: 500;
   margin: 0px;
 }
 
-.list-card:hover{
+.list-card-sm:hover{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 
-.figure-card{
-  width: 250px;
-  height: 250px;
+.figure-card-sm{
+  width: 150px;
+  height: 150px;
   overflow: hidden;
   margin: 10px;
   position: relative;
+  display: flex;
+  justify-content: center;
 
-  & .img-card {
-    max-height: 250px;
+  & .img-card-sm{
+    max-height: 150px;
     width: auto;
     position: absolute;
     left: -1000%;
@@ -105,10 +108,9 @@
     margin: auto;
     
   }
-
 }
 
-.list-card-body{
+.list-card-body-sm{
   padding: 2px 12px;
   margin: 0px;
   background-color: $secondary-color;

@@ -30,7 +30,10 @@ input[type=text], input[type=password], input[type=email]  {
   padding: 8px 8px;
   margin: 4px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-top: white;
+  border-left: white;
+  border-right:white;
   box-sizing: border-box;
   border-radius: $radius-a;
 }
@@ -70,4 +73,59 @@ span.psw {
   margin-top: 16px;
   width: 240px;
   font-style: italic;
+}
+
+
+// ----- Contact Box ----- //
+
+.contact-box {
+  font-family: $font-type-b;
+  font-size: $text-size-s;
+  width: 400px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin:0 auto;
+  align-items: center;
+
+  & input{
+    margin-top: 10px 0;
+  }
+
+}
+
+.text-area-msg{
+  margin-top: 5px;
+  width: 400px;
+  height: 200px;
+}
+
+.msgSent{
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  & p{
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+    padding-top: 10px;
+  }
+}
+
+.airplane{
+  height: 200px;
+}
+
+
+@media all and (max-width: 750px) {
+  .contact-box {
+    width: 350px;
+
+  }
+  .text-area-msg{
+    width: 350px; 
+  }
 }

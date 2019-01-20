@@ -56,7 +56,7 @@ class LogInModule extends Component {
               <p>Remember me</p>
               <NavLink to='/signup'>Sign Up</NavLink>
             </div>
-              <span className="psw">Forgot <a href="#">password?</a></span>
+              <span className="psw">Forgot <NavLink to='/recover'>password?</NavLink></span>
           </div>
         </form>
         <div className="log-error">{this.state.loginError}</div>

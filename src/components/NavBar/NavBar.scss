@@ -10,6 +10,22 @@
   width: auto;
 }
 
+.svg-inline--fa {
+  color:$navbar-text;
+  // line-height: 20px;
+  // vertical-align: -5px;
+}
+
+.logo-ll{
+  margin-left: 10px;
+  a{
+  color: $navbar-text;
+  text-decoration: none;
+  font-family: $font-type-a;
+  font-size: $text-size-m;
+  font-weight: $font-w-bold;
+  }
+}
 
 .nav-bar {
   display: flex;

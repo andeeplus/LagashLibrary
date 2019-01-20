@@ -15,7 +15,7 @@ export default class MasterDetail extends Component {
         detail &&
         
         <React.Fragment>
-          <div className="block-rec">
+          <div className="page-block">
             <figure>
               <img className="main-rec-image" 
               src={
@@ -24,7 +24,7 @@ export default class MasterDetail extends Component {
                 : vinyl
               } alt='record' />
             </figure>
-            <div className="record-details">
+            <div className="page-details">
               <p className="record-det-artist">{detail.artists[0].name}</p>
               <p className="record-det-title">{detail.title}</p>
             <div className="genre-block">

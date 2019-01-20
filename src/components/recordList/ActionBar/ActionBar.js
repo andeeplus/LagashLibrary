@@ -15,7 +15,7 @@ class ActionBar extends Component {
       case 'release':
         return `/record/releases/${id}`;
       default:
-        return `/record/${id}`
+        return `/record/releases/${id}`
     }
   }
 

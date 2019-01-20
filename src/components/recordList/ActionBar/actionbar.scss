@@ -1,0 +1,22 @@
+.list-card-action{
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 6px;
+  color: $clear-color;
+}
+
+.list-card-button{
+  background: none;
+	color: $clear-color;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+  outline: inherit;
+  
+  & :hover{
+    color: $mid-sub;
+  }
+}

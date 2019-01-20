@@ -12,12 +12,13 @@ import LabelPage from './pages/LabelPage/LabelPage'
 import RecordPage from './pages/RecordPage/RecordPage.js'
 import SearchPage from './pages/SearchPage/SearchPage.js'
 import MessageArea from './pages/MessageArea/MessageArea'
-import UserArea from './pages/UserArea/UserArea'
 import Library from './pages/Library/Library'
+import About from './pages/About/About'
+import UserArea from './pages/UserArea/UserArea'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner } from '@fortawesome/free-solid-svg-icons'
-library.add(faSearch, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink)
+import { faSearch, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner, faSignInAlt, faSignOutAlt, faBook } from '@fortawesome/free-solid-svg-icons'
+library.add(faSearch,faSignInAlt, faBook, faSignOutAlt, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink)
 
 
 export default () => (
@@ -33,11 +34,11 @@ export default () => (
         <Route exact path='/record/masters/:record' component={RecordPage} />
         <Route exact path='/record/releases/:record' component={RecordPage} />
         <Route exact path='/library' component={Library} />
-        <Route exact path='/user/:userId' component={UserArea} />
         <Route exact path='/messages' component={MessageArea} />
-        <Route exact path='/user-area' component={UserArea} />
+        <Route exact path='/user/:user' component={UserArea} />
         <Route exact path='/login' component={LogInModule} />
         <Route exact path='/signup' component={SignUpModule} />
+        <Route exact path='/about' component={About} />
         <Redirect from="/" to="/home" />
       </Switch>
       <Footer />

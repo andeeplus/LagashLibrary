@@ -12,9 +12,14 @@ LAGASH, or Sirpurla, one of the oldest centres of Sumerian civilization in Babyl
 
 ## Ok, but why Lagash?
 
-Keeping alive forgotten music and create a good channel where to discover relevant information outside the mass channels at our disposal has been always something that interested me. 
-
-Based on the Discogs API this simple project born to make possible collecting valuable infos from the largest music database on the planet, thanks to the help of, initially, a reduced amount of passionate user.
+Lagash Library born as an excel sheet on the cloud where some friends used to share new music and forgotten gems.
+<br><br>
+Creating a good channel where to discover relevant information outside the mass channels at our disposal is something we have been always attracted to.
+<br><br>
+Powered by the Discogs API this simple project born to make possible collecting valuable infos from the largest music database on the planet, thanks to the help of a reduced amount of passionate user. 
+This time using a web App.
+<br><br>
+Join Lagash!
 
 All this information can be seen by everybody on the web but just selected users can edit and add items to it.
 

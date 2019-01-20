@@ -18,8 +18,8 @@ class AddArticles extends Component {
 
 
   componentDidMount(){
-    const {idLabel, type} = this.props
-    this.setState({idLabel: idLabel.toString(),type})
+    const {idType, type} = this.props
+    this.setState({[idType[0]]: idType[1].toString(),type})
   }
 
   handleChange = (e) => {
@@ -61,7 +61,7 @@ class AddArticles extends Component {
 
   render() {
     return (
-      <div>
+      <div className="add-article-box">
       <form onSubmit={this.handleSubmit}>
         <div className="addArticle">
           <label htmlFor="title"><b>Title</b></label>

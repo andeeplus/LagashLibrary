@@ -1,4 +1,4 @@
-.block-rec{
+.page-block{
   display:flex;
   flex-direction: row;
   padding-top: 16px;
@@ -6,7 +6,7 @@
   padding-bottom: 5vh;
 }
 
-.record-details{
+.page-details{
   display:flex;
   flex-direction: column;
 }
@@ -139,22 +139,26 @@
     flex-direction: row;
   }
 
-  .label-description{
+  .page-desc{
     font-family: $font-type-b;
     font-size: $text-size-m;
     padding: 3px 0;
-    font-style: italic;
+
+    &span{
+      font-style: $font-w-bold;
+    }
   }
 
-  .label-name{
+  .page-name{
     @extend .record-det-artist;
     text-transform: capitalize;
   }
 
-  .web-label {
+  .web-page {
     font-family: $font-type-b;
     font-size: $text-size-m;
     text-decoration: none;
+    font-style: italic;
   }
 
   .label-contact{
@@ -163,9 +167,52 @@
     text-decoration: none;
   }
 
+
+  .page-h1{
+    font-family: $font-type-b;
+    font-size: $text-size-xl;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    line-height: 23px;
+  }
+
+  .page-real-name{
+    @extend .record-det-title
+  }
+
+  .page-aliases{
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+  }
+
+
+
+.buttonAddArticle{
+  background-color: #de774e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+  height: 23px;
+  margin-left:5px;
+  vertical-align: center;
+}
+
+.page-h1 .svg-inline--fa{
+  font-size: $text-size-s;
+  color: black;
+  vertical-align:middle;
+  padding-right: 5px;
+}
+
+
 @media all and (max-width: 750px) {
   
-  .block-rec{
+  .page-block{
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -184,11 +231,5 @@
     width: -webkit-fill-available;
 }
 
-  .label-block {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5vw;
-    padding-bottom: 5vh;
-  }
 }
+

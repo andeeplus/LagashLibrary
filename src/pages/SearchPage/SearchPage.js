@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RecordList from '../../components/recordList/RecordList'
-import {fetchQuery} from '../../redux/actions/queryActions'
 import Loading from '../../components/Loading/Loading'
 import {DiscogsApi} from '../../services/DiscogsApi'
 
@@ -64,6 +63,7 @@ class SearchPage extends Component {
     dir === 'next' 
     && this.setState({page: page +1, loading: true},()=>{this.fetchData(this.state.query)});
 
+    console.log(page)
     window.scrollTo(0, 0)
 
   }

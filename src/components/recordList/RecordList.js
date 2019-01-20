@@ -10,17 +10,18 @@ class RecordList extends Component {
 
   render () {
 
-    const {records} = this.props
-    console.log('this.props.records, RecordList --->',records, this.props)
+    const {records, comingFrom} = this.props
 
     return (
       <div className='RecordList'>
+      
         {records && records.map(records => {
             console.log(records)
             return (
               <div key={records.id} className='RecordList-item'>
                 <RecordCard
                   id={records.id}
+                  artist={records.artist}
                   title={records.title}
                   label={records.label}
                   style={records.style}
@@ -28,9 +29,10 @@ class RecordList extends Component {
                   format={records.format}
                   country={records.country}
                   catno={records.catno}
-                  cover_image={records.cover_image}
+                  cover_image={comingFrom === 'labelDetail' ? records.thumb : records.cover_image}
                   year={records.year}
                   type={records.type}
+                  comingFrom={comingFrom}
                 />
               </div>
             )
