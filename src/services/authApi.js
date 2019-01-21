@@ -37,6 +37,7 @@ export default class AuthApi {
     return error;
   }
 
+
   static registerAuthObserver(callback){
     firebase.auth().onAuthStateChanged((user) => {
       callback(user);

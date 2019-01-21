@@ -25,4 +25,3 @@ ArticleCard.propTypes = {
 
 export default ArticleCard;
 
-// 

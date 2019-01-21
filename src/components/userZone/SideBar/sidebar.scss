@@ -1,0 +1,33 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: $primary-color;
+  align-content: baseline;
+  width: 80px;
+  height: 100vh;
+  
+  padding: 0 10px;
+
+  & .side-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: $primary-color;
+    color: $navbar-text;
+    font-size: $text-size-s;
+    font-family: $font-type-a;
+    font-weight: 700;
+
+    & a{
+      text-decoration: none;
+      color: $navbar-text;
+      font-weight: 400;
+      width: 100%;
+    }
+
+  }
+}

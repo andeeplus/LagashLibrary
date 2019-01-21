@@ -79,6 +79,17 @@
   }
 }
 
+.no-articles{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  p{
+    padding-top: 5px;
+    font-family: $font-type-b;
+    font-size: $text-size-m;
+  }
+}
+
 
 
 @media all and (max-width: 1024px) {
@@ -94,11 +105,11 @@
   }
 
   .slick-prev {
-    left: -13px;
+    left: -10px !important;
   }
 
-  .slick-prev {
-    right: -13px;
+  .slick-next {
+    right: -10px !important;
   }
 
 }

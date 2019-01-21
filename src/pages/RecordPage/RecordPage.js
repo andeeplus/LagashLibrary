@@ -64,7 +64,7 @@ class RecordPage extends Component {
       
           loading 
           ? <Loading />
-          : <div>
+          : <div className='pages-blocks'>
             {this.recCompo(results, versions)}
           </div>
     );

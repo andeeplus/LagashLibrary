@@ -14,7 +14,9 @@
 @import './components/recordDetails/VersionList/versions.scss';
 @import './components/library/Articles/articles.scss';
 @import './components/Modal/modal.scss';
-
+@import './components/userZone/SideBar/sidebar.scss';
+@import './components/comments/AddComment/AddComment.scss';
+@import './components/comments/CommentBox/commentbox.scss';
 
 html,body,p{
   margin:0;
@@ -34,4 +36,10 @@ textarea:focus, input:focus{
   font-family: $font-type-b;
   font-size: $text-size-l;
   text-align: center;
+}
+
+.pages-blocks{
+  max-width: 950px;
+  margin: 0 auto;
+  padding-bottom: 50px;
 }

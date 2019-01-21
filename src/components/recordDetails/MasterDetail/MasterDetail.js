@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import vinyl from '../../../img/vinyl.svg'
 import VersionList from '../VersionList/VersionList'
+import Comments from '../../comments/Comments'
 
 export default class MasterDetail extends Component {
 
@@ -42,6 +43,7 @@ export default class MasterDetail extends Component {
             </div>
           </div>
          </div>
+         <Comments idArtist={detail.id} type={'master'} />
          <VersionList versions={versions}/>
         </React.Fragment>
         

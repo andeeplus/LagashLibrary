@@ -86,7 +86,7 @@ class SignUpModule extends Component {
             <label htmlFor="email"><b>E-mail</b></label>
               <input type="email" onChange={this.handleChange} id="eMail" placeholder="Enter E-mail" required />
             <label htmlFor="uname"><b>Username</b></label>
-              <input type="text" id="userName" placeholder="Enter Username" required />
+              <input type="text" id="userName" onChange={this.handleChange} placeholder="Enter Username" required />
             <label htmlFor="psw"><b>Password</b></label>
               <input type="password" onChange={this.handleChange} id="password" placeholder="Enter Password" required />
               <input type="password" onChange={this.handleChange} id="checkPassword" placeholder="Confirm Password" required />

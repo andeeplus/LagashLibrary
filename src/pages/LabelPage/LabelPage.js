@@ -35,9 +35,9 @@ class LabelPage extends Component {
 
       loading 
       ? <Loading />
-      : <React.Fragment>
+      : <div className='pages-blocks'>
         <LabelDetail results={results} releases={releases} />
-      </React.Fragment>
+      </div>
     );
   }
 }

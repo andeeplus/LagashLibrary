@@ -28,7 +28,7 @@ export default class DatabaseApi {
     let resultDoc = null;
     
     try {
-      const doc = await db.collection(collectionName).doc(id).get();
+      const doc = await db.collection(collectionName).doc(id.toString()).get();
       if (doc.exists) {
         resultDoc = {
           id: doc.id,
@@ -61,6 +61,19 @@ export default class DatabaseApi {
     return success;
   }
 
+  static async updateItemArrayIntoDoc(collection, docId, fieldid, itemToAdd){
+    db.collection(collection).doc(docId).update({
+    [fieldid]: firebase.firestore.FieldValue.arrayUnion(itemToAdd)
+  });
+  }
+
+  static async removeItemArrayIntoDoc(collection, docId, fieldid, itemToRemove){
+    db.collection(collection).doc(docId).update({
+    [fieldid]: firebase.firestore.FieldValue.arrayRemove(itemToRemove)
+  });
+  }
+
+
   static async addDocument(collectionName, document){
     let success = false;
     
@@ -68,6 +81,23 @@ export default class DatabaseApi {
       const docRef = await db.collection(collectionName).add(document);
       if(docRef.id) {
 				console.log("​DatabaseApi -> addDocument -> docRef.id", docRef.id)
+        success = true;
+      }
+      
+    } catch (error) {
+			console.log("​DatabaseApi -> }catch -> error", error)
+    }
+
+    return success;
+  }
+
+  static async addDocumentWithID(collectionName, document, docID){
+    let success = false;
+    
+    try {
+      const docRef = await db.collection(collectionName).doc(docID).set(document);
+      if(docRef) {
+				console.log("​DatabaseApi -> addDocument -> docRef.id", docRef)
         success = true;
       }
       

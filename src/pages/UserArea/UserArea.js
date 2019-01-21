@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import SideBar from '../../components/userZone/SideBar/SideBar'
+
 
 class UserArea extends Component {
+
   render() {
     return (
       <div>
-        [Page] User Area
+        <SideBar />
       </div>
     );
   }

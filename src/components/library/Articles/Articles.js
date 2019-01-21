@@ -25,7 +25,7 @@ export default class Articles extends Component {
   }
 
   componentDidMount(){
-    //const {idLabel, idArtist, idMaster, idRelease} = this.props
+
     this.getArticles('library', this.identifyType()[0].toString(), this.identifyType()[1].toString())
   }
 
@@ -82,7 +82,7 @@ export default class Articles extends Component {
       ]
     };
     return (
-      fbArticles !== [] &&
+      
 
       <React.Fragment>
 
@@ -97,17 +97,22 @@ export default class Articles extends Component {
           Add Article
           </button>
         </h1>
-        <div className="caro-box">
+        
+        {fbArticles.length > 0 
+        ?<div className="caro-box">
           <Slider {...settings} className="articles-carousel">
-          {fbArticles.map((i,index) => <ArticleCard property={i}/> )}
+          {fbArticles.map((i,index) => <ArticleCard key={index} property={i}/> )}
           </Slider>
         </div>
+        : <div className="no-articles"><p>Add some articles!</p></div>}
         <Modal 
         onClose={this.onClose} 
         show={modalShow} 
         trigger={<AddArticles idType={relateArticle} type={type}/>}
         />
       </React.Fragment>
+
+      
 
 
 

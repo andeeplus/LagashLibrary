@@ -78,7 +78,7 @@ class SearchPage extends Component {
       ? <Loading />
       : <React.Fragment>
         <div>
-          <RecordList records={results} />
+          <RecordList records={results} comingFrom={'searchPage'}/>
         </div>
         <div className="button-line-move">
           <button className="butt-move" onClick={() => this.changePage('prev')} type="button">

@@ -34,9 +34,9 @@ class ArtistPage extends Component {
 
       loading 
       ? <Loading />
-      : <div>
+      : <div className='pages-blocks'>
         <ArtistDetail results={results} releases={releases} />
-      </div>
+        </div>
     );
   }
 }

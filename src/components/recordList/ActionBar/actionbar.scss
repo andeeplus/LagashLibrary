@@ -20,3 +20,8 @@
     color: $mid-sub;
   }
 }
+
+.list-card-button-fav{
+  @extend .list-card-button;
+  color: $secondary-darker;
+}

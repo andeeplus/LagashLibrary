@@ -3,11 +3,13 @@ import vinyl from '../../../img/vinyl.svg'
 import RecordList from '../../../components/recordList/RecordList'
 import { NavLink } from 'react-router-dom'
 import Articles from '../../library/Articles/Articles'
+import Comments from '../../comments/Comments'
 
 class ArtistDetail extends Component {
   render() {
 
     const {results, releases} = this.props
+    console.log('---->result.id', results.id)
 
     return (
 
@@ -24,6 +26,7 @@ class ArtistDetail extends Component {
           <div className="page-details">
             <p className="page-name">{results.name}</p>
             <p className="page-real-name">{results.realname}</p>
+            { results.aliases &&            
             <p className="page-aliases"><strong>Aliases: </strong>
             {results.aliases.map((i,index) => <NavLink 
               key={index} 
@@ -31,22 +34,30 @@ class ArtistDetail extends Component {
               to={`detail/artists/${i.resource_url.replace('https://api.discogs.com/artists/','')}`}>
               {i.name}
               </NavLink>)}
-            </p>
-            <p className="page-desc"><strong>Info: </strong><p dangerouslySetInnerHTML={{__html:results.profile_html}} ></p></p>
+            </p>}
+            {results.profile && 
+            <React.Fragment>
+              <p className="page-desc"><strong>Info: </strong></p>
+              <p className="page-desc" dangerouslySetInnerHTML={{__html:results.profile_html}} ></p>
+            </React.Fragment>}
             {results.contact_info && <p className="page-contact"><strong>Contact: </strong>{results.contact_info}</p>}
-            <p className="web-page"><strong>Sites:</strong></p>
-            {results.urls.map((i,index) => <a 
-              key={index} 
-              className="web-page" 
-              href={i}>{
-                i.replace('http://www.','')
-                .replace('http://','')}</a>)}
             
+              {results.urls && 
+                <React.Fragment>
+                <p className="web-page"><strong>Sites:</strong></p>
+              {results.urls.map((i,index) => <a 
+                key={index} 
+                className="web-page" 
+                href={i}>{
+                  i.replace('http://www.','')
+                  .replace('http://','')}</a>)}
+                </React.Fragment>}
           </div>
         </div>
 
         <Articles idArtist={results.id} type={'artist'} />
-        <RecordList records={releases.releases} comingFrom={'labelDetail'}/>
+        <Comments idArtist={results.id} type={'artist'} />
+        <RecordList records={releases.releases} comingFrom={'pageDetail'}/>
       </React.Fragment>
 
     );

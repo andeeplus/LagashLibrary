@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import vinyl from '../../../img/vinyl.svg'
 import VersionList from '../VersionList/VersionList'
-
+import Comments from '../../comments/Comments'
 
 export default class ReleaseDetail extends Component {
 
@@ -50,6 +50,7 @@ export default class ReleaseDetail extends Component {
 
           </div>
           </div>
+          <Comments idRelease={detail.id} type={'release'} />
           { versions && versions.versions.length !== 0 &&
             <VersionList versions={versions}/>}
         </React.Fragment>
