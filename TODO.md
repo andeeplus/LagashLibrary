@@ -7,13 +7,14 @@ Label
 Release
 Master
 Contact
-
+Articles (add articles, view article)
 
 Fixes needed:
 
 - Add videos to music pages
 - Carousel on main images
 - Comments?
+- User and timestamp on submitting articles
 
 # Action
 
@@ -37,7 +38,7 @@ Fixes needed:
   - Private Routes
   - **Admin Area**
     - Choose Hot Topics for Library
-    - Possibility to read contacts directly from the web
 
+  
   
 
