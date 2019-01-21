@@ -37,6 +37,7 @@ Fixes needed:
   - Private Routes
   - **Admin Area**
     - Choose Hot Topics for Library
+    - Possibility to read contacts directly from the web
 
   
 
