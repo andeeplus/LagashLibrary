@@ -8,12 +8,19 @@ Release
 Master
 Contact
 Articles (add articles, view article)
+<<<<<<< HEAD
 Comments √ (can do better)
+=======
+>>>>>>> dbf88ed3a11d100ca7374f9af2e511613f0740b3
 
 Fixes needed:
 
 - Add videos to music pages
 - Carousel on main images
+<<<<<<< HEAD
+=======
+- Comments?
+>>>>>>> dbf88ed3a11d100ca7374f9af2e511613f0740b3
 - User and timestamp on submitting articles
 
 # Action
@@ -40,5 +47,6 @@ Fixes needed:
   - **Admin Area**
     - Choose Hot Topics for Library
 
+  
   
 
