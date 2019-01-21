@@ -58,7 +58,7 @@ export default class Articles extends Component {
       lazyLoad: true,
       infinite: true,
       speed: 500,
-      slidesToShow: -1,
+      slidesToShow: 4,
       slidesToScroll: 1,
       initialSlide: 2,
       responsive: [
