@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import vinyl from '../../../img/vinyl.svg'
 import VersionList from '../VersionList/VersionList'
 
+
 export default class ReleaseDetail extends Component {
 
   
