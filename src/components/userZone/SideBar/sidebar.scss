@@ -5,9 +5,9 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: $primary-color;
+  background-color: $secondary-darker;
   align-content: baseline;
-  width: 80px;
+  width: 120px;
   height: 100vh;
   
   padding: 0 10px;
@@ -16,9 +16,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: $primary-color;
     color: $navbar-text;
-    font-size: $text-size-s;
+    font-size: $text-size-m;
     font-family: $font-type-a;
     font-weight: 700;
 

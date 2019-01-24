@@ -41,8 +41,6 @@ class AddComment extends Component {
       });
     });
 
-    console.log(this.props, '<------------id artist?')
-
   }
 
   handleChange = (e) => {
@@ -75,7 +73,8 @@ class AddComment extends Component {
     }
     console.log(this.props, '<------------id artist?')
     this.addDocs(commentUp)
-
+    this.refs.comment.value = ''
+    
   }
 
 
@@ -84,7 +83,7 @@ class AddComment extends Component {
 
       <form className="send-comment-box" onSubmit={this.handleSubmit}>
         <div className="addComment">
-            <textarea id="comment" 
+            <textarea id="comment" ref="comment"
             onChange={this.handleChange} 
             placeholder="Write your comment here..." 
             required />
@@ -96,6 +95,7 @@ class AddComment extends Component {
     );
   }
 }
+
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -46,7 +46,7 @@ export default class RecordCard extends Component {
   
 
   render () {
-    const { id, cover_image, title, year, catno, type, artist, comingFrom, user } = this.props
+    const { id, cover_image, title, year, catno, type, artist, comingFrom, user, heart } = this.props
     const actionProps = { 
       id, 
       cover_image, 
@@ -55,7 +55,8 @@ export default class RecordCard extends Component {
       catno, 
       type,
       user, 
-      artist: stripTitle(title)[0]
+      artist: stripTitle(title)[0],
+      heart
     }
 
     return (

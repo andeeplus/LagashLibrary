@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom'
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class VersionList extends Component {
 
@@ -13,7 +14,12 @@ class VersionList extends Component {
     const {versions} = this.props
     return (
 
-      versions &&
+    versions &&
+      <React.Fragment>
+      <h1 className="page-h1">
+      <FontAwesomeIcon icon="code-branch" /> 
+      Versions
+      </h1>
       <div className="table-versions">
       <ReactTable
         data={versions.versions}
@@ -56,6 +62,7 @@ class VersionList extends Component {
       />
       <br />
     </div>
+    </React.Fragment>
     );
   }
 }

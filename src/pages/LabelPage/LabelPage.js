@@ -4,7 +4,6 @@ import LabelDetail from '../../components/recordDetails/LabelDetail/LabelDetail'
 import Loading from '../../components/Loading/Loading'
 import {DiscogsApi} from '../../services/DiscogsApi'
 
-
 class LabelPage extends Component {
 
   state = {

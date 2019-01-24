@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import vinyl from '../../../img/vinyl.svg'
 import RecordList from '../../../components/recordList/RecordList'
 import { NavLink } from 'react-router-dom'
 import Articles from '../../library/Articles/Articles'
 import Comments from '../../comments/Comments'
+import Carousel from '../../Carousel/Carousel'
 
 class ArtistDetail extends Component {
   render() {
@@ -15,17 +15,10 @@ class ArtistDetail extends Component {
 
       <React.Fragment>
         <div className="page-block">
-          <figure>
-          <img className="main-rec-image" 
-          src={
-            results.images
-            ? results.images[0].uri
-            : vinyl
-          } alt='record' />
-        </figure>
+        <Carousel images={results.images} />
           <div className="page-details">
             <p className="page-name">{results.name}</p>
-            <p className="page-real-name">{results.realname}</p>
+            { results.realname && <p className="page-real-name">{results.realname}</p>}
             { results.aliases &&            
             <p className="page-aliases"><strong>Aliases: </strong>
             {results.aliases.map((i,index) => <NavLink 

@@ -17,6 +17,8 @@
 @import './components/userZone/SideBar/sidebar.scss';
 @import './components/comments/AddComment/AddComment.scss';
 @import './components/comments/CommentBox/commentbox.scss';
+@import './components//Carousel//Carousel.scss';
+@import './components/userZone/PersonalDetail/personalDetail.scss';
 
 html,body,p{
   margin:0;
@@ -40,6 +42,12 @@ textarea:focus, input:focus{
 
 .pages-blocks{
   max-width: 950px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+.about-block{
+  max-width: 450px;
   margin: 0 auto;
   padding-bottom: 50px;
 }

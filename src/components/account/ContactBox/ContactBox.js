@@ -39,6 +39,7 @@ class ContactBox extends Component {
 
       !msgSent 
       ?<div class="contact-box">
+        <h1 className="title-pages">Write us a message!</h1>
         <form onSubmit={this.handleSubmit}>
           <label for="name">Name</label>
           <input type="text" id="name" name="firstname" onChange={this.handleChange} placeholder="Your name.." />

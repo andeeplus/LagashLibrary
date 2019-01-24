@@ -40,4 +40,5 @@ class ArtistPage extends Component {
     );
   }
 }
+
 export default ArtistPage;

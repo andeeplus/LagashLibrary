@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import vinyl from '../../../img/vinyl.svg'
 import VersionList from '../VersionList/VersionList'
 import Comments from '../../comments/Comments'
+import Articles from '../../library/Articles/Articles'
+import Carousel from '../../Carousel/Carousel'
 
 export default class MasterDetail extends Component {
 
@@ -17,14 +18,7 @@ export default class MasterDetail extends Component {
         
         <React.Fragment>
           <div className="page-block">
-            <figure>
-              <img className="main-rec-image" 
-              src={
-                detail.images
-                ? detail.images[0].uri
-                : vinyl
-              } alt='record' />
-            </figure>
+          <Carousel images={detail.images} />
             <div className="page-details">
               <p className="record-det-artist">{detail.artists[0].name}</p>
               <p className="record-det-title">{detail.title}</p>
@@ -43,8 +37,10 @@ export default class MasterDetail extends Component {
             </div>
           </div>
          </div>
-         <Comments idArtist={detail.id} type={'master'} />
-         <VersionList versions={versions}/>
+         <Articles idMaster={detail.id} type={'master'} />
+         <Comments idMaster={detail.id} type={'master'} />
+         { versions && versions.versions.length !== 0 &&
+          <VersionList versions={versions}/>}
         </React.Fragment>
         
     );

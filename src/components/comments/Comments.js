@@ -12,7 +12,6 @@ class Comments extends Component {
 
   async getArticles(collectionName, filterName, filterValue){
     const fbComments = await DatabaseApi.getDocument(collectionName, filterName, filterValue)
-    console.log('--->ArticlesFirebase',fbComments)
     this.setState({fbComments})
   }
 
@@ -21,6 +20,7 @@ class Comments extends Component {
     this.getArticles('comments', this.identifyType()[0].toString(), this.identifyType()[1].toString())
     
   }
+
 
   identifyType(){
     const {type, idLabel, idArtist, idMaster, idRelease} = this.props
@@ -52,7 +52,8 @@ class Comments extends Component {
         {fbComments && <CommentBox comments={fbComments}/>}
         <AddComment 
         id={this.identifyType()} 
-        type={type}/>
+        type={type}
+        />
       </React.Fragment>
     );
   }

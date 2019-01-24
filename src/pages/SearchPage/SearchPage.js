@@ -76,7 +76,7 @@ class SearchPage extends Component {
     return (
       loading
       ? <Loading />
-      : <React.Fragment>
+      : <div className="pages-blocks">
         <div>
           <RecordList records={results} comingFrom={'searchPage'}/>
         </div>
@@ -88,7 +88,7 @@ class SearchPage extends Component {
             Next
           </button>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -72,5 +72,3 @@ class RecordPage extends Component {
 }
 
 export default RecordPage;
-
-

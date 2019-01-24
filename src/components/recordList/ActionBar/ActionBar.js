@@ -17,13 +17,12 @@ class ActionBar extends Component {
     title: '',
     year: '',
     type:'',
-    user: ''
+    user: '',
+    heart: false
   }  
 
-  componentWillMount(){
-    // const {user, id} = this.props
-    // console.log('---->USER ACTION',this.props)
-    // this.isFavCssClass(user.userFav, id)
+  componentDidMount() {
+    console.log(this.props.heart)
   }
 
   linkTo(param,id) {
@@ -61,20 +60,51 @@ class ActionBar extends Component {
     const user = this.state.user.id
     const { id= '', cover_image = '', title = '', year = '', catno = '', type = '', artist = '' } = this.props.actionProps
 
+    const prevFavs = await DatabaseApi.getDocumentById('favourites', idRec.toString())
+    const userData = await DatabaseApi.getDocumentById('user', user)
+
+
     this.setState({id:id.toString(), cover_image, title, year, catno, type, artist, user },
     async function() {
 
-      const prevFavs = await DatabaseApi.getDocumentById('favourites', idRec.toString())
-      const userData = await DatabaseApi.getDocumentById('user', user)
-
-        if (prevFavs !== null && userData.userFav.includes(idRec.toString())){
-          this.removeUserFavs('user', user, 'userFav', idRec.toString())
-        } else {
-          DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
-          this.updateUserFavs('user', user, 'userFav', idRec.toString())
-        }
+      switch(this.props.type){
+        case 'artist':
+          if (prevFavs !== null && userData.artistFav.includes(idRec.toString())){
+            this.removeUserFavs('user', user, 'artistFav', idRec.toString())
+          } else {
+            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
+            this.updateUserFavs('user', user, 'artistFav', idRec.toString())
+          }
+          break;
+        case 'label':
+          if (prevFavs !== null && userData.labelFav.includes(idRec.toString())){
+            this.removeUserFavs('user', user, 'labelFav', idRec.toString())
+          } else {
+            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
+            this.updateUserFavs('user', user, 'labelFav', idRec.toString())
+          }
+          break;
+        case 'release':
+          if (prevFavs !== null && userData.releaseFav.includes(idRec.toString())){
+            this.removeUserFavs('user', user, 'releaseFav', idRec.toString())
+          } else {
+            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
+            this.updateUserFavs('user', user, 'releaseFav', idRec.toString())
+          }
+          break;
+        case 'master':
+          if (prevFavs !== null && userData.masterFav.includes(idRec.toString())){
+            this.removeUserFavs('user', user, 'masterFav', idRec.toString())
+          } else {
+            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
+            this.updateUserFavs('user', user, 'masterFav', idRec.toString())
+          }
+          break;
+        default:
+      }
     })
   }
+
 
   updateUserFavs(collection, docId, fieldid, itemToAdd){
     DatabaseApi.updateItemArrayIntoDoc(collection, docId, fieldid, itemToAdd)
@@ -91,9 +121,16 @@ class ActionBar extends Component {
 
   }
 
+  heartCallback = () => {
+    console.log('ENTRANDOOOOOO')
+    console.log(this.state.heart)
+    this.setState({heart: !this.state.heart})
+  }
+
   render() {
     
     const { id, type } = this.props
+    const { heart } = this.state
 
     return (
 
@@ -103,7 +140,7 @@ class ActionBar extends Component {
         </Link>
         <button className="list-card-button"><FontAwesomeIcon icon="share-square" /></button>
         <button className="list-card-button"><FontAwesomeIcon icon="plus-circle" /></button>
-        <button className="list-card-button" onClick={() => this.manageFav(id)}><FontAwesomeIcon icon="heart" /></button>
+        <button className={`list-card-button${this.props.heart || heart ? '-fav' : ''}`} onClick={() => {this.manageFav(id); this.heartCallback()}}><FontAwesomeIcon icon="heart" /></button>
       </div>
 
     );

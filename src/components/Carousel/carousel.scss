@@ -1,0 +1,77 @@
+
+.carousel {
+  position: relative;
+  height: 320px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+
+  figure{
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+  
+    img {
+      height: 300px;
+      position: absolute;
+      left: -1000%;
+      right: -1000%;
+      top: -1000%;
+      bottom: -1000%;
+      margin: auto;
+      display: block;
+      
+    }
+  
+  }
+}
+
+.arrows-overlay{
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+  .left-arr{
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width: 30px;
+    height: 30px;
+    left:10px;
+    opacity: 0;
+    transition: opacity 800ms;
+  }
+
+  .right-arr{
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width: 30px;
+    height: 30px;
+    right:10px;
+    opacity: 0;
+    transition: opacity 800ms;
+  }
+  .arrows-caro{
+    color: $primary-color;
+    height: 20px;
+    background: rgba(179, 42, 42, 0.151);
+    border-radius: 50%;
+  }
+  .svg-inline--fa.fa-w-14 {
+    width: 20px;
+    padding: 5px;
+  }
+
+ .carousel:hover .right-arr, .carousel:hover .left-arr
+    {
+        opacity: 1.0;
+    }

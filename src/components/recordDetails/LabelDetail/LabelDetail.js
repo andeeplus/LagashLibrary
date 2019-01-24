@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import vinyl from '../../../img/vinyl.svg'
 import Articles from '../../library/Articles/Articles'
 import RecordList from '../../../components/recordList/RecordList'
 import Comments from '../../comments/Comments'
+import Carousel from '../../Carousel/Carousel'
 
 class LabelDetail extends Component {
   render() {
@@ -12,14 +12,7 @@ class LabelDetail extends Component {
     return (
       <React.Fragment>
         <div className="page-block">
-          <figure>
-          <img className="main-rec-image" 
-          src={
-            results.images
-            ? results.images[0].uri
-            : vinyl
-          } alt='record' />
-        </figure>
+        <Carousel images={results.images} />
           <div className="page-details">
             <p className="page-name">{results.name}</p>
             <p className="page-desc"><strong>Info: </strong></p>
