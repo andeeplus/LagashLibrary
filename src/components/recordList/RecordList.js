@@ -1,31 +1,10 @@
 import React, { Component } from 'react';
 import RecordCard from '../recordList/RecordCard/RecordCard'
-// import {connect} from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { withRouter} from 'react-router'
-import  DatabaseApi from '../../../src/services/dbApi'
-import AuthApi from '../../../src/services/authApi'
 import { connect } from 'react-redux';
-import { setUserInfo } from '../../redux/actions/authActions'
 
 class RecordList extends Component {
-
-  state = {user: null}
-
-  componentDidMount(){
-    AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
-      let userData = null;
-      if (user) {
-        userData = await DatabaseApi.getDocumentById('user', user.uid);
-        if(!userData){ 
-          console.log("Please verify your Firebase setup");
-        }
-      } 
-      this.props.setUser(userData);
-      this.setState({user:userData});
-    });
-  }
 
 
   titleId(){
@@ -44,16 +23,7 @@ class RecordList extends Component {
     }
   }
 
-  shouldPrintHeart = (id) => {
-    const {labelFav, artistFav, masterFav, releaseFav } = this.state.user
 
-    const labelFavBool = labelFav.includes(id)
-    const artistFavBool = artistFav.includes(id)
-    const masterFavBool = masterFav.includes(id)
-    const releaseFavBool = releaseFav.includes(id)
-
-    return labelFavBool || artistFavBool || masterFavBool || releaseFavBool
-  }
 
   render () {
 
@@ -72,11 +42,9 @@ class RecordList extends Component {
        
 
       <div className='RecordList'>
-        {this.state.user && records && records.map(records => {
+        {this.props.user && records && records.map(records => {
 
-      
 
-          console.log('RECORDS', records)
             return (
               <div key={records.id} className='RecordList-item'>
                 <RecordCard
@@ -89,7 +57,6 @@ class RecordList extends Component {
                   format={records.format = []}
                   country={records.country}
                   catno={records.catno}
-                  heart={this.shouldPrintHeart(records.id)}
                   cover_image={
                     comingFrom === 'pageDetail' 
                     ? records.thumb : records.cover_image}
@@ -109,12 +76,13 @@ class RecordList extends Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+
+const mapStateToProps = (state) => {
   return {
-    setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) }
+    user: state.userReducer.user
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(RecordList));
+export default withRouter(connect(mapStateToProps)(RecordList));
 
 

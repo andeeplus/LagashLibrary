@@ -20,7 +20,7 @@ export class DiscogsApi {
            }
        })
    if (results.status === 200) {
-       console.log(results.data)
+       
    }    
        return results.data
    }

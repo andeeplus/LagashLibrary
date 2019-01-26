@@ -61,6 +61,19 @@ export default class DatabaseApi {
     return success;
   }
 
+  static async deleteDocumentWithId(collection, docID){
+    db.collection(collection).doc(docID).delete().then(function() {
+      console.log("Document successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
+  }
+
+  static async deleteDocumentFieldWithId(collection, docID, field){
+    db.collection(collection).doc(docID).update({
+      [field]: firebase.firestore.FieldValue.delete()
+  })}
+
   static async updateItemArrayIntoDoc(collection, docId, fieldid, itemToAdd){
     db.collection(collection).doc(docId).update({
     [fieldid]: firebase.firestore.FieldValue.arrayUnion(itemToAdd)
@@ -72,6 +85,13 @@ export default class DatabaseApi {
     [fieldid]: firebase.firestore.FieldValue.arrayRemove(itemToRemove)
   });
   }
+
+  static async removeItemFromDoc(collection, docId, fieldid){
+    db.collection(collection).doc(docId).update({
+    [fieldid]: firebase.firestore.FieldValue.delete()
+  });
+  }
+
 
 
   static async addDocument(collectionName, document){
@@ -111,10 +131,9 @@ export default class DatabaseApi {
   static async getRealtimeDocument(collectionName, filterName, filterValue, callback){
     db.collection(collectionName).where(filterName, "==", filterValue)
       .onSnapshot((querySnapshot) => {
-        let result = null;
+        let result = [];
         querySnapshot.forEach((doc) => {
-          result = doc.data();
-          result.id = doc.id;
+          result.push({id:doc.id, ...doc.data()});
         });
         callback(result);
     });

@@ -6,9 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class VersionList extends Component {
 
-  componentDidMount(){
-    console.log('versions mounted')
-  }
   render() {
 
     const {versions} = this.props
@@ -68,30 +65,3 @@ class VersionList extends Component {
 }
 
 export default VersionList;
-
-
-// <div>
-// <table>
-// <tbody>
-//   <th>Cat#</th>
-//   <th>Label</th>
-//   <th>Title</th>
-//   <th>Format</th>
-//   <th>Country</th>
-//   <th>Released</th>
-// </tbody>
-// {
-//   versions.versions.map((i,index) =>
-//       <tr key={i.id + index}>
-//         <td>{i.catno}</td>
-//         <td>{i.label}</td>
-//         <td>{i.title}</td>
-//         <td>{i.format}</td>
-//         <td>{i.country}</td>
-//         <td>{i.released}</td>
-//       </tr>
-//     )
-// }
-
-// </table>
-// </div>

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import  DatabaseApi from '../../../services/dbApi'
-import AuthApi from '../../../../src/services/authApi'
 import { connect } from 'react-redux';
-import { setUserInfo } from '../../../../src/redux/actions/authActions';
+import { refreshUserFromDb } from '../../../redux/actions/refreshUser'
+
 
 class ActionBar extends Component {
 
@@ -18,12 +18,12 @@ class ActionBar extends Component {
     year: '',
     type:'',
     user: '',
-    heart: false
+    labelFav: [],
+    artistFav: [],
+    releaseFav: [],
+    masterFav: []
   }  
 
-  componentDidMount() {
-    console.log(this.props.heart)
-  }
 
   linkTo(param,id) {
     switch(param) {
@@ -40,78 +40,127 @@ class ActionBar extends Component {
     }
   }
 
-  manageFav(id){
-    AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
-      let userData = null;
-      if (user) {
-        userData = await DatabaseApi.getDocumentById('user', user.uid);
-        if(!userData){ 
-          console.log("Please verify your Firebase setup");
-        }
-      } 
-      this.props.setUser(userData);
-      this.setState({user:userData}, ()=> this.addToGlobalFavs(id));
-    });
+  componentDidMount(){
+
+    const labelFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favLabel`)))
+    const artistFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favArtist`)))
+    const releaseFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favRelease`)))
+    const masterFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favMaster`)))
+
+    console.log('DIDMOUNT FAVS EXTRACT: ',labelFav, artistFav, releaseFav, masterFav )
+    this.setState({
+      labelFav, artistFav, releaseFav, masterFav
+    }, ()=>console.log(`callback`,this.state))
+
+    
   }
 
+ 
 
   addToGlobalFavs = async (idRec) => {
-    const user = this.state.user.id
+
+    const user = this.props.user
     const { id= '', cover_image = '', title = '', year = '', catno = '', type = '', artist = '' } = this.props.actionProps
+    
+    let prevArtistFav = JSON.parse(localStorage.getItem(`${user.id}_favArtist`))
+    prevArtistFav = prevArtistFav === null ? prevArtistFav = {} : prevArtistFav
+    
+    let prevLabelFav = JSON.parse(localStorage.getItem(`${user.id}_favLabel`))
+    prevLabelFav = prevLabelFav === null ? prevLabelFav = {} : prevLabelFav
 
-    const prevFavs = await DatabaseApi.getDocumentById('favourites', idRec.toString())
-    const userData = await DatabaseApi.getDocumentById('user', user)
+    let prevReleaseFav = JSON.parse(localStorage.getItem(`${user.id}_favLabel`))
+    prevReleaseFav = prevReleaseFav === null ? prevReleaseFav = {} : prevReleaseFav
+    
+    let prevMasterFav = JSON.parse(localStorage.getItem(`${user.id}_favLabel`))
+    prevMasterFav = prevMasterFav === null ? prevMasterFav = {} : prevMasterFav
 
 
-    this.setState({id:id.toString(), cover_image, title, year, catno, type, artist, user },
+    this.setState({id:id.toString(), cover_image, title, year, catno, type, artist },
     async function() {
 
       switch(this.props.type){
         case 'artist':
-          if (prevFavs !== null && userData.artistFav.includes(idRec.toString())){
-            this.removeUserFavs('user', user, 'artistFav', idRec.toString())
+          const artistFav = {artist: title, cover_image, id, type} 
+          
+          if (prevArtistFav !== null && prevArtistFav[id]){
+            
+            DatabaseApi.removeItemFromDoc('artistFav', user.id, id)
+            delete prevArtistFav[id]
+            localStorage.setItem(`${user.id}_favArtist`, JSON.stringify(prevArtistFav));
+
           } else {
-            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
-            this.updateUserFavs('user', user, 'artistFav', idRec.toString())
+
+            DatabaseApi.updateDocument('artistFav', {[id]:artistFav}, user.id)
+            prevArtistFav[id] = artistFav
+            localStorage.setItem(`${user.id}_favArtist`, JSON.stringify(prevArtistFav));
           }
           break;
+
         case 'label':
-          if (prevFavs !== null && userData.labelFav.includes(idRec.toString())){
-            this.removeUserFavs('user', user, 'labelFav', idRec.toString())
+          const labelFav = {cover_image, id, title, type}
+
+          if (prevLabelFav !== null && prevLabelFav[id]){
+            
+            DatabaseApi.removeItemFromDoc('labelFav', user.id, id)
+            delete prevLabelFav[id]
+            localStorage.setItem(`${user.id}_favLabel`, JSON.stringify(prevLabelFav));
+
           } else {
-            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
-            this.updateUserFavs('user', user, 'labelFav', idRec.toString())
+
+            DatabaseApi.updateDocument('labelFav', {[id]:labelFav}, user.id)
+            prevLabelFav[id] = labelFav
+            localStorage.setItem(`${user.id}_favLabel`, JSON.stringify(prevLabelFav));
           }
           break;
+
         case 'release':
-          if (prevFavs !== null && userData.releaseFav.includes(idRec.toString())){
-            this.removeUserFavs('user', user, 'releaseFav', idRec.toString())
-          } else {
-            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
-            this.updateUserFavs('user', user, 'releaseFav', idRec.toString())
-          }
-          break;
+
+        const releaseFav = {cover_image, id, title, type, year, catno}
+
+        if (prevReleaseFav !== null && prevReleaseFav[id]){
+          
+          DatabaseApi.removeItemFromDoc('releaseFav', user.id, id)
+          delete prevReleaseFav[id]
+          localStorage.setItem(`${user.id}_favRelease`, JSON.stringify(prevReleaseFav));
+
+        } else {
+
+          DatabaseApi.updateDocument('releaseFav', {[id]:releaseFav}, user.id)
+          prevReleaseFav[id] = releaseFav
+          localStorage.setItem(`${user.id}_favRelease`, JSON.stringify(prevReleaseFav));
+        }
+        break;
+
         case 'master':
-          if (prevFavs !== null && userData.masterFav.includes(idRec.toString())){
-            this.removeUserFavs('user', user, 'masterFav', idRec.toString())
-          } else {
-            DatabaseApi.addDocumentWithID('favourites', this.state, idRec.toString())
-            this.updateUserFavs('user', user, 'masterFav', idRec.toString())
-          }
-          break;
+        const masterFav = {cover_image, id, title, type, year, catno}
+
+        if (prevMasterFav !== null && prevMasterFav[id]){
+          
+          DatabaseApi.removeItemFromDoc('masterFav', user.id, id)
+          delete prevMasterFav[id]
+          localStorage.setItem(`${user.id}_favMaster`, JSON.stringify(prevMasterFav));
+
+        } else {
+
+          DatabaseApi.updateDocument('masterFav', {[id]:masterFav}, user.id)
+          prevMasterFav[id] = masterFav
+          localStorage.setItem(`${user.id}_favMaster`, JSON.stringify(prevMasterFav));
+        }
+        break;
         default:
       }
     })
   }
 
 
-  updateUserFavs(collection, docId, fieldid, itemToAdd){
-    DatabaseApi.updateItemArrayIntoDoc(collection, docId, fieldid, itemToAdd)
+  async updateUserFavs (collection, docId, fieldid, itemToAdd){
+    await DatabaseApi.updateItemArrayIntoDoc(collection, docId, fieldid, itemToAdd)
+    this.props.refreshUserFromDb(this.props.user.id)
   }
 
-  removeUserFavs(collection, docId, fieldid, itemToRemove){
-    DatabaseApi.removeItemArrayIntoDoc(collection, docId, fieldid, itemToRemove)
+  async removeUserFavs(collection, docId, fieldid, itemToRemove){
+    await DatabaseApi.removeItemArrayIntoDoc(collection, docId, fieldid, itemToRemove)
+    this.props.refreshUserFromDb(this.props.user.id)
   }
 
 
@@ -121,18 +170,26 @@ class ActionBar extends Component {
 
   }
 
-  heartCallback = () => {
-    console.log('ENTRANDOOOOOO')
-    console.log(this.state.heart)
-    this.setState({heart: !this.state.heart})
+  shouldPrintHeart = (id) => {
+    const {labelFav, artistFav, masterFav, releaseFav } = this.state
+
+    const labelFavBool = labelFav.includes(id.toString())
+    const artistFavBool = artistFav.includes(id.toString())
+    const masterFavBool = masterFav.includes(id.toString())
+    const releaseFavBool = releaseFav.includes(id.toString())
+
+    console.log(labelFavBool, artistFavBool, masterFavBool, releaseFavBool)
+    return labelFavBool || artistFavBool || masterFavBool || releaseFavBool
   }
 
   render() {
     
     const { id, type } = this.props
-    const { heart } = this.state
+    const {labelFav,artistFav,releaseFav,masterFav } = this.state
 
     return (
+
+      labelFav && artistFav && releaseFav && masterFav &&
 
       <div className="list-card-action">
         <Link className="list-card-button" to={this.linkTo(type,id)}>
@@ -140,18 +197,26 @@ class ActionBar extends Component {
         </Link>
         <button className="list-card-button"><FontAwesomeIcon icon="share-square" /></button>
         <button className="list-card-button"><FontAwesomeIcon icon="plus-circle" /></button>
-        <button className={`list-card-button${this.props.heart || heart ? '-fav' : ''}`} onClick={() => {this.manageFav(id); this.heartCallback()}}><FontAwesomeIcon icon="heart" /></button>
+        <button className={`list-card-button${this.shouldPrintHeart(id) ? '-fav' : ''}`} onClick={() => {this.addToGlobalFavs(id)}}><FontAwesomeIcon icon="heart" /></button>
       </div>
 
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) }
+    user: state.userReducer.user
   }
 }
 
-export default connect(null, mapDispatchToProps)(ActionBar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    refreshUserFromDb: (userid) => { dispatch(refreshUserFromDb(userid)) }
+  }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(ActionBar);
+
 

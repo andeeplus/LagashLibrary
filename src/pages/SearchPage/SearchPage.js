@@ -32,7 +32,7 @@ class SearchPage extends Component {
     const results = await DiscogsApi.getQuery(url)
 
     this.setState({results: results.results, query: this.props.match.params.query, loading:false, page: 1})
-    console.log(this.state.results)
+
   }
 
   componentDidMount() {
@@ -41,7 +41,7 @@ class SearchPage extends Component {
       query
       ? this.fetchData(query)
       : this.fetchData(this.state.query)
-      console.log(this.props)
+
     
   }
 

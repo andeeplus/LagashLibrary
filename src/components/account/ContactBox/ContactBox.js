@@ -38,16 +38,16 @@ class ContactBox extends Component {
     return (
 
       !msgSent 
-      ?<div class="contact-box">
+      ?<div className="contact-box">
         <h1 className="title-pages">Write us a message!</h1>
         <form onSubmit={this.handleSubmit}>
-          <label for="name">Name</label>
+          <label htmlFor="name">Name</label>
           <input type="text" id="name" name="firstname" onChange={this.handleChange} placeholder="Your name.." />
 
-          <label for="email">E-Mail</label>
+          <label htmlFor="email">E-Mail</label>
           <input type="email" id="email" name="email" onChange={this.handleChange} placeholder="Your email.." required />
       
-          <label for="subject">Subject</label>
+          <label htmlFor="subject">Subject</label>
           <textarea id="subject" className="text-area-msg" onChange={this.handleChange} name="subject" placeholder="Write something.." required></textarea>
       
           <input type="submit" className="buttonSubmit" value="Submit" />

@@ -24,22 +24,13 @@ class AddComment extends Component {
 
   componentDidMount(){
 
-    AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
-      let userData = null;
-      if (user) {
-        userData = await DatabaseApi.getDocumentById('user', user.uid);
-        if(!userData){ 
-          console.log("Please verify your Firebase setup");
-        }
-      } 
-      this.props.setUser(userData);
+    const {user} = this.props
+
       this.setState({
-        user:userData, 
-        userName: userData.userName, 
-        userId: userData.id,
+        user:user, 
+        userName: user.userName, 
+        userId: user.id,
       });
-    });
 
   }
 
@@ -47,7 +38,6 @@ class AddComment extends Component {
     this.setState({
       [e.target.id]: e.target.value
     })
-    console.log(this.state)
   }
 
   handleSubmit = async (e) => {
@@ -71,7 +61,7 @@ class AddComment extends Component {
       idRelease,
       type
     }
-    console.log(this.props, '<------------id artist?')
+
     this.addDocs(commentUp)
     this.refs.comment.value = ''
     
@@ -81,6 +71,7 @@ class AddComment extends Component {
   render() {
     return (
 
+      this.props.user &&
       <form className="send-comment-box" onSubmit={this.handleSubmit}>
         <div className="addComment">
             <textarea id="comment" ref="comment"
@@ -97,10 +88,13 @@ class AddComment extends Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+
+
+const mapStateToProps = (state) => {
   return {
-    setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) }
+    user: state.userReducer.user
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddComment);
+
+export default connect(mapStateToProps)(AddComment);

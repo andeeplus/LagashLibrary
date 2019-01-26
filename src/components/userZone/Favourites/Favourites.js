@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatabaseApi from '../../../../src/services/dbApi'
-import { setUserInfo } from '../../../../src/redux/actions/authActions';
 import Loading from '../../Loading/Loading'
-import AuthApi from '../../../../src/services/authApi'
+import FavouriteList from '../FavouriteList/FavouriteList'
+import DropDown from '../DropDown/DropDown'
 
 class Favourites extends Component {
 
@@ -13,7 +13,28 @@ state = {
   releaseFav:[],
   artistFav:[],
   masterFav:[],
-  loading: true
+  loading: true,
+
+  artistsSelect: true,
+  labelsSelect: false,
+  recordsSelect:false,
+  menuTitle: 'Artists'
+}
+
+chooseFavo = (input) => {
+  switch(input){
+    case 'artists':
+    this.setState({artistsSelect : true, labelsSelect: false, recordsSelect:false, menuTitle: 'Artists'})
+    break;
+    case 'labels':
+    this.setState({labelsSelect : true, artistsSelect: false, recordsSelect:false, menuTitle: 'Labels'})
+    break;
+    case 'records':
+    this.setState({recordsSelect:true, labelsSelect: false, artistsSelect:false, menuTitle: 'Records'})
+    break;
+    default: console.log('Some issue happened')
+  }
+  
 }
 
 async getArticles(collectionName, filterName, filterValue){
@@ -23,62 +44,58 @@ async getArticles(collectionName, filterName, filterValue){
 }
 
 componentDidMount(){
-  AuthApi.registerAuthObserver(async (user) => {
-    console.log("​App -> componentDidMount -> user", user)
-    let userData = null;
-    if (user) {
-      userData = await DatabaseApi.getDocumentById('user', user.uid);
-      if(!userData){ 
-        console.log("Please verify your Firebase setup");
-      }
-    } 
-    this.props.setUser(userData);
+
+  const {user} = this.props
+
     this.setState({
-      user:userData,
-      labelFav: userData.labelFav ? userData.labelFav : [],
-      releaseFav: userData.releaseFav ? userData.releaseFav : [],
-      artistFav: userData.artistFav ? userData.artistFav : [],
-      masterFav: userData.masterFav ? userData.masterFav : [],
-    }, () => this.getFaves());
-  });
-}
-
-getFaves = async() => {
-  let {labelFav, artistFav, releaseFav, masterFav} = this.state
-  console.log('------>', labelFav, artistFav, releaseFav, masterFav)
-
-  // const filteredArrays = [labelFav, artistFav, releaseFav, masterFav].filter(element => element.length > 0);
-
-  const getFavLabelPromise = Promise.all(labelFav.map((id) => DatabaseApi.getDocumentById('favourites',id)))
-  const getFavArtistPromise = Promise.all(artistFav.map((id) => DatabaseApi.getDocumentById('favourites',id)))
-  const getFavReleasePromise = Promise.all(releaseFav.map((id) => DatabaseApi.getDocumentById('favourites',id)))
-  const gestMasterFavPromise = Promise.all(masterFav.map((id) => DatabaseApi.getDocumentById('favourites',id)))
-
-  const [getFavLabel, getFavArtist, getFavRelease, gestMasterFav] = await Promise.all([getFavLabelPromise, getFavArtistPromise, getFavReleasePromise, gestMasterFavPromise])
-
-
-  this.setState({ labelFav: getFavLabel, artistFav: getFavArtist, releaseFav: getFavRelease, masterFav: gestMasterFav, loading: false}, () => console.log('GO!', this.state))
-      
+      user:user,
+      labelFav: JSON.parse(localStorage.getItem(`${user.id}_favLabel`)),
+      releaseFav: JSON.parse(localStorage.getItem(`${user.id}_favRelease`)),
+      artistFav: JSON.parse(localStorage.getItem(`${user.id}_favArtist`)),
+      masterFav: JSON.parse(localStorage.getItem(`${user.id}_favMaster`)),
+      loading: false
+    });
+  
 }
 
   render() {
 
-    const {loading} = this.state
+    const {loading, artistFav, masterFav, labelFav, releaseFav, menuTitle, artistsSelect, labelsSelect, recordsSelect} = this.state
+    const fullRecords = {...releaseFav,...masterFav}
+    console.log('FAVOURITES---->Obj',artistFav, masterFav, labelFav, releaseFav)
 
     return (
       loading 
       ? <Loading />
       :<div>
+      <DropDown chooseFavo={this.chooseFavo}>{menuTitle}</DropDown>
+
+      {  Object.entries(artistFav).length === 0  
+        ? <p>No favourites yet, search for it!</p>
+        :<React.Fragment>
+        { artistsSelect && <FavouriteList artistFav={Object.values(artistFav)}/> }
+        </React.Fragment>}
+
+      {  Object.entries(labelFav).length === 0  
+        ? <p>No favourites yet, search for it!</p>
+        :<React.Fragment>
+        {labelsSelect && <FavouriteList labelFav={Object.values(labelFav)}/>}
+        </React.Fragment>}
+
+      {  Object.entries(releaseFav).length === 0  
+        ? <p>No favourites yet, search for it!</p>
+        :<React.Fragment>
+        {recordsSelect && <FavouriteList recordFav={Object.values(fullRecords)}/>}
+      </React.Fragment>}
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) }
+    user: state.userReducer.user
   }
 }
 
-
-export default connect(null, mapDispatchToProps)(Favourites);
+export default connect(mapStateToProps)(Favourites);

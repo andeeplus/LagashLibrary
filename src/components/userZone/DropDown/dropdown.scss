@@ -1,0 +1,32 @@
+
+.dropdown{
+  font-family: $font-type-b;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 1;
+  position: absolute;
+  background-color: white;
+
+  .buttonMenu{
+    font-size: $text-size-xl;
+    font-weight: 700;
+  }
+  ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: 100vh;
+
+  }
+  li{
+    list-style: none;
+    text-align: center;
+    padding: 16px;
+    font-size: $text-size-xl;
+  }
+}
+
+

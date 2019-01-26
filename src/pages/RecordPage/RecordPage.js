@@ -44,13 +44,10 @@ class RecordPage extends Component {
    let url = this.props.location.pathname.split('/')[2]
    switch (url){
      case 'masters':
-     console.log('master')
       return <MasterDetail detail={results} versions={versions} />
     case 'releases':
-      console.log('release')
       return <ReleaseDetail detail={results} versions={versions}/>
      default:
-      console.log('none of two')
    }
   }
 
@@ -58,8 +55,7 @@ class RecordPage extends Component {
   render() {
 
     const {results, versions, loading} = this.state
-    console.log('--->',results)
-    console.log('RECORD PAGE',results,versions)
+
     return (
       
           loading 

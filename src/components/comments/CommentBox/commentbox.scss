@@ -8,3 +8,8 @@
   margin: 0 auto;
   padding-bottom: 16px;
 }
+
+@media all and (max-width: 750px) {
+  .comment-box{ width: 300px;}
+
+}

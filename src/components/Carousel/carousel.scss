@@ -75,3 +75,12 @@
     {
         opacity: 1.0;
     }
+
+@media all and (max-width: 750px) {
+  figure{
+    width: 100%;}
+  
+  .carousel {
+      padding:20px;
+    }
+}

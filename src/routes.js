@@ -21,8 +21,8 @@ import Favourites from './components/userZone/Favourites/Favourites'
 import PrivateRoute from './specialRoutes/PrivateRoute'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faMusic, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner, faSignInAlt, faSignOutAlt, faBook, faComment, faCodeBranch, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-library.add(faSearch, faArrowRight, faArrowLeft, faComment, faCodeBranch, faSignInAlt, faMusic, faBook, faSignOutAlt, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink)
+import { faSearch, faMusic, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner, faSignInAlt, faSignOutAlt, faBook, faComment, faCodeBranch, faArrowRight, faArrowLeft, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+library.add(faSearch, faUser, faEnvelope, faArrowRight, faArrowLeft, faComment, faCodeBranch, faSignInAlt, faMusic, faBook, faSignOutAlt, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink)
 
 
 export default () => (
@@ -42,9 +42,10 @@ export default () => (
         <Route exact path='/login' component={LogInModule} />
         <Route exact path='/signup' component={SignUpModule} />
         <Route exact path='/about' component={About} />
-        <Route exact path='/user/:user' component={UserArea} />
-        <Route exact path='/user/:user/your-library' component={Favourites} />
-        <Route exact path='/user/:user/personal-detail' component={PersonalDetail} />
+        <PrivateRoute exact path='/user/:user' componentUser={UserArea} />
+        <PrivateRoute exact path='/user/:user/your-library' componentUser={Favourites} />
+        <PrivateRoute exact path='/user/:user/your-favourites' componentUser={Favourites} />
+        <PrivateRoute exact path='/user/:user/personal-detail' componentUser={PersonalDetail} />
         <Redirect from="/" to="/home" />
       </Switch>
       <Footer />

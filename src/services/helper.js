@@ -8,7 +8,6 @@ JS Functions Helper
 
 export function truncateString(string, value = 20){
   if(!string){
-     console.log(string)
      return undefined
   } else if (string.length > value){
    return string.substring(0,value-1)+'...';

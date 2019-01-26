@@ -20,7 +20,6 @@ export default class Articles extends Component {
 
   async getArticles(collectionName, filterName, filterValue){
     const fbArticles = await DatabaseApi.getDocument(collectionName, filterName, filterValue)
-    console.log('--->ArticlesFirebase',fbArticles)
     this.setState({fbArticles, showItem:fbArticles[0] })
   }
 

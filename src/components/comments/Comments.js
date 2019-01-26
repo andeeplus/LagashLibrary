@@ -10,15 +10,12 @@ class Comments extends Component {
     fbComments:[],
   }
 
-  async getArticles(collectionName, filterName, filterValue){
-    const fbComments = await DatabaseApi.getDocument(collectionName, filterName, filterValue)
-    this.setState({fbComments})
-  }
 
   componentDidMount(){
 
-    this.getArticles('comments', this.identifyType()[0].toString(), this.identifyType()[1].toString())
-    
+    DatabaseApi.getRealtimeDocument('comments', this.identifyType()[0].toString(), this.identifyType()[1].toString(),
+      (fbComments) => {
+      this.setState({fbComments});})
   }
 
 

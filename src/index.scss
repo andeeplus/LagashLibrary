@@ -14,11 +14,13 @@
 @import './components/recordDetails/VersionList/versions.scss';
 @import './components/library/Articles/articles.scss';
 @import './components/Modal/modal.scss';
-@import './components/userZone/SideBar/sidebar.scss';
+//@import './components/userZone/SideBar/sidebar.scss';
 @import './components/comments/AddComment/AddComment.scss';
 @import './components/comments/CommentBox/commentbox.scss';
 @import './components//Carousel//Carousel.scss';
 @import './components/userZone/PersonalDetail/personalDetail.scss';
+@import './components/userZone/DropDown/dropdown.scss';
+@import './pages/UserArea/userarea.scss';
 
 html,body,p{
   margin:0;
@@ -50,4 +52,21 @@ textarea:focus, input:focus{
   max-width: 450px;
   margin: 0 auto;
   padding-bottom: 50px;
+}
+
+.extra-top{
+  margin-top:40px;
+}
+
+@media all and (max-width: 750px) {
+  .about-block{
+    max-width: 350px;
+
+  }
+
+  .pages-blocks {
+    max-width: 375px;
+    margin: 0 0;
+    padding-bottom: 50px;
+}
 }

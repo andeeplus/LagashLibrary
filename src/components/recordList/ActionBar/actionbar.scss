@@ -24,6 +24,6 @@
 .list-card-button-fav{
   @extend .list-card-button;
   .svg-inline--fa.fa-heart.fa-w-16 {
-    color: $secondary-darker !important; 
+    color: $secondary-darker; 
   }
 }

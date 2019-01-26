@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom' 
 import DatabaseApi from '../../../services/dbApi';
-import AuthApi from '../../../services/authApi'
 import StorageApi from '../../../services/StorageApi'
 import { withRouter } from "react-router";
 import { connect } from 'react-redux';
 import { setUserInfo } from '../../../redux/actions/authActions'
 import noImg from '../../../img/noimgMan.svg'
+import Loading from '../../Loading/Loading'
 class PersonalDetail extends Component {
 
   state = {
@@ -26,21 +25,6 @@ class PersonalDetail extends Component {
     
   }
 
-  componentDidMount(){
-    AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
-      let userData = null;
-      if (user) {
-        userData = await DatabaseApi.getDocumentById('user', user.uid);
-        if(!userData){ 
-          console.log("Please verify your Firebase setup");
-        }
-      } 
-      this.props.setUser(userData);
-      this.setState({user:userData});
-    });
-
-  }
 
   handleChange = (e) => {
     this.setState({
@@ -74,33 +58,43 @@ class PersonalDetail extends Component {
     }
   }
 
-  updatePic = async () => {
-    const { newProfilePic, user } = this.state;
+  updatePic = async (e) => {
+    e.preventDefault()
+    const { newProfilePic } = this.state;
+    const {user,setUser} = this.props
 
     const result = await DatabaseApi.updateDocument('user', {
       profilePic: newProfilePic
     }, user.id);
 
     if(result){
+      setUser(Object.assign({...user}, {profilePic:newProfilePic}))
       this.setState({newProfilePic : ''});
       this.fileInputRef.value = ''
+      
     }
+
+
   }
 
   onFileSelected = (e) => {
     const file = e.target.files[0];
     StorageApi.uploadFile('userPics',file, (imageURL) => {
       this.setState({newProfilePic: imageURL});
-      console.log(imageURL)
     });
   }
 
   render() {
 
-    const {user,permitsUpdate} = this.state
+    const {permitsUpdate} = this.state
+    const { user } = this.props
+
 
     return (
 
+      !user 
+      ? <Loading />
+      :
       <div className="personal-block">
       <div className="pic-block">
       <figure>
@@ -150,6 +144,12 @@ class PersonalDetail extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) }
@@ -157,6 +157,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default withRouter(connect(null, mapDispatchToProps)(PersonalDetail));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(PersonalDetail));
 
 

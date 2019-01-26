@@ -30,3 +30,11 @@
   padding: 4px;
   background-color: $primary-color;
 }
+
+@media all and (max-width: 750px) {
+  .addComment{ 
+    width: 300px;
+  textarea{ width: 300px;}
+  }
+
+}

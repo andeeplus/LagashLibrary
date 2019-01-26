@@ -25,14 +25,38 @@ class NavBar extends Component {
         }
       } 
       this.props.setUser(userData);
-      this.setState({user:userData, loading: false});
+      this.setState({user:userData, loading: false},
+        () => this.getUserFavourites()
+        );
     });
   }
+
+  getUserFavourites = async () => {
+
+    let getFavLabelPromise = DatabaseApi.getDocumentById('labelFav',this.state.user.id)
+    let getFavArtistPromise = DatabaseApi.getDocumentById('artistFav',this.state.user.id)
+    let getFavReleasePromise = DatabaseApi.getDocumentById('releaseFav',this.state.user.id)
+    let getFavMasterPromise = DatabaseApi.getDocumentById('masterFav',this.state.user.id)
+  
+    let [getFavLabel, getFavArtist, getFavRelease, getFavMaster] = await Promise.all([getFavLabelPromise, getFavArtistPromise, getFavReleasePromise, getFavMasterPromise])
+    
+    // Here I'm deleting the [id] field - Temp Workaround
+    delete getFavLabel.id;
+    delete getFavArtist.id;
+    delete getFavRelease.id;
+    delete getFavMaster.id;
+
+    localStorage.setItem(`${this.state.user.id}_favLabel`, JSON.stringify(getFavLabel));
+    localStorage.setItem(`${this.state.user.id}_favArtist`, JSON.stringify(getFavArtist));
+    localStorage.setItem(`${this.state.user.id}_favRelease`, JSON.stringify(getFavRelease));
+    localStorage.setItem(`${this.state.user.id}_favMaster`, JSON.stringify(getFavMaster));
+  }
+
 
   render() {
 
     const {user} = this.state
-    console.log('we have the user',this.state.user)
+    
 
     return (
     <div className="full-nav">
@@ -76,10 +100,9 @@ class NavBar extends Component {
       </ul>
       <SearchForm />
     </div>
-
-    
     );
   }
+  
 }
 
 const activeCss = {backgroundColor: '#de774e', color: 'white'}

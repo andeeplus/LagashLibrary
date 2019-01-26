@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { truncateString, stripTitle } from '../../../services/helper'
 import ActionBar from '../ActionBar/ActionBar'
 import vinyl from '../../../img/vinyl.svg'
+import { connect } from 'react-redux';
 
-export default class RecordCard extends Component {
+class RecordCard extends Component {
+
   static propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
@@ -18,10 +20,6 @@ export default class RecordCard extends Component {
     catno: PropTypes.string
   }
 
-  constructor(props){
-    super(props)
-    this.state = {isFavorite: false}
-  }
 
   renderLabel(param){
     switch(param) {
@@ -46,17 +44,16 @@ export default class RecordCard extends Component {
   
 
   render () {
-    const { id, cover_image, title, year, catno, type, artist, comingFrom, user, heart } = this.props
+    const { id, cover_image, title, year, catno, type, artist, user, comingFrom } = this.props
     const actionProps = { 
       id, 
       cover_image, 
-      title: stripTitle(title)[1],
+      title,
       year, 
       catno, 
       type,
       user, 
-      artist: stripTitle(title)[0],
-      heart
+      artist
     }
 
     return (
@@ -96,3 +93,12 @@ export default class RecordCard extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user
+  }
+}
+
+export default connect(mapStateToProps)(RecordCard);

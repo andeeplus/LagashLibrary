@@ -3,33 +3,11 @@ import { NavLink } from 'react-router-dom'
 import FooterAZ from './FooterAZ/'
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
-
-import DatabaseApi from '../../../src/services/dbApi'
 import AuthApi from '../../../src/services/authApi'
-import { setUserInfo } from '../../../src/redux/actions/authActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Footer extends Component {
 
-  state = {
-    user: {}
-  }
-
-
-  componentDidMount(){
-    AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
-      let userData = null;
-      if (user) {
-        userData = await DatabaseApi.getDocumentById('user', user.uid);
-        if(!userData){ 
-          console.log("Please verify your Firebase setup");
-        }
-      } 
-      this.props.setUser(userData);
-      this.setState({user:userData, loading: false});
-    });
-  }
 
 
   logout = () => {
@@ -42,8 +20,7 @@ class Footer extends Component {
 
   render() {
 
-    const {user} = this.state
-    console.log('--->user--->',user)
+    const {user} = this.props
 
     return (
     <footer>
@@ -74,11 +51,11 @@ class Footer extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+
+const mapStateToProps = (state) => {
   return {
-    setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) }
+    user: state.userReducer.user
   }
 }
 
-
-export default withRouter(connect(null, mapDispatchToProps)(Footer));
+export default withRouter(connect(mapStateToProps)(Footer));

@@ -16,10 +16,9 @@ class LabelPage extends Component {
 
     const results = await DiscogsApi.getQuery(`https://api.discogs.com/labels/${query}`)
     const releases = await DiscogsApi.getQuery(`https://api.discogs.com/labels/${query}/releases`)
-    console.log('--->URL--->',`https://api.discogs.com/labels/${query}`,`https://api.discogs.com/labels/${query}/releases`)
+  
     Promise.all([results,releases],this.setState({results, releases, loading:false}))
 
-    console.log('---->STATE: ',this.state)
   }
 
   componentDidMount() {
