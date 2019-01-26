@@ -4,12 +4,10 @@ import Loading from '../../components/Loading/Loading'
 import {DiscogsApi} from '../../services/DiscogsApi'
 
 const urlData = {
-  apiKey:'tFPFwHxGFquOsbBgvDmOLOZibAmnJIlKMjtzLUIE',
   rootUrl: 'https://api.discogs.com/database/',
   search: 'search?q=',
   pages: '&page=',
   perPages: '&per_page=',
-  token: '&token='
 }
 
 
@@ -25,13 +23,13 @@ class SearchPage extends Component {
 
   async fetchData(query){
 
-    const {apiKey, rootUrl, search, pages, perPages, token} = urlData
+    const {rootUrl, search, pages, perPages} = urlData
     const {page, perPage} = this.state
-    const url = `${rootUrl}${search}${query}${pages}${page}${perPages}${perPage}${token}${apiKey}`
+    const url = `${rootUrl}${search}${query}${pages}${page}${perPages}${perPage}`
 
     const results = await DiscogsApi.getQuery(url)
 
-    this.setState({results: results.results, query: this.props.match.params.query, loading:false, page: 1})
+    this.setState({results: results.results, query: this.props.match.params.query, loading:false})
 
   }
 
@@ -63,8 +61,9 @@ class SearchPage extends Component {
     dir === 'next' 
     && this.setState({page: page +1, loading: true},()=>{this.fetchData(this.state.query)});
 
-    console.log(page)
     window.scrollTo(0, 0)
+
+    console.log(this.state.page)
 
   }
 

@@ -84,3 +84,11 @@
       padding:20px;
     }
 }
+
+@media all and (max-width: 370px) {
+
+  .carousel {
+    padding:0;
+  }
+}
+

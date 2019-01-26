@@ -42,10 +42,10 @@ class ContactBox extends Component {
         <h1 className="title-pages">Write us a message!</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="firstname" onChange={this.handleChange} placeholder="Your name.." />
+          <input type="text" id="name" name="firstname" autoComplete="firstname" onChange={this.handleChange} placeholder="Your name.." />
 
           <label htmlFor="email">E-Mail</label>
-          <input type="email" id="email" name="email" onChange={this.handleChange} placeholder="Your email.." required />
+          <input type="email" id="email" name="email" autoComplete="email" onChange={this.handleChange} placeholder="Your email.." required />
       
           <label htmlFor="subject">Subject</label>
           <textarea id="subject" className="text-area-msg" onChange={this.handleChange} name="subject" placeholder="Write something.." required></textarea>

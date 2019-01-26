@@ -34,7 +34,6 @@ class FavouriteList extends Component {
       artist
     }
 
-    console.log('PROPS IN FAV LIST: ',recordFav, artistFav, labelFav)
 
     return (
 

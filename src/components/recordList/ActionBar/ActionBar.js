@@ -21,7 +21,8 @@ class ActionBar extends Component {
     labelFav: [],
     artistFav: [],
     releaseFav: [],
-    masterFav: []
+    masterFav: [],
+    heart: false
   }  
 
 
@@ -40,6 +41,7 @@ class ActionBar extends Component {
     }
   }
 
+
   componentDidMount(){
 
     const labelFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favLabel`)))
@@ -47,17 +49,12 @@ class ActionBar extends Component {
     const releaseFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favRelease`)))
     const masterFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favMaster`)))
 
-    console.log('DIDMOUNT FAVS EXTRACT: ',labelFav, artistFav, releaseFav, masterFav )
-    this.setState({
-      labelFav, artistFav, releaseFav, masterFav
-    }, ()=>console.log(`callback`,this.state))
-
+    this.setState({labelFav, artistFav, releaseFav, masterFav}, () => this.shouldPrintHeart(this.props.id))
     
   }
 
- 
 
-  addToGlobalFavs = async (idRec) => {
+  addToGlobalFavs = async () => {
 
     const user = this.props.user
     const { id= '', cover_image = '', title = '', year = '', catno = '', type = '', artist = '' } = this.props.actionProps
@@ -68,10 +65,10 @@ class ActionBar extends Component {
     let prevLabelFav = JSON.parse(localStorage.getItem(`${user.id}_favLabel`))
     prevLabelFav = prevLabelFav === null ? prevLabelFav = {} : prevLabelFav
 
-    let prevReleaseFav = JSON.parse(localStorage.getItem(`${user.id}_favLabel`))
+    let prevReleaseFav = JSON.parse(localStorage.getItem(`${user.id}_favRelease`))
     prevReleaseFav = prevReleaseFav === null ? prevReleaseFav = {} : prevReleaseFav
     
-    let prevMasterFav = JSON.parse(localStorage.getItem(`${user.id}_favLabel`))
+    let prevMasterFav = JSON.parse(localStorage.getItem(`${user.id}_favMaster`))
     prevMasterFav = prevMasterFav === null ? prevMasterFav = {} : prevMasterFav
 
 
@@ -87,12 +84,14 @@ class ActionBar extends Component {
             DatabaseApi.removeItemFromDoc('artistFav', user.id, id)
             delete prevArtistFav[id]
             localStorage.setItem(`${user.id}_favArtist`, JSON.stringify(prevArtistFav));
+            this.setState({heart: false}) 
 
           } else {
 
             DatabaseApi.updateDocument('artistFav', {[id]:artistFav}, user.id)
             prevArtistFav[id] = artistFav
             localStorage.setItem(`${user.id}_favArtist`, JSON.stringify(prevArtistFav));
+            this.setState({heart: true})
           }
           break;
 
@@ -104,50 +103,56 @@ class ActionBar extends Component {
             DatabaseApi.removeItemFromDoc('labelFav', user.id, id)
             delete prevLabelFav[id]
             localStorage.setItem(`${user.id}_favLabel`, JSON.stringify(prevLabelFav));
+            this.setState({heart: false}) 
 
           } else {
 
             DatabaseApi.updateDocument('labelFav', {[id]:labelFav}, user.id)
             prevLabelFav[id] = labelFav
             localStorage.setItem(`${user.id}_favLabel`, JSON.stringify(prevLabelFav));
+            this.setState({heart: true})
           }
           break;
 
-        case 'release':
+          case 'release':
 
-        const releaseFav = {cover_image, id, title, type, year, catno}
+          const releaseFav = {cover_image, id, title, type, year, catno}
 
-        if (prevReleaseFav !== null && prevReleaseFav[id]){
-          
-          DatabaseApi.removeItemFromDoc('releaseFav', user.id, id)
-          delete prevReleaseFav[id]
-          localStorage.setItem(`${user.id}_favRelease`, JSON.stringify(prevReleaseFav));
+          if (prevReleaseFav !== null && prevReleaseFav[id]){
+            
+            DatabaseApi.removeItemFromDoc('releaseFav', user.id, id)
+            delete prevReleaseFav[id]
+            localStorage.setItem(`${user.id}_favRelease`, JSON.stringify(prevReleaseFav));
+            this.setState({heart: false}) 
 
-        } else {
+          } else {
 
-          DatabaseApi.updateDocument('releaseFav', {[id]:releaseFav}, user.id)
-          prevReleaseFav[id] = releaseFav
-          localStorage.setItem(`${user.id}_favRelease`, JSON.stringify(prevReleaseFav));
-        }
-        break;
+            DatabaseApi.updateDocument('releaseFav', {[id]:releaseFav}, user.id)
+            prevReleaseFav[id] = releaseFav
+            localStorage.setItem(`${user.id}_favRelease`, JSON.stringify(prevReleaseFav));
+            this.setState({heart: true})
+          }
+          break;
 
-        case 'master':
-        const masterFav = {cover_image, id, title, type, year, catno}
+          case 'master':
+          const masterFav = {cover_image, id, title, type, year, catno}
 
-        if (prevMasterFav !== null && prevMasterFav[id]){
-          
-          DatabaseApi.removeItemFromDoc('masterFav', user.id, id)
-          delete prevMasterFav[id]
-          localStorage.setItem(`${user.id}_favMaster`, JSON.stringify(prevMasterFav));
+          if (prevMasterFav !== null && prevMasterFav[id]){
+            
+            DatabaseApi.removeItemFromDoc('masterFav', user.id, id)
+            delete prevMasterFav[id]
+            localStorage.setItem(`${user.id}_favMaster`, JSON.stringify(prevMasterFav));
+            this.setState({heart: false}) 
 
-        } else {
+          } else {
 
-          DatabaseApi.updateDocument('masterFav', {[id]:masterFav}, user.id)
-          prevMasterFav[id] = masterFav
-          localStorage.setItem(`${user.id}_favMaster`, JSON.stringify(prevMasterFav));
-        }
-        break;
-        default:
+            DatabaseApi.updateDocument('masterFav', {[id]:masterFav}, user.id)
+            prevMasterFav[id] = masterFav
+            localStorage.setItem(`${user.id}_favMaster`, JSON.stringify(prevMasterFav));
+            this.setState({heart: true})
+          }
+          break;
+          default:
       }
     })
   }
@@ -170,16 +175,26 @@ class ActionBar extends Component {
 
   }
 
+
   shouldPrintHeart = (id) => {
     const {labelFav, artistFav, masterFav, releaseFav } = this.state
+  
+    switch(this.props.type){
+      case 'artist':
+      artistFav.includes(id.toString()) && this.setState({heart: true}) 
+      break;
+      case 'label':
+      labelFav.includes(id.toString()) && this.setState({heart: true})
+      break;
+      case 'release':
+      releaseFav.includes(id.toString()) && this.setState({heart: true})
+      break;
+      case 'master':
+      masterFav.includes(id.toString()) && this.setState({heart: true})
+      break;
+      default:
 
-    const labelFavBool = labelFav.includes(id.toString())
-    const artistFavBool = artistFav.includes(id.toString())
-    const masterFavBool = masterFav.includes(id.toString())
-    const releaseFavBool = releaseFav.includes(id.toString())
-
-    console.log(labelFavBool, artistFavBool, masterFavBool, releaseFavBool)
-    return labelFavBool || artistFavBool || masterFavBool || releaseFavBool
+    }
   }
 
   render() {
@@ -197,7 +212,8 @@ class ActionBar extends Component {
         </Link>
         <button className="list-card-button"><FontAwesomeIcon icon="share-square" /></button>
         <button className="list-card-button"><FontAwesomeIcon icon="plus-circle" /></button>
-        <button className={`list-card-button${this.shouldPrintHeart(id) ? '-fav' : ''}`} onClick={() => {this.addToGlobalFavs(id)}}><FontAwesomeIcon icon="heart" /></button>
+        <button className={`list-card-button${this.state.heart ? '-fav' : ''}`} 
+          onClick={() => {this.addToGlobalFavs()}}><FontAwesomeIcon icon="heart" /></button>
       </div>
 
     );

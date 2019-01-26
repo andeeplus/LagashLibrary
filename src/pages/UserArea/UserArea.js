@@ -39,26 +39,26 @@ class UserArea extends Component {
       <div className="icon-menu-item">
       <NavLink exact to={`/user/${user.id}/personal-detail`}>
       <FontAwesomeIcon className="icon-svg" icon="user" />
-            Your Details
         </NavLink>
+        <p>Your Details</p>
       </div>
       <div className="icon-menu-item">
       <NavLink to={`/user/${user.id}/your-library`}>
-      <FontAwesomeIcon className="icon-svg" icon="book" />
-            Your Library
+      <FontAwesomeIcon className="icon-svg" icon="book" />   
         </NavLink>
+        <p>Your Library</p>
       </div>
       <div className="icon-menu-item">
       <NavLink to={`/user/${user.id}/your-favourites`}>
       <FontAwesomeIcon className="icon-svg" icon="heart" />
-            Favourites
         </NavLink>
+        <p>Favourites</p>
       </div>
       <div className="icon-menu-item">
       <NavLink to={`/user/${user.id}/messages`}>
       <FontAwesomeIcon className="icon-svg" icon="envelope" />
-            Messages
         </NavLink>
+        <p>Messages</p>
       </div>
       </div>
     );

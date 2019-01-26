@@ -19,7 +19,7 @@
 .record-det-artist{
   font-family: $font-type-b;
   font-size: $text-size-xxl;
-  font-weight: $font-w-normal;
+  font-weight: $font-w-bold;
   margin: 0px;
 }
 .record-det-title{
@@ -157,7 +157,6 @@
     font-family: $font-type-b;
     font-size: $text-size-m;
     text-decoration: none;
-    font-style: italic;
   }
 
   .label-contact{

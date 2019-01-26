@@ -11,13 +11,13 @@ class SearchForm extends Component {
 
   _handleChange = (e) => {
     this.setState({ searchRec: e.target.value })
-    console.log(e.target.value)
+
   }
 
   _handleSubmit = async (e) => {
     e.preventDefault()
     this.props.addQuery(this.state)
-    console.log('this.state.searchRec --> ',this.state.searchRec)
+
   }
   
 

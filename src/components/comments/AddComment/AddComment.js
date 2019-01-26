@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import DatabaseApi from '../../../services/dbApi'
-import AuthApi from '../../../services/authApi'
 import { connect } from 'react-redux';
-import { setUserInfo } from '../../../redux/actions/authActions'
 
 
 class AddComment extends Component {
@@ -16,23 +14,25 @@ class AddComment extends Component {
     imgArticle: '',
     type: '',
     userId: '',
-    user:{}
+    user:{},
+    loading: true
   }
 
   addDocs = (comment) => DatabaseApi.addDocument('comments',comment)
 
 
-  componentDidMount(){
+  // componentDidMount(){
 
-    const {user} = this.props
+  //   const {user} = this.props
+  //   console.log('user on add comment', user)
+  //     this.setState({
+  //       user:user, 
+  //       userName: user.userName, 
+  //       userId: user.id,
+  //       loading: false
+  //     });
 
-      this.setState({
-        user:user, 
-        userName: user.userName, 
-        userId: user.id,
-      });
-
-  }
+  // }
 
   handleChange = (e) => {
     this.setState({
@@ -53,8 +53,8 @@ class AddComment extends Component {
     
     const commentUp = {
       comment: this.state.comment,
-      userName: this.state.userName,
-      userId: this.state.userId,
+      userName: this.props.user.userName,
+      userId: this.props.user.userId,
       idLabel,
       idArtist,
       idMaster,
@@ -71,7 +71,7 @@ class AddComment extends Component {
   render() {
     return (
 
-      this.props.user &&
+      !this.state.loading &&
       <form className="send-comment-box" onSubmit={this.handleSubmit}>
         <div className="addComment">
             <textarea id="comment" ref="comment"
@@ -88,13 +88,10 @@ class AddComment extends Component {
 }
 
 
-
-
 const mapStateToProps = (state) => {
   return {
     user: state.userReducer.user
   }
 }
-
 
 export default connect(mapStateToProps)(AddComment);

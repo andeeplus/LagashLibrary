@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom' 
-import DatabaseApi from '../../../services/dbApi';
+//import DatabaseApi from '../../../services/dbApi';
 import AuthApi from '../../../services/authApi'
+import { connect } from 'react-redux';
 
 
 class SignUpModule extends Component {
@@ -21,33 +22,34 @@ class SignUpModule extends Component {
     })
   }
 
-  componentDidMount(){
+  // componentDidMount(){
 
-    AuthApi.registerAuthObserver((user) => {
-      if(!user) return; 
-
-      const {uid} = user
-
-      const {
-        name,
-        lastName,
-        eMail,
-        password,
-        userName,
-      } = this.state
-
-      const newUser = {
-        name,
-        lastName,
-        eMail,
-        password,
-        userName
-      }
+  //   AuthApi.registerAuthObserver((user) => {
       
-      DatabaseApi.createDocumentWithId('user', newUser, uid)
-    }
-    )
-  }
+  //     if(!user) return; 
+
+  //     const {uid} = user
+
+  //     const {
+  //       name,
+  //       lastName,
+  //       eMail,
+  //       password,
+  //       userName,
+  //     } = this.state
+
+  //     const newUser = {
+  //       name,
+  //       lastName,
+  //       eMail,
+  //       password,
+  //       userName
+  //     }
+      
+  //     DatabaseApi.createDocumentWithId('user', newUser, uid)
+  //   }
+  //   )
+  // }
 
   handleSubmit = async (e) => {
     e.preventDefault()
@@ -70,7 +72,6 @@ class SignUpModule extends Component {
     } else if(result === 'auth/email-already-in-use'){
       this.setState({registerError: 'Email already registered'})
     }
-		console.log("​Signup -> createAccount -> result", result)
   }
 
   render() {
@@ -80,7 +81,7 @@ class SignUpModule extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="loginContainer">
             <label htmlFor="fname"><b>Name</b></label>
-              <input type="text" onChange={this.handleChange} id="name" placeholder="Enter Name" required />
+              <input type="text" onChange={this.handleChange}  id="name" placeholder="Enter Name" required />
             <label htmlFor="lname"><b>Last Name</b></label>
               <input type="text" onChange={this.handleChange} id="lastName" placeholder="Enter Last Name" required />
             <label htmlFor="email"><b>E-mail</b></label>
@@ -88,8 +89,8 @@ class SignUpModule extends Component {
             <label htmlFor="uname"><b>Username</b></label>
               <input type="text" id="userName" onChange={this.handleChange} placeholder="Enter Username" required />
             <label htmlFor="psw"><b>Password</b></label>
-              <input type="password" onChange={this.handleChange} id="password" placeholder="Enter Password" required />
-              <input type="password" onChange={this.handleChange} id="checkPassword" placeholder="Confirm Password" required />
+              <input type="password" onChange={this.handleChange} id="password" autoComplete="password" placeholder="Enter Password" required />
+              <input type="password" onChange={this.handleChange} id="checkPassword" autoComplete="check-password" placeholder="Confirm Password" required />
             <button className="buttonSubmit" type="submit">Sign Up</button>
             <div className="low-bar-form">
               <input type="checkbox" defaultChecked="checked" name="remember" /> 
@@ -104,5 +105,12 @@ class SignUpModule extends Component {
   }
 }
 
-export default SignUpModule;
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user
+  }
+}
+
+
+export default connect(mapStateToProps)(SignUpModule);

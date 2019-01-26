@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class Dropdown extends Component {
 
@@ -29,7 +30,7 @@ showDropdownMenu = (event) => {
 
     return (
         <div  className="dropdown" >
-         <div className="buttonMenu" onClick={this.showDropdownMenu}> {this.props.children}</div>
+         <div className="buttonMenu" onClick={this.showDropdownMenu}>{this.props.children} <FontAwesomeIcon icon="caret-down" /></div>
 
           { this.state.displayMenu ? (
           <ul>

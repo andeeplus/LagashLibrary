@@ -32,24 +32,25 @@ class PersonalDetail extends Component {
     })
   }
 
-  handleSubmit = async (e) => {
-    e.preventDefault()
-    this.updateUser()
-  }
+  // handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   this.updateUser()
+  // }
 
   permitsUpdate = (e) => {
 
     this.setState({permitsUpdate: !this.state.permitsUpdate})
   }
 
-  updateUser = async () => {
-    const { newName, newLastname, newUserName, user } = this.state;
+  updateUser = async (e) => {
+    e.preventDefault()
+    const { newName, newLastName, newUserName } = this.state;
 
-    const result = await DatabaseApi.updateDocument('content', {
+    const result = await DatabaseApi.updateDocument('user', {
       name: newName,
-      lastname: newLastname,
+      lastName: newLastName,
       userName: newUserName
-    }, user.id);
+    }, this.props.user.id);
 
     if(result){
       alert("Document Updated");
@@ -121,7 +122,7 @@ class PersonalDetail extends Component {
       </div>
 
       :<div className="signup-block">
-        <form onSubmit={() => this.handleSubmit()}>
+        <form onSubmit={this.updateUser}>
           <div className="loginContainer">
             <label htmlFor="fname"><b>Name</b></label>
               <input type="text" onChange={this.handleChange} id="newName" placeholder={user.name} required />

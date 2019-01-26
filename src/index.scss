@@ -55,10 +55,10 @@ textarea:focus, input:focus{
 }
 
 .extra-top{
-  margin-top:40px;
+  margin-top:50px;
 }
 
-@media all and (max-width: 750px) {
+@media all and (max-width: 375px) {
   .about-block{
     max-width: 350px;
 

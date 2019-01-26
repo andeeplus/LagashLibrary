@@ -16,7 +16,7 @@ class NavBar extends Component {
 
   componentDidMount(){
     AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
+     
       let userData = null;
       if (user) {
         userData = await DatabaseApi.getDocumentById('user', user.uid);

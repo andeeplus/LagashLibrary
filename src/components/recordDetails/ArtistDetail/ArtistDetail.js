@@ -9,7 +9,6 @@ class ArtistDetail extends Component {
   render() {
 
     const {results, releases} = this.props
-    console.log('---->result.id', results.id)
 
     return (
 

@@ -39,7 +39,6 @@ chooseFavo = (input) => {
 
 async getArticles(collectionName, filterName, filterValue){
   const fbArticles = await DatabaseApi.getDocument(collectionName, filterName, filterValue)
-  console.log('--->ArticlesFirebase',fbArticles)
   this.setState({fbArticles, showItem:fbArticles[0] })
 }
 
@@ -62,7 +61,7 @@ componentDidMount(){
 
     const {loading, artistFav, masterFav, labelFav, releaseFav, menuTitle, artistsSelect, labelsSelect, recordsSelect} = this.state
     const fullRecords = {...releaseFav,...masterFav}
-    console.log('FAVOURITES---->Obj',artistFav, masterFav, labelFav, releaseFav)
+  
 
     return (
       loading 

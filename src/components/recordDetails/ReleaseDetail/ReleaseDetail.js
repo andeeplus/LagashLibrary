@@ -10,7 +10,6 @@ export default class ReleaseDetail extends Component {
   render() {
 
     const {detail, versions} = this.props
-    console.log('Release Detail ------>',detail,versions, this.props)
   
       return (
         <React.Fragment>

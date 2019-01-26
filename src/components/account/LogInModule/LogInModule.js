@@ -31,7 +31,6 @@ class LogInModule extends Component {
     const { eMail, password } = this.state;
     
     const result = await AuthApi.login(eMail, password);
-		console.log("​Signup -> login -> result", result)
 
     if(result.code) {
       this.setState({loginError: result.message})

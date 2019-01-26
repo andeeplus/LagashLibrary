@@ -10,7 +10,6 @@ export default class MasterDetail extends Component {
   render() {
 
     const {detail, versions} = this.props
-    console.log('Master Detail ------>',detail, this.props)
   
       return (
         

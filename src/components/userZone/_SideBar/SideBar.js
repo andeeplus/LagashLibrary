@@ -11,28 +11,9 @@ import { setUserInfo } from '../../../../src/redux/actions/authActions';
 
 class SideBar extends Component {
 
-  state = {
-    user: {}
-  }
-
-  componentDidMount(){
-    AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
-      let userData = null;
-      if (user) {
-        userData = await DatabaseApi.getDocumentById('user', user.uid);
-        if(!userData){ 
-          console.log("Please verify your Firebase setup");
-        }
-      } 
-      this.props.setUser(userData);
-      this.setState({user:userData, loading: false});
-    });
-  }
-
   render() {
 
-    const {user} = this.state
+    const {user} = this.props
     console.log('we have the user',this.state.user)
 
     return (
@@ -66,14 +47,14 @@ class SideBar extends Component {
 const activeCss = {backgroundColor: '#de774e', color: 'white'}
 
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) }
+    user: state.userReducer.user
   }
 }
 
+export default connect(mapStateToProps)(SideBar);
 
-export default withRouter(connect(null, mapDispatchToProps)(SideBar));
 
 
 
