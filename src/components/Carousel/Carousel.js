@@ -18,7 +18,7 @@ class Carousel extends Component {
 		this.sizeSelector(this.props.size)
 		this.dotSelector(this.props.dots)
 		const {images} = this.props
-		images && this.setState({images}, () => console.log(this.state))
+		images && this.setState({images})
 		window.addEventListener('resize', this.triggerTitle());
 	}
 
@@ -27,7 +27,7 @@ class Carousel extends Component {
 	}
 
 	triggerTitle(){
-		if (window.innerWidth < 400){this.setState({titleTrig: 40})}
+		if (window.innerWidth < 780){this.setState({titleTrig: 47})}
 	}
 
   previousSlide = () => {

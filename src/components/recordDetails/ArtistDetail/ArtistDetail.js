@@ -7,6 +7,11 @@ import Carousel from '../../Carousel/Carousel'
 
 
 class ArtistDetail extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+  
   render() {
 
     const {results, releases} = this.props
@@ -49,7 +54,7 @@ class ArtistDetail extends Component {
         </div>
 
         <Articles idArtist={results.id} type={'artist'} />
-        <Comments idArtist={results.id} type={'artist'} />
+        <Comments idArtist={results.id} type={'artist'} onPage={results.name} />
         <RecordList records={releases.releases} comingFrom={'pageDetail'}/>
       </React.Fragment>
 

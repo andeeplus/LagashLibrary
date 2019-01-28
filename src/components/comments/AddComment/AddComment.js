@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DatabaseApi from '../../../services/dbApi'
 import { connect } from 'react-redux';
 
-
 class AddComment extends Component {
   state = {
     comment: '',
@@ -15,24 +14,11 @@ class AddComment extends Component {
     type: '',
     userId: '',
     user:{},
-    loading: true
+    loading: true,
   }
 
   addDocs = (comment) => DatabaseApi.addDocument('comments',comment)
 
-
-  // componentDidMount(){
-
-  //   const {user} = this.props
-  //   console.log('user on add comment', user)
-  //     this.setState({
-  //       user:user, 
-  //       userName: user.userName, 
-  //       userId: user.id,
-  //       loading: false
-  //     });
-
-  // }
 
   handleChange = (e) => {
     this.setState({
@@ -42,6 +28,8 @@ class AddComment extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault()
+
+    const date = new Date()
 
     const{ 
       idLabel = this.props.id[0] === 'idLabel' ? this.props.id[1].toString() : '',
@@ -60,10 +48,14 @@ class AddComment extends Component {
       idArtist,
       idMaster,
       idRelease,
-      type
+      type,
+      date: date.toLocaleString(),
+      dateNow: Date.now(),
+      onPage: this.props.onPage
     }
 
     this.addDocs(commentUp)
+    console.log(commentUp)
     this.refs.comment.value = ''
     
   }

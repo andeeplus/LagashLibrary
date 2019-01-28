@@ -7,7 +7,10 @@ import VideoPlayer from '../../VideoPlayer/VideoPlayer'
 import ExchangeZone from '../../exchange/ExchangeZone/ExchangeZone'
 
 export default class ReleaseDetail extends Component {
-
+  
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   
   render() {
 
@@ -47,7 +50,7 @@ export default class ReleaseDetail extends Component {
           <ExchangeZone detail={detail} type={'release'}/>
           <Articles idRelease={detail.id} type={'release'} />
           <VideoPlayer videos={detail.videos} />
-          <Comments idRelease={detail.id} type={'release'} />
+          <Comments idRelease={detail.id} type={'release'} onPage={detail.artists[0].name}/>
           { versions && versions.versions.length !== 0 &&
             <VersionList detail={detail} versions={versions}/>}
         </React.Fragment>

@@ -13,3 +13,40 @@
   .comment-box{ width: 300px;}
 
 }
+
+.single-comment{
+  padding-bottom: 16px;
+}
+
+.comment-line{
+
+}
+
+.comment-timestamp{
+  background-color: $secondary-color;
+  font-size: $text-size-xs;
+  font-family: $font-type-b;
+  text-align: right;
+  padding: 0 5px;
+  border-radius: $radius-a;
+}
+
+.comments-on-page{
+  background-color: $primary-color;
+  font-size: $text-size-s;
+  font-family: $font-type-b;
+  text-align: left;
+  padding: 0 5px;
+  border-radius: $radius-a;
+  text-transform: capitalize;
+  span{
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: $text-size-m;
+    cursor: pointer;
+  }
+}

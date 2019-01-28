@@ -44,6 +44,8 @@ class ExchangeItem extends Component {
   handleSubmit = async (e) => {
     e.preventDefault()
 
+    const date = new Date()
+
     const { 
       user,
       userName,
@@ -69,7 +71,9 @@ class ExchangeItem extends Component {
       idRelease,
       titleOffer,
       offerDetail,
-      type
+      type,
+      date: date.toLocaleString(),
+      dateNow: Date.now()
     }
 
     this.addDocs(exchangeItemUp)

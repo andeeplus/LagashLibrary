@@ -50,10 +50,6 @@ class ActionBar extends Component {
     const masterFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favMaster`)))
 
     this.setState({labelFav, artistFav, releaseFav, masterFav}, () => this.shouldPrintHeart(this.props.id.toString()))
-    console.log('COMPO DID MOUNT: ',labelFav,
-    artistFav,
-    releaseFav,
-    masterFav, this.props.id.toString())
   }
 
 
@@ -192,7 +188,6 @@ class ActionBar extends Component {
 
     }
 
-    console.log(this.state.heart,this.props.type,id)
   }
 
   render() {

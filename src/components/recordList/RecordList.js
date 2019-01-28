@@ -19,16 +19,14 @@ class RecordList extends Component {
       case '/search':
         return ['Results', 'search']
       default:
-        console.log('Something bad happened')
     }
   }
-
 
 
   render () {
 
     const {records, comingFrom} = this.props
-    console.log(this.props)
+    const year = isNaN(records.year) ? records.year : records.year.toString()
     return (
 
       <React.Fragment>
@@ -60,7 +58,7 @@ class RecordList extends Component {
                   cover_image={
                     comingFrom === 'pageDetail' 
                     ? records.thumb : records.cover_image}
-                  year={records.year}
+                  year={year}
                   type={
                     records.type
                     ? records.type

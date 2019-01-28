@@ -152,6 +152,19 @@ export default class DatabaseApi {
     return result;
   }
 
+  static async getDocumentDateNow24(collectionName, dateNow, callback){
+    const date24 = (dateNow - 8,64e+7)
+    console.log(collectionName, dateNow, callback)
+    db.collection(collectionName).where('dateNow', "<", dateNow).where('dateNow', ">", date24)
+    .onSnapshot((querySnapshot) => {
+      let result = [];
+      querySnapshot.forEach((doc) => {
+        result.push({id:doc.id, ...doc.data()});
+      });
+      callback(result);
+  });
+  }
+
   static async getCollection(collectionName) {
     const result = [];
 

@@ -5,12 +5,17 @@ import Articles from '../../library/Articles/Articles'
 import Carousel from '../../Carousel/Carousel'
 
 export default class MasterDetail extends Component {
-
+  
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+  
   
   render() {
 
     const {detail, versions} = this.props
   
+
       return (
         
         detail &&
@@ -37,7 +42,7 @@ export default class MasterDetail extends Component {
           </div>
          </div>
          <Articles idMaster={detail.id} type={'master'} />
-         <Comments idMaster={detail.id} type={'master'} />
+         <Comments idMaster={detail.id} type={'master'} onPage={detail.artists[0].name}/>
          { versions && versions.versions.length !== 0 &&
           <VersionList versions={versions}/>}
         </React.Fragment>

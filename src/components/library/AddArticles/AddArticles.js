@@ -31,6 +31,8 @@ class AddArticles extends Component {
   handleSubmit = async (e) => {
     e.preventDefault()
 
+    const date = new Date()
+
     const { 
       idLabel,
       idArtist,
@@ -50,7 +52,9 @@ class AddArticles extends Component {
       link,
       title,
       imgArticle,
-      type
+      type,
+      date: date.toLocaleString(),
+      dateNow: Date.now()
     }
 
     this.addDocs(articleUp)

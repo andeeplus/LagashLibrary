@@ -38,7 +38,7 @@ class Comments extends Component {
 
   render() {
 
-    const {type} = this.props
+    const {type, onPage} = this.props
     const {fbComments} = this.state
     return (
       <React.Fragment>
@@ -50,6 +50,7 @@ class Comments extends Component {
         <AddComment 
         id={this.identifyType()} 
         type={type}
+        onPage={onPage}
         />
       </React.Fragment>
     );

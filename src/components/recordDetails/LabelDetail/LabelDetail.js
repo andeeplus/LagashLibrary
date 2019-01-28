@@ -6,6 +6,10 @@ import Carousel from '../../Carousel/Carousel'
 
 
 class LabelDetail extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   render() {
 
     const {results, releases} = this.props
@@ -32,7 +36,7 @@ class LabelDetail extends Component {
         </div>
         
         <Articles idLabel={results.id} type={'label'} />
-        <Comments idLabel={results.id} type={'label'} />
+        <Comments idLabel={results.id} type={'label'} onPage={results.name}/>
         <RecordList records={releases.releases} comingFrom={'pageDetail'}/>
       </React.Fragment>
     );

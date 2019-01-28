@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Carousel from '../../components/Carousel/Carousel'
 import DatabaseApi from '../../services/dbApi'
 import ExchangeTab from '../../components/exchange/ExchangeTab/ExchangeTab'
-
+import CommentsTab from '../../components/comments/CommentsTab/CommentsTab'
 
 class Library extends Component {
 
@@ -16,6 +16,8 @@ class Library extends Component {
   componentDidMount(){
 
     this.getArticles('library')
+    window.scrollTo(0, 0)
+
   }
 
   render() {
@@ -30,6 +32,7 @@ class Library extends Component {
         size={'header'} 
         dots={{dots:true, dotsType:'square'}}/>}
         <ExchangeTab />
+        <CommentsTab />
       </div>
     );
   }
