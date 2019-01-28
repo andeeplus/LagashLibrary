@@ -133,3 +133,16 @@ animation: spin1 2s infinite linear;
   }
 
 }
+
+@media all and (max-width: 750px) {
+  
+  .footerAZ{
+    display:none;
+  }
+
+  .foot-logo{
+    font-size: small;
+  }
+
+}
+

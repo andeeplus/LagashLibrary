@@ -114,7 +114,7 @@
 
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 330px) {
 
   .slick-prev {
     display: none !important;
@@ -123,4 +123,19 @@
   .slick-next {
     display: none !important;
   }
+
+  .slick-slider{
+    width: 290px;
+  }
+
+  .article-card {
+    display: table-footer-group;
+    text-align: left;
+}
+
+.article-card figure {
+  position: relative;
+  width: 130px;
+  height: 130px;
+}
 }

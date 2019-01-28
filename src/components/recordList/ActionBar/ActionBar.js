@@ -49,8 +49,11 @@ class ActionBar extends Component {
     const releaseFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favRelease`)))
     const masterFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favMaster`)))
 
-    this.setState({labelFav, artistFav, releaseFav, masterFav}, () => this.shouldPrintHeart(this.props.id))
-    
+    this.setState({labelFav, artistFav, releaseFav, masterFav}, () => this.shouldPrintHeart(this.props.id.toString()))
+    console.log('COMPO DID MOUNT: ',labelFav,
+    artistFav,
+    releaseFav,
+    masterFav, this.props.id.toString())
   }
 
 
@@ -75,10 +78,10 @@ class ActionBar extends Component {
     this.setState({id:id.toString(), cover_image, title, year, catno, type, artist },
     async function() {
 
-      switch(this.props.type){
+      switch(type){
         case 'artist':
           const artistFav = {artist: title, cover_image, id, type} 
-          
+
           if (prevArtistFav !== null && prevArtistFav[id]){
             
             DatabaseApi.removeItemFromDoc('artistFav', user.id, id)
@@ -169,32 +172,27 @@ class ActionBar extends Component {
   }
 
 
-  isFavCssClass = (user, idRec) => { 
-    
-    return user.includes(idRec.toString()) ? "-fav" : ""  
-
-  }
-
-
   shouldPrintHeart = (id) => {
     const {labelFav, artistFav, masterFav, releaseFav } = this.state
   
     switch(this.props.type){
       case 'artist':
-      artistFav.includes(id.toString()) && this.setState({heart: true}) 
+      artistFav.includes(id) && this.setState({heart: true}) 
       break;
       case 'label':
-      labelFav.includes(id.toString()) && this.setState({heart: true})
+      labelFav.includes(id) && this.setState({heart: true})
       break;
       case 'release':
-      releaseFav.includes(id.toString()) && this.setState({heart: true})
+      releaseFav.includes(id) && this.setState({heart: true})
       break;
       case 'master':
-      masterFav.includes(id.toString()) && this.setState({heart: true})
+      masterFav.includes(id) && this.setState({heart: true})
       break;
       default:
 
     }
+
+    console.log(this.state.heart,this.props.type,id)
   }
 
   render() {
@@ -210,8 +208,8 @@ class ActionBar extends Component {
         <Link className="list-card-button" to={this.linkTo(type,id)}>
           <FontAwesomeIcon icon="link" />
         </Link>
-        <button className="list-card-button"><FontAwesomeIcon icon="share-square" /></button>
         <button className="list-card-button"><FontAwesomeIcon icon="plus-circle" /></button>
+        { type === 'release' && <button className="list-card-button interchange"><FontAwesomeIcon icon="exchange-alt" /></button>}
         <button className={`list-card-button${this.state.heart ? '-fav' : ''}`} 
           onClick={() => {this.addToGlobalFavs()}}><FontAwesomeIcon icon="heart" /></button>
       </div>

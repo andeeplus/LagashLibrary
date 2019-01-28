@@ -4,6 +4,7 @@ import RecordList from '../../../components/recordList/RecordList'
 import Comments from '../../comments/Comments'
 import Carousel from '../../Carousel/Carousel'
 
+
 class LabelDetail extends Component {
   render() {
 
@@ -12,7 +13,7 @@ class LabelDetail extends Component {
     return (
       <React.Fragment>
         <div className="page-block">
-        <Carousel images={results.images} />
+        <Carousel images={results.images} size={'small-square'}/>
           <div className="page-details">
             <p className="page-name">{results.name}</p>
             <p className="page-desc"><strong>Info: </strong></p>
@@ -29,7 +30,7 @@ class LabelDetail extends Component {
             
           </div>
         </div>
-
+        
         <Articles idLabel={results.id} type={'label'} />
         <Comments idLabel={results.id} type={'label'} />
         <RecordList records={releases.releases} comingFrom={'pageDetail'}/>

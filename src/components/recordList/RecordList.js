@@ -28,7 +28,7 @@ class RecordList extends Component {
   render () {
 
     const {records, comingFrom} = this.props
-    
+    console.log(this.props)
     return (
 
       <React.Fragment>
@@ -61,7 +61,11 @@ class RecordList extends Component {
                     comingFrom === 'pageDetail' 
                     ? records.thumb : records.cover_image}
                   year={records.year}
-                  type={records.type}
+                  type={
+                    records.type
+                    ? records.type
+                    : 'release'
+                  }
                   comingFrom={comingFrom}
 
                 />

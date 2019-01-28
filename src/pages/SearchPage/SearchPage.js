@@ -17,11 +17,11 @@ class SearchPage extends Component {
     page: 1,
     perPage: 20,
     loading: true,
-    query: 'pitch down',
+    queryDefault: 'pitch down',
     results: []
   }
 
-  async fetchData(query){
+  async fetchData(query = this.state.queryDefault){
 
     const {rootUrl, search, pages, perPages} = urlData
     const {page, perPage} = this.state

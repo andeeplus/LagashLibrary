@@ -54,7 +54,7 @@ class AddComment extends Component {
     const commentUp = {
       comment: this.state.comment,
       userName: this.props.user.userName,
-      userId: this.props.user.userId,
+      userId: this.props.user.id,
       idLabel,
       idArtist,
       idMaster,
@@ -71,7 +71,6 @@ class AddComment extends Component {
   render() {
     return (
 
-      !this.state.loading &&
       <form className="send-comment-box" onSubmit={this.handleSubmit}>
         <div className="addComment">
             <textarea id="comment" ref="comment"

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import DatabaseApi from '../../../services/dbApi'
-import Slider from "react-slick";
-import ArticleCard from '../ArticleCard/ArticleCard'
 import Modal from "../../Modal/Modal";
 import AddArticles from '../AddArticles/AddArticles'
-
+import MultiCarousel from '../MultiCarousel/MultiCarousel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class Articles extends Component {
@@ -45,6 +43,8 @@ export default class Articles extends Component {
     }
   }
 
+
+
   render() {
 
     
@@ -52,41 +52,13 @@ export default class Articles extends Component {
     const {type} = this.props
     const relateArticle = this.identifyType()
 
-    const settings = {
-      dots: true,
-      lazyLoad: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      initialSlide: 2,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
-          }
-        },
-      ]
-    };
     return (
       
 
       <React.Fragment>
 
         <h1 className="page-h1">
-          <FontAwesomeIcon icon="book" /> 
+          <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="book" /> 
           Library
             <button 
             className="buttonAddArticle" 
@@ -98,23 +70,14 @@ export default class Articles extends Component {
         </h1>
         
         {fbArticles.length > 0 
-        ?<div className="caro-box">
-          <Slider {...settings} className="articles-carousel">
-          {fbArticles.map((i,index) => <ArticleCard key={index} property={i}/> )}
-          </Slider>
-        </div>
+        ?<MultiCarousel images={fbArticles} />
         : <div className="no-articles"><p>Add some articles!</p></div>}
         <Modal 
         onClose={this.onClose} 
         show={modalShow} 
         trigger={<AddArticles idType={relateArticle} type={type}/>}
-        />
+        >Add an Article</Modal>
       </React.Fragment>
-
-      
-
-
-
 
     );
   }

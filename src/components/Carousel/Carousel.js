@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import vinyl from '../../img/vinyl.svg'
-
+import {truncateString} from '../../services/helper'
 
 class Carousel extends Component {
 
   state = {
 		currentImageIndex: 0,
-		images: [vinyl]
+		size: 'small',
+		dots: false,
+		dotsType: 'square',
+		images: [vinyl],
+		titleTrig: 60
 	};
 
 	componentDidMount(){
+		this.sizeSelector(this.props.size)
+		this.dotSelector(this.props.dots)
 		const {images} = this.props
-		images && this.setState({images})
+		images && this.setState({images}, () => console.log(this.state))
+		window.addEventListener('resize', this.triggerTitle());
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.triggerTitle());
+	}
+
+	triggerTitle(){
+		if (window.innerWidth < 400){this.setState({titleTrig: 40})}
 	}
 
   previousSlide = () => {
@@ -25,6 +40,9 @@ class Carousel extends Component {
 			currentImageIndex: index
 		});
 	}
+
+
+
 	
 	nextSlide = () => {
 		const lastIndex = this.state.images.length - 1;
@@ -37,27 +55,77 @@ class Carousel extends Component {
 		});
   }
 	
+	sizeSelector(size){
+		switch(size){
+			case 'small-square':
+			this.setState({size: '-small'})
+			break
+			case 'header': 
+			this.setState({size: '-header'})
+			break
+			default: 
+			this.setState({size: '-small'})
+		}
+	}
+
+	dotSelector(dots){
+		if (dots) {
+			switch(dots.type){
+				case 'square':
+				this.setState({dots: true, dotsType: 'square'})
+				break
+				case 'circle': 
+				this.setState({dots: true, dotsType: 'circle'})
+				break
+				default: 
+				this.setState({dots: true, dotsType: 'square'})
+			}
+		}
+	}
 
 
 	render () {
-		const {images} = this.state
+		const {images, size, currentImageIndex, dots, titleTrig} = this.state
 		return (
-      <div className="carousel">
+      <div className={`carousel${size}`}>
         <figure>
-          <img className="image-slide"  src={ this.state.images[this.state.currentImageIndex].uri} alt={this.state.currentImageIndex} />
-        </figure>
+					<img className={`image-slide${size}`}  
+					src={ size === '-small' ? images[currentImageIndex].uri : images[currentImageIndex].imgArticle} 
+					alt={currentImageIndex} />
+				{ size === '-header' &&
+				<div className='title-overlay-header'>
+					<p><span className="highlight">{truncateString(images[currentImageIndex].title, titleTrig)}
+					<a href={images[currentImageIndex].link} target="_blank" rel="noopener noreferrer"> 
+					<FontAwesomeIcon style={{paddingLeft:'5px', paddingBottom: '2px', height: '15px', lineHeight: '30px'}}icon='external-link-alt'/></a></span>
+					</p>
+				</div> }
+				</figure>
+
+				{dots &&
+					<div className="dots-line">
+					{images.map( (i, index) =>
+						<FontAwesomeIcon 
+						key= {index}
+						onClick={ () => this.setState({currentImageIndex: index})} 
+						style={currentImageIndex === index 
+							&& {color:'red'}}
+						icon="square" />)}
+					</div>
+
+				}
+
 			{ images.length > 1 && 
 				<React.Fragment>
-				<div className="left-arr">
+				<div className={`left-arr${size}`}>
 				<FontAwesomeIcon 
-					className="arrows-caro" 
-					icon="arrow-left" onClick={ () => this.previousSlide() 
+					className={`arrows-caro${size}`} 
+					icon={'arrow-left'} onClick={ () => this.previousSlide() 
 					}/>
 				</div>
-				<div className="right-arr">
+				<div className={`right-arr${size}`}>
 				<FontAwesomeIcon 
-					className="arrows-caro" 
-					icon="arrow-right" 
+					className={`arrows-caro${size}`} 
+					icon={'arrow-right'} 
 					onClick={ () => this.nextSlide() } 
 				/>
 				</div>

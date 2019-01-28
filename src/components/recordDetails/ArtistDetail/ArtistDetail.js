@@ -5,16 +5,17 @@ import Articles from '../../library/Articles/Articles'
 import Comments from '../../comments/Comments'
 import Carousel from '../../Carousel/Carousel'
 
+
 class ArtistDetail extends Component {
   render() {
 
     const {results, releases} = this.props
-
+    console.log(results)
     return (
 
       <React.Fragment>
         <div className="page-block">
-        <Carousel images={results.images} />
+        <Carousel images={results.images} size={'small-square'}/>
           <div className="page-details">
             <p className="page-name">{results.name}</p>
             { results.realname && <p className="page-real-name">{results.realname}</p>}

@@ -17,7 +17,7 @@ export default class MasterDetail extends Component {
         
         <React.Fragment>
           <div className="page-block">
-          <Carousel images={detail.images} />
+          <Carousel images={detail.images} size={'small-square'}/>
             <div className="page-details">
               <p className="record-det-artist">{detail.artists[0].name}</p>
               <p className="record-det-title">{detail.title}</p>

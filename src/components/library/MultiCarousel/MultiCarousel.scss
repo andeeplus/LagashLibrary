@@ -1,0 +1,70 @@
+
+.multi-carousel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex: 0 1 45%;
+  padding-bottom: 30px;
+}
+
+.multi-card-carousel{
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  padding: 5px;
+
+  a{
+    font-family: $font-type-b;
+    font-size: $text-size-s;
+    text-decoration: none;
+  }
+}
+
+.multi-card-figure{
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 150px;
+  }
+}
+
+  .multi-left-arr{
+    padding-top:70px;
+    opacity: 0;
+    transition: opacity 800ms;
+  }
+
+  .multi-right-arr{
+    padding-top:70px;
+    opacity: 0;
+    transition: opacity 800ms;
+  }
+  .multi-arrows-caro{
+    color: $primary-color;
+    height: 10px;
+    background: rgba(179, 42, 42, 0.151);
+    border-radius: 50%;
+  }
+  .svg-inline--fa.fa-w-14 {
+    width: 10px;
+    padding: 5px;
+  }
+
+ .multi-carousel:hover .multi-right-arr, .multi-carousel:hover .multi-left-arr
+    {
+        opacity: 1.0;
+    }
+
+
+
+@media all and (max-width: 375px) {
+
+  
+}

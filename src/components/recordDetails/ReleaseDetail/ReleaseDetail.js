@@ -3,6 +3,8 @@ import VersionList from '../VersionList/VersionList'
 import Comments from '../../comments/Comments'
 import Articles from '../../library/Articles/Articles'
 import Carousel from '../../Carousel/Carousel'
+import VideoPlayer from '../../VideoPlayer/VideoPlayer'
+import ExchangeZone from '../../exchange/ExchangeZone/ExchangeZone'
 
 export default class ReleaseDetail extends Component {
 
@@ -10,11 +12,11 @@ export default class ReleaseDetail extends Component {
   render() {
 
     const {detail, versions} = this.props
-  
+    console.log(detail)
       return (
         <React.Fragment>
           <div className="page-block">
-          <Carousel images={detail.images} />
+          <Carousel images={detail.images} size={'small-square'}/>
           <div className="page-details">
             <p className="record-det-artist">{detail.artists_sort}</p>
             <p className="record-det-title">{detail.title}</p>
@@ -40,10 +42,11 @@ export default class ReleaseDetail extends Component {
             <i>{a.duration}</i>
             </p>)}
           </div>
-
           </div>
           </div>
+          <ExchangeZone detail={detail} type={'release'}/>
           <Articles idRelease={detail.id} type={'release'} />
+          <VideoPlayer videos={detail.videos} />
           <Comments idRelease={detail.id} type={'release'} />
           { versions && versions.versions.length !== 0 &&
             <VersionList versions={versions}/>}

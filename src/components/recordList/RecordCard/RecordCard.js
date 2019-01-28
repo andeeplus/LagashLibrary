@@ -5,6 +5,7 @@ import ActionBar from '../ActionBar/ActionBar'
 import vinyl from '../../../img/vinyl.svg'
 import { connect } from 'react-redux';
 
+
 class RecordCard extends Component {
 
   static propTypes = {

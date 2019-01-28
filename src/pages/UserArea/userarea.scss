@@ -3,9 +3,10 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  height: 30vh;
-  margin-top: 10vh;
-  
+  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 150px;
+  max-width: 900px;
 }
 
 .icon-menu-item{
@@ -13,12 +14,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 0 45%;
-  padding-bottom: 10vh;
+  flex: 0 38%;
+  padding: 8vh 0;
 
   .icon-svg{
     height: 130px;
-    width: 150px;
+    width: 150px !important;
     color: $primary-darker;
   }
 
@@ -30,9 +31,21 @@
   }
 }
 
-@media all and (max-width: 750px) {
+@media all and (max-width: 550px) {
+  .icon-menu-item{
+    padding: 8vh 2vh;
+  }
+
   .icon-menu{
     max-width: 450px;
-
   }
+
+  .icon-menu-item{
+
+    .icon-svg{
+      height: 80px;
+      width: 80px;
+  }
+  }
+
 }
