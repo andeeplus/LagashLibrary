@@ -55,6 +55,7 @@ class AddComment extends Component {
       comment: this.state.comment,
       userName: this.props.user.userName,
       userId: this.props.user.id,
+      userImg: this.props.user.profilePic,
       idLabel,
       idArtist,
       idMaster,

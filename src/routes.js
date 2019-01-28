@@ -21,8 +21,8 @@ import Favourites from './components/userZone/Favourites/Favourites'
 import PrivateRoute from './specialRoutes/PrivateRoute'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faMusic, faSquare, faExchangeAlt, faPlusCircle, faVideo, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner, faSignInAlt, faSignOutAlt, faBook, faComment, faCodeBranch, faArrowRight, faArrowLeft, faUser, faEnvelope, faCaretDown, faCircle, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
-library.add(faSearch, faExternalLinkAlt, faExchangeAlt, faCaretDown, faSquare, faCircle, faVideo, faUser, faEnvelope, faArrowRight, faArrowLeft, faComment, faCodeBranch, faSignInAlt, faMusic, faBook, faSignOutAlt, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink)
+import { faSearch, faMusic, faSquare, faExchangeAlt, faPlusCircle, faVideo, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner, faSignInAlt, faSignOutAlt, faBook, faComment, faCodeBranch, faArrowRight, faArrowLeft, faUser, faEnvelope, faCaretDown, faCircle, faExternalLinkAlt, faHandshake } from '@fortawesome/free-solid-svg-icons'
+library.add(faSearch, faExternalLinkAlt, faHandshake, faExchangeAlt, faCaretDown, faSquare, faCircle, faVideo, faUser, faEnvelope, faArrowRight, faArrowLeft, faComment, faCodeBranch, faSignInAlt, faMusic, faBook, faSignOutAlt, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink)
 
 
 export default () => (

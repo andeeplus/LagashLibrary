@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DatabaseApi from '../../../services/dbApi'
 import Modal from "../../Modal/Modal";
 import ExchangeItem from '../ExchangeItem/ExchangeItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,14 +15,16 @@ class ExchangeZone extends Component {
   showModal = e => {this.setState({modalShow: true})};
   onClose = e => {this.setState({modalShow: false})};
 
-  async getExchangeItems(collectionName, filterName, filterValue){
-    const exchangeItems = await DatabaseApi.getDocument(collectionName, filterName, filterValue)
-    this.setState({exchangeItems})
-  }
-
   componentDidMount(){
+    const {detail} = this.props
+    
+    const recoverData = JSON.parse(localStorage.getItem('lagash-global-exchange'))
+    const exchangeItems = recoverData.filter(obj => {
+      return obj.idRelease === detail.id.toString()
+    })
 
-    this.getExchangeItems('exchange', 'id', this.props.detail.id)
+    console.log(recoverData, exchangeItems, detail.id)
+    this.setState({exchangeItems})
   }
 
 
@@ -58,12 +59,15 @@ class ExchangeZone extends Component {
           <div className="offers-on-page">
           {exchangeItems.map(i =>
             <div key={i.id} className="single-exchange">
+            <div className="user-offer-block">
             <img src={i.userImg} alt={i.id + i.userName}/>
+            <FontAwesomeIcon className="offer-icons" icon="envelope" />
+            </div>
             <div className='single-exchange-text'>
             <p className="exchange-title">{i.titleOffer}</p>
             <p className="exchange-desc">{i.offerDetail}</p>
             </div>
-            <FontAwesomeIcon className="offer-mail" icon="envelope" />
+           
             </div>
           )}
           </div>

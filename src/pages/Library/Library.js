@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Carousel from '../../components/Carousel/Carousel'
 import DatabaseApi from '../../services/dbApi'
+import ExchangeTab from '../../components/exchange/ExchangeTab/ExchangeTab'
+
 
 class Library extends Component {
 
@@ -21,12 +23,13 @@ class Library extends Component {
     const {fbArticles} = this.state
  
     return (
-      
+  
       <div>
       {fbArticles && 
         <Carousel images={fbArticles} 
         size={'header'} 
         dots={{dots:true, dotsType:'square'}}/>}
+        <ExchangeTab />
       </div>
     );
   }

@@ -49,7 +49,7 @@ export default class ReleaseDetail extends Component {
           <VideoPlayer videos={detail.videos} />
           <Comments idRelease={detail.id} type={'release'} />
           { versions && versions.versions.length !== 0 &&
-            <VersionList versions={versions}/>}
+            <VersionList detail={detail} versions={versions}/>}
         </React.Fragment>
 
     );

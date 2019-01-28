@@ -29,10 +29,10 @@ class ExchangeItem extends Component {
       title: detail.title,
       catno: detail.labels.map(i => [i.name,i.catno]).join(','),
       artist: detail.artists_sort,
-      year: detail.year,
-      id: detail.id,
+      year: detail.year.toString(),
+      idRelease: detail.id.toString(),
       type: type
-    }, () => console.log(this.state))
+    })
   }
 
   handleChange = (e) => {
@@ -52,7 +52,7 @@ class ExchangeItem extends Component {
       catno,
       artist,
       year,
-      id,
+      idRelease,
       titleOffer,
       offerDetail,
       type
@@ -66,14 +66,15 @@ class ExchangeItem extends Component {
       catno,
       artist,
       year,
-      id,
+      idRelease,
       titleOffer,
       offerDetail,
       type
     }
 
     this.addDocs(exchangeItemUp)
-
+    const exchangeItems = JSON.parse(localStorage.getItem('lagash-global-exchange'))
+    localStorage.setItem('lagash-global-exchange', JSON.stringify({...exchangeItems, ...exchangeItemUp}));
   }
 
 
@@ -85,7 +86,7 @@ class ExchangeItem extends Component {
         <div className="addArticle">
           <label htmlFor="titleOffer"><b>Offer Title</b></label>
             <input type="text" id="titleOffer" onChange={this.handleChange} placeholder="Title" required />
-          <label htmlFor="recirdState"><b>Info Exchange</b></label>
+          <label htmlFor="offerDetail"><b>Info Exchange</b></label>
             <textarea className="textexchange" id="offerDetail" onChange={this.handleChange} placeholder="Describe the state of the record..." required />
           <button className="buttonSubmit" type="submit">Submit</button>
         </div>

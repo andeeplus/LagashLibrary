@@ -33,12 +33,13 @@ class NavBar extends Component {
 
   getUserFavourites = async () => {
 
-    let getFavLabelPromise = DatabaseApi.getDocumentById('labelFav',this.state.user.id)
-    let getFavArtistPromise = DatabaseApi.getDocumentById('artistFav',this.state.user.id)
-    let getFavReleasePromise = DatabaseApi.getDocumentById('releaseFav',this.state.user.id)
-    let getFavMasterPromise = DatabaseApi.getDocumentById('masterFav',this.state.user.id)
-  
-    let [getFavLabel, getFavArtist, getFavRelease, getFavMaster] = await Promise.all([getFavLabelPromise, getFavArtistPromise, getFavReleasePromise, getFavMasterPromise])
+    const getFavLabelPromise = DatabaseApi.getDocumentById('labelFav',this.state.user.id)
+    const getFavArtistPromise = DatabaseApi.getDocumentById('artistFav',this.state.user.id)
+    const getFavReleasePromise = DatabaseApi.getDocumentById('releaseFav',this.state.user.id)
+    const getFavMasterPromise = DatabaseApi.getDocumentById('masterFav',this.state.user.id)
+    const getExchangePromise = DatabaseApi.getCollection('exchange')
+
+    let [getFavLabel, getFavArtist, getFavRelease, getFavMaster, getExchange] = await Promise.all([getFavLabelPromise, getFavArtistPromise, getFavReleasePromise, getFavMasterPromise, getExchangePromise])
     
     // Here I'm deleting the [id] field - Temp Workaround
     delete getFavLabel.id;
@@ -50,6 +51,7 @@ class NavBar extends Component {
     localStorage.setItem(`${this.state.user.id}_favArtist`, JSON.stringify(getFavArtist));
     localStorage.setItem(`${this.state.user.id}_favRelease`, JSON.stringify(getFavRelease));
     localStorage.setItem(`${this.state.user.id}_favMaster`, JSON.stringify(getFavMaster));
+    localStorage.setItem('lagash-global-exchange', JSON.stringify(getExchange));
   }
 
 

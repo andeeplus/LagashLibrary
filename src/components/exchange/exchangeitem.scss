@@ -19,6 +19,14 @@
   }
 }
 
+.exchange-tab{
+  padding: 10px;
+  background-color: $navbar-text;
+  width: 350px;
+  border-radius: $radius-a;
+  margin: 0 auto;
+}
+
 .offers-on-page{
 
   display: flex;
@@ -32,15 +40,16 @@
   justify-content: center;
   align-items: center;
   background-color: $secondary-color;
-  width: 300px;
+  width: 320px;
   padding: 10px;
   margin: 0 auto;
   border-radius: $radius-a;
+  margin-bottom: 16px;
 
   img {
     height: 60px;
     border-radius: 50%;
-    padding-right: 10px;
+    
   }
 
 }
@@ -50,6 +59,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding-right: 10px;
   width: 300px;
 
   .exchange-title{
@@ -65,10 +75,49 @@
   }
 }
 
-.offer-mail{
+.offer-icons{
   color: $primary-color;
   cursor: pointer;
   &:hover{
     color: $secondary-darker;
   }
+  padding: 5px 5px;
+}
+
+.exchange-record{
+  font-family: $font-type-b;
+  font-size: $text-size-s;
+  font-weight: $font-w-light;
+  text-transform: uppercase;
+  background-color: $secondary-darker;
+  padding: 5px;
+  border-radius: $radius-a;
+  
+  a{
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.user-offer-block{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
+  margin: 10px;
+}
+
+.user-icon-block{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+@media all and (max-width: 350px) {
+
+  .single-exchange{
+    padding: 0;
+  }
+
 }
