@@ -7,7 +7,6 @@ import LogInModule from '../src/components/account/LogInModule/LogInModule'
 import SignUpModule from '../src/components/account/SignUpModule/SignUpModule'
 import PersonalDetail from './components/userZone/PersonalDetail/PersonalDetail'
 
-import Home from './pages/Home/Home'
 import RecordPage from './pages/RecordPage/RecordPage.js'
 import SearchPage from './pages/SearchPage/SearchPage.js'
 import MessageArea from './pages/MessageArea/MessageArea'

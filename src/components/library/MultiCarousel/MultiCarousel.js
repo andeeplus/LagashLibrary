@@ -14,7 +14,7 @@ class Carousel extends Component {
 
 	componentDidMount(){
 		const {images} = this.props
-		console.log(this.props.images)
+		
 		images && this.setState({articles: images})
 	}
 

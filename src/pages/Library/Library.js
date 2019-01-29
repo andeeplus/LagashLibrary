@@ -11,7 +11,7 @@ class Library extends Component {
 
   async getArticles(collectionName, filterName, filterValue){
     const fbArticles = await DatabaseApi.getCollection(collectionName)
-    this.setState({fbArticles}, () => console.log(fbArticles))
+    this.setState({fbArticles})
   }
 
   componentDidMount(){

@@ -20,7 +20,7 @@ class CommentsTab extends Component {
   render() {
 
     const {fbComments} = this.state
-    console.log(fbComments)
+    
     return (
       <React.Fragment>
         <h1 className="page-h1">
