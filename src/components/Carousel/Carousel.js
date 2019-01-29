@@ -27,7 +27,7 @@ class Carousel extends Component {
 	}
 
 	triggerTitle(){
-		if (window.innerWidth < 780){this.setState({titleTrig: 47})}
+		if (window.innerWidth < 780){this.setState({titleTrig: 46})}
 	}
 
   previousSlide = () => {

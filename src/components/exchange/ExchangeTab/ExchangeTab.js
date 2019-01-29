@@ -10,7 +10,7 @@ class ExchangeTab extends Component {
   state = {exchangeItems: null, user: null, loading: true}
 
   componentDidMount(){
-    const exchangeItems = JSON.parse(localStorage.getItem('lagash-global-exchange'))
+    const {exchangeItems} = this.props
     this.setState({exchangeItems, loading: false})
     
   }

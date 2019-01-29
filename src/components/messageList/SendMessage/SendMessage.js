@@ -36,7 +36,9 @@ class SendMessage extends Component {
   handleSubmit = async (e) => {
     e.preventDefault()
 
-    const date = new Date()
+    const getDate = new Date()
+    const date = getDate.toLocaleString()
+    const dateNow = Date.now()
 
     const { 
       fromUser,
@@ -53,11 +55,11 @@ class SendMessage extends Component {
       userName,
       userImg,
       subject,
-      message,
+      message:[{message,date,dateNow,fromUser}],
       infoExchange,
       toUser,
-      date: date.toLocaleString(),
-      dateNow: Date.now()
+      date,
+      dateNow
     }
 
     this.sendMessage(messageToSend)

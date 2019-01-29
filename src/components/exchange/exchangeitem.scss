@@ -117,7 +117,12 @@
 @media all and (max-width: 350px) {
 
   .single-exchange{
-    padding: 0;
+    padding: 5px;
+    width: 280px;
+  }
+
+  .exchange-tab{
+    width: 280px;
   }
 
 }

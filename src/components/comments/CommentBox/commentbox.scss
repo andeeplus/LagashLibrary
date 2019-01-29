@@ -19,7 +19,8 @@
 }
 
 .comment-line{
-
+  background-color: rgb(250, 249, 249);
+  border-radius: $radius-a;
 }
 
 .comment-timestamp{
@@ -29,6 +30,7 @@
   text-align: right;
   padding: 0 5px;
   border-radius: $radius-a;
+
 }
 
 .comments-on-page{
@@ -39,6 +41,7 @@
   padding: 0 5px;
   border-radius: $radius-a;
   text-transform: capitalize;
+
   span{
     text-transform: uppercase;
     font-weight: 700;

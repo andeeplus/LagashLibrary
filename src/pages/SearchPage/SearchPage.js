@@ -35,12 +35,13 @@ class SearchPage extends Component {
 
   componentDidMount() {
     const {query} = this.props.match.params
-    window.scrollTo(0, 0)
+    
     
       query
       ? this.fetchData(query)
-      : this.fetchData(this.state.query)
-
+      : this.fetchData(this.state.queryDefault)
+      
+      window.scrollTo(0, 0)
     
   }
 

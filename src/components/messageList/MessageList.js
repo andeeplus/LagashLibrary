@@ -14,8 +14,8 @@ class MessageList extends Component {
 
   async componentDidMount(){
     const {user} = this.props
-    const messages = await DatabaseApi.getDocument('messages', 'toUser', user.id)
-    this.setState({messages, loading: false, user})
+    DatabaseApi.getRealtimeDocument('messages', 'toUser', user.id,
+    (messages) => {this.setState({messages, loading: false})})
   }
   
 

@@ -23,25 +23,25 @@ class ExchangeZone extends Component {
   onCloseMsg = e => {this.setState({modalShowMsg: false})};
 
   componentDidMount(){
-    const {detail} = this.props
+    const {detail,exchangeItems} = this.props
     
-    const recoverData = JSON.parse(localStorage.getItem('lagash-global-exchange'))
-    const exchangeItems = recoverData.filter(obj => {
+    const filteredEx = exchangeItems.filter(obj => {
       return obj.idRelease === detail.id.toString()
     })
 
-    
-    this.setState({exchangeItems})
+
+    this.setState({exchangeItems:filteredEx})
   }
 
-  sendMessageToUser(sendEmailTo){
+  sendMessageToUser(info){
     this.setState({
-      sendEmailTo: sendEmailTo.user, 
+      sendEmailTo: info.user,
+      receiverPic: info.user.profilePic,
       infoExchange:{
-        id: sendEmailTo.id, 
-        artist:sendEmailTo.artist, 
-        title: sendEmailTo.title, 
-        catno: sendEmailTo.catno}
+        id: info.id, 
+        artist:info.artist, 
+        title: info.title, 
+        catno: info.catno}
       }, () => this.showModalMsg() )
   }
 
@@ -108,7 +108,8 @@ class ExchangeZone extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    exchangeItems: state.exchangeReducer.exchangeItems
   }
 }
 

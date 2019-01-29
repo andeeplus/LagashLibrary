@@ -12,10 +12,15 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  text-shadow: $image-shadow;
+
+  span {
+    text-shadow: none;
+  }
+
   p{
     font-family: $font-type-b;
-    
+    text-align: center;
+    text-shadow: none;
   }
   
 
@@ -26,6 +31,7 @@
     box-shadow: $image-shadow;
   }
 }
+
 
 .email-subject{
   font-family: $font-type-b;
@@ -55,24 +61,83 @@
   display: flex;
   flex-direction: column;
   box-shadow: $image-shadow;
+  display:flex;
+  flex-direction: column;
+}
+
+.user-right {
+  text-align: right;
+  width: 78%;
+  justify-self: flex-start;
+  background-color: rgb(227, 230, 230);
+  padding: 3px;
+  border-radius: $radius-a;
+  box-shadow: $image-shadow;
+}
+
+.user-left {
+  text-align: left;
+  width: 78%;
+  justify-self: flex-end;
+  background-color: rgb(231, 240, 240);
+  padding: 3px;
+  border-radius: $radius-a;
+  box-shadow: $image-shadow;
+}
+
+
+.single-message{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 10px;
 }
 
 .big-x-message{
   color: $primary-color;
   font-size: $text-size-xl;
-  text-align: center;
-  bottom: 260px;
-  left: 280px;;
+  top: 70px;
+  left: 270px;;
   position: relative;
   padding: 0;
   height: 100%;
   width: 100%;
   cursor: pointer;
+  text-shadow: $image-shadow;
+  transition: size ease 2s;
+
+  &:hover{
+    color: $secondary-darker;
+    font-size: $text-size-xxl;
+  }
 }
 
 .send-answer{
-  font-size: $text-size-xxl;
+  font-size: $text-size-l;
+  background-color: $primary-color;
+  border-radius: 50%;
+  padding: 6px;
+  margin-top: 10px;
   align-self: center;
-  padding-top: 30px;
+  color:$white;
   cursor: pointer;
+}
+
+.write-message{
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+
+  .message-textarea{
+    
+    width:97%;
+    height: 40px;
+    border-radius: $radius-a;
+    border: 1px solid rgb(240, 231, 231);
+    font-size: $text-size-m;
+    padding: 3px;
+    resize: none;
+    box-shadow: $image-shadow;
+    font-family: $font-type-b;
+  }
 }
