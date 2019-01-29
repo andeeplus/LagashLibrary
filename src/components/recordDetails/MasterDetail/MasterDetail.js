@@ -3,6 +3,7 @@ import VersionList from '../VersionList/VersionList'
 import Comments from '../../comments/Comments'
 import Articles from '../../library/Articles/Articles'
 import Carousel from '../../Carousel/Carousel'
+import VideoPlayer from '../../VideoPlayer/VideoPlayer'
 
 export default class MasterDetail extends Component {
   
@@ -42,6 +43,7 @@ export default class MasterDetail extends Component {
           </div>
          </div>
          <Articles idMaster={detail.id} type={'master'} />
+         {detail.videos && <VideoPlayer videos={detail.videos} />}
          <Comments idMaster={detail.id} type={'master'} onPage={detail.artists[0].name}/>
          { versions && versions.versions.length !== 0 &&
           <VersionList versions={versions}/>}

@@ -26,8 +26,8 @@ class VersionList extends Component {
               {
                 Header: "Cat #",
                 accessor: "catno",
-                Cell: ({ row }) => {
-                  return (<NavLink to={{ pathname: `/record/releases/${row._original.id}` }}>{row.catno}</NavLink>)}
+                // Cell: ({ row }) => {
+                //   return (<NavLink to={{ pathname: `/record/releases/${row._original.id}` }}>{row.catno}</NavLink>)}
               },
               {
                 Header: "Label",

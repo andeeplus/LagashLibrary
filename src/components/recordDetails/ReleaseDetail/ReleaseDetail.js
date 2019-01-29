@@ -49,7 +49,7 @@ export default class ReleaseDetail extends Component {
           </div>
           <ExchangeZone detail={detail} type={'release'}/>
           <Articles idRelease={detail.id} type={'release'} />
-          <VideoPlayer videos={detail.videos} />
+          {detail.videos && <VideoPlayer videos={detail.videos} />}
           <Comments idRelease={detail.id} type={'release'} onPage={detail.artists[0].name}/>
           { versions && versions.versions.length !== 0 &&
             <VersionList detail={detail} versions={versions}/>}

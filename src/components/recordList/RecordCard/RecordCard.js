@@ -42,6 +42,7 @@ class RecordCard extends Component {
     }
   }
 
+  componentDidMount(){console.log('hemosllegado aqui')}
   
 
   render () {

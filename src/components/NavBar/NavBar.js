@@ -76,12 +76,6 @@ class NavBar extends Component {
           </NavLink>
         </li>
         <li className="nav-links">
-          <NavLink to='/library' 
-            activeStyle={activeCss}>
-              Library
-          </NavLink>
-        </li>
-        <li className="nav-links">
           <NavLink to='/about' 
             activeStyle={activeCss}>
               About

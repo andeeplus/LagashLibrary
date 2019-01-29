@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import Articles from '../../library/Articles/Articles'
 import Comments from '../../comments/Comments'
 import Carousel from '../../Carousel/Carousel'
-
+import VideoPlayer from '../../VideoPlayer/VideoPlayer'
 
 class ArtistDetail extends Component {
 
@@ -54,6 +54,7 @@ class ArtistDetail extends Component {
         </div>
 
         <Articles idArtist={results.id} type={'artist'} />
+        {results.videos && <VideoPlayer videos={results.videos} />}
         <Comments idArtist={results.id} type={'artist'} onPage={results.name} />
         <RecordList records={releases.releases} comingFrom={'pageDetail'}/>
       </React.Fragment>

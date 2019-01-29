@@ -22,7 +22,8 @@ class ActionBar extends Component {
     artistFav: [],
     releaseFav: [],
     masterFav: [],
-    heart: false
+    heart: false,
+    isDisabled: true
   }  
 
 
@@ -43,15 +44,19 @@ class ActionBar extends Component {
 
 
   componentDidMount(){
+    
+    this.props.user ? this.collectFavourites() : this.setState({isDisabled: true})
 
-    const labelFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favLabel`)))
-    const artistFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favArtist`)))
-    const releaseFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favRelease`)))
-    const masterFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favMaster`)))
-
-    this.setState({labelFav, artistFav, releaseFav, masterFav}, () => this.shouldPrintHeart(this.props.id.toString()))
   }
 
+  collectFavourites(){
+  const labelFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favLabel`)))
+  const artistFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favArtist`)))
+  const releaseFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favRelease`)))
+  const masterFav = Object.keys(JSON.parse(localStorage.getItem(`${this.props.user.id}_favMaster`)))
+
+  this.setState({labelFav, artistFav, releaseFav, masterFav, isDisabled: false}, () => this.shouldPrintHeart(this.props.id.toString()))
+  }
 
   addToGlobalFavs = async () => {
 
@@ -95,6 +100,7 @@ class ActionBar extends Component {
           break;
 
         case 'label':
+
           const labelFav = {cover_image, id, title, type}
 
           if (prevLabelFav !== null && prevLabelFav[id]){
@@ -113,7 +119,7 @@ class ActionBar extends Component {
           }
           break;
 
-          case 'release':
+        case 'release':
 
           const releaseFav = {cover_image, id, title, type, year, catno}
 
@@ -133,7 +139,8 @@ class ActionBar extends Component {
           }
           break;
 
-          case 'master':
+        case 'master':
+
           const masterFav = {cover_image, id, title, type, year, catno}
 
           if (prevMasterFav !== null && prevMasterFav[id]){
@@ -203,10 +210,13 @@ class ActionBar extends Component {
         <Link className="list-card-button" to={this.linkTo(type,id)}>
           <FontAwesomeIcon icon="link" />
         </Link>
-        <button className="list-card-button"><FontAwesomeIcon icon="plus-circle" /></button>
+        <button style={{disabled: this.state.isDisabled}} className="list-card-button"><FontAwesomeIcon icon="plus-circle" /></button>
         { type === 'release' && <button className="list-card-button interchange"><FontAwesomeIcon icon="exchange-alt" /></button>}
-        <button className={`list-card-button${this.state.heart ? '-fav' : ''}`} 
-          onClick={() => {this.addToGlobalFavs()}}><FontAwesomeIcon icon="heart" /></button>
+        <button 
+          className={`list-card-button${this.state.heart ? '-fav' : ''}`} 
+          onClick={() => {this.props.user && this.addToGlobalFavs()}}><FontAwesomeIcon 
+          icon="heart" 
+          disabled={this.state.user}/></button>
       </div>
 
     );

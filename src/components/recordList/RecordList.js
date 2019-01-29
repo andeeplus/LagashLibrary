@@ -21,7 +21,7 @@ class RecordList extends Component {
       default:
     }
   }
-
+ 
 
   render () {
 
@@ -40,7 +40,7 @@ class RecordList extends Component {
        
 
       <div className='RecordList'>
-        {this.props.user && records && records.map(records => {
+        {records && records.map(records => {
 
 
             return (

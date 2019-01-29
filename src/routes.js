@@ -30,14 +30,13 @@ export default () => (
     <div>
       <NavBar />
       <Switch>
-        <Route exact path='/home' component={Home} />
+        <Route exact path='/home' component={Library} />
         <Route exact path='/search' component={SearchPage} />
         <Route exact path='/search-page/:query' component={SearchPage} />
         <Route exact path='/detail/artists/:artist' component={ArtistPage} />
         <Route exact path='/detail/labels/:label' component={LabelPage} />
         <Route exact path='/record/masters/:record' component={RecordPage} />
         <Route exact path='/record/releases/:record' component={RecordPage} />
-        <Route exact path='/library/' component={Library} />
         <Route exact path='/login' component={LogInModule} />
         <Route exact path='/signup' component={SignUpModule} />
         <Route exact path='/about' component={About} />

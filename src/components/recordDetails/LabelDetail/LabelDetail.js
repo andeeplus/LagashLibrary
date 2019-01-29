@@ -3,7 +3,7 @@ import Articles from '../../library/Articles/Articles'
 import RecordList from '../../../components/recordList/RecordList'
 import Comments from '../../comments/Comments'
 import Carousel from '../../Carousel/Carousel'
-
+import VideoPlayer from '../../VideoPlayer/VideoPlayer'
 
 class LabelDetail extends Component {
 
@@ -36,6 +36,7 @@ class LabelDetail extends Component {
         </div>
         
         <Articles idLabel={results.id} type={'label'} />
+        {results.videos && <VideoPlayer videos={results.videos} />}
         <Comments idLabel={results.id} type={'label'} onPage={results.name}/>
         <RecordList records={releases.releases} comingFrom={'pageDetail'}/>
       </React.Fragment>

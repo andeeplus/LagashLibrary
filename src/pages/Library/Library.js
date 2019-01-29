@@ -3,6 +3,7 @@ import Carousel from '../../components/Carousel/Carousel'
 import DatabaseApi from '../../services/dbApi'
 import ExchangeTab from '../../components/exchange/ExchangeTab/ExchangeTab'
 import CommentsTab from '../../components/comments/CommentsTab/CommentsTab'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Library extends Component {
 
@@ -27,6 +28,10 @@ class Library extends Component {
     return (
   
       <div>
+      <h1 className="page-h1">
+      <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="book" /> 
+      Lagash Library
+      </h1>
       {fbArticles && 
         <Carousel images={fbArticles} 
         size={'header'} 

@@ -6,8 +6,6 @@ import './index.scss';
 import Routes from '../src/routes'
 import * as serviceWorker from './serviceWorker';
 import dbApi from './services/dbApi'
-import 'slick-carousel/slick/slick.scss'
-import 'slick-carousel/slick/slick-theme.scss'
 
 dbApi.initDatabase();
 
