@@ -9,7 +9,7 @@ class Library extends Component {
 
   state = {fbArticles: null}
 
-  async getArticles(collectionName, filterName, filterValue){
+  getArticles = async (collectionName) =>{
     const fbArticles = await DatabaseApi.getCollection(collectionName)
     this.setState({fbArticles})
   }
@@ -27,6 +27,7 @@ class Library extends Component {
  
     return (
   
+      fbArticles &&
       <div>
       <h1 className="page-h1">
       <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="book" /> 

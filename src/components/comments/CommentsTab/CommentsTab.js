@@ -17,11 +17,14 @@ class CommentsTab extends Component {
       
   }
 
+
   render() {
 
     const {fbComments} = this.state
     
     return (
+
+      fbComments &&
       <React.Fragment>
         <h1 className="page-h1">
         <FontAwesomeIcon icon="comment" /> 

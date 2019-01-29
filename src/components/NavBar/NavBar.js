@@ -11,7 +11,8 @@ import { setUserInfo } from '../../../src/redux/actions/authActions';
 class NavBar extends Component {
 
   state = {
-    user: {}
+    user: {},
+    loading: true
   }
 
   componentDidMount(){
@@ -25,14 +26,25 @@ class NavBar extends Component {
         }
       } 
       this.props.setUser(userData);
-      this.setState({user:userData, loading: false},
-        () => {user && this.getUserFavourites()}
+      this.setState({user:userData},
+        () => {this.getUserFavourites()}
         );
     });
   }
 
+  async noUserLoadingBatch(){
+    const getExchange = await DatabaseApi.getCollection('exchange')
+    localStorage.setItem('lagash-global-exchange', JSON.stringify(getExchange));
+    console.log('HERE:', getExchange)
+    this.setState({loading: false})
+  }
+
   getUserFavourites = async () => {
 
+    const {user} = this.state
+
+    if (!user){this.noUserLoadingBatch()}
+    else {
     const getFavLabelPromise = DatabaseApi.getDocumentById('labelFav',this.state.user.id)
     const getFavArtistPromise = DatabaseApi.getDocumentById('artistFav',this.state.user.id)
     const getFavReleasePromise = DatabaseApi.getDocumentById('releaseFav',this.state.user.id)
@@ -52,6 +64,8 @@ class NavBar extends Component {
     localStorage.setItem(`${this.state.user.id}_favRelease`, JSON.stringify(getFavRelease));
     localStorage.setItem(`${this.state.user.id}_favMaster`, JSON.stringify(getFavMaster));
     localStorage.setItem('lagash-global-exchange', JSON.stringify(getExchange));
+    }
+    this.setState({loading: false})
   }
 
 
@@ -61,6 +75,8 @@ class NavBar extends Component {
     
 
     return (
+
+      !this.state.loading && 
     <div className="full-nav">
     <div className="logo-ll">
       <NavLink exact to='/'>
