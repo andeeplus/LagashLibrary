@@ -129,3 +129,15 @@ span.psw {
     width: 350px; 
   }
 }
+
+@media all and (max-width: 350px) {
+  .page-desc {
+    font-family: "Lato", sans-serif;
+    font-size: 1em;
+    padding: 3px 0;
+    width: 315px;
+}
+  .text-area-msg{
+    width: 315px; 
+  }
+}

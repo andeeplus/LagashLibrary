@@ -1,0 +1,78 @@
+.full-card-message{
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 340px;
+
+}
+
+.email-line{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-shadow: $image-shadow;
+  p{
+    font-family: $font-type-b;
+    
+  }
+  
+
+  img{
+    margin-bottom: 10px;
+    height:60px;
+    border-radius: 50%;
+    box-shadow: $image-shadow;
+  }
+}
+
+.email-subject{
+  font-family: $font-type-b;
+  font-size: $text-size-m;
+}
+
+.email-timestamp{
+  font-family: $font-type-b;
+  font-size: $font-size-card-el;
+  font-weight: 400;
+  margin: 0px;
+  margin-right: 0.25em;
+  background-color: $secondary-color;
+  border-radius: 3px;
+  display: inline;
+  color: $secondary-darker;
+  padding: 2px 4px;
+  align-self: center;
+  margin: 10px 5px 0px 0px;
+}
+.body-message{
+  font-family: $font-type-b;
+  font-size: $text-size-m;
+  padding: 10px;
+  border: 1px solid rgb(240, 231, 231);
+  border-radius: $radius-a;
+  display: flex;
+  flex-direction: column;
+  box-shadow: $image-shadow;
+}
+
+.big-x-message{
+  color: $primary-color;
+  font-size: $text-size-xl;
+  text-align: center;
+  bottom: 260px;
+  left: 280px;;
+  position: relative;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.send-answer{
+  font-size: $text-size-xxl;
+  align-self: center;
+  padding-top: 30px;
+  cursor: pointer;
+}

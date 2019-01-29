@@ -26,7 +26,7 @@ class NavBar extends Component {
       } 
       this.props.setUser(userData);
       this.setState({user:userData, loading: false},
-        () => this.getUserFavourites()
+        () => {user && this.getUserFavourites()}
         );
     });
   }

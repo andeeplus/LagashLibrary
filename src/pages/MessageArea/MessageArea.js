@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import MessageList from '../../components/messageList/MessageList'
 
 class MessageArea extends Component {
+
   render() {
     return (
       <div>
-        [Page] Message Area
+        <MessageList />
       </div>
     );
   }

@@ -21,8 +21,8 @@ import Favourites from './components/userZone/Favourites/Favourites'
 import PrivateRoute from './specialRoutes/PrivateRoute'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faMusic, faSquare, faExchangeAlt, faPlusCircle, faVideo, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner, faSignInAlt, faSignOutAlt, faBook, faComment, faCodeBranch, faArrowRight, faArrowLeft, faUser, faEnvelope, faCaretDown, faCircle, faExternalLinkAlt, faHandshake } from '@fortawesome/free-solid-svg-icons'
-library.add(faSearch, faExternalLinkAlt, faHandshake, faExchangeAlt, faCaretDown, faSquare, faCircle, faVideo, faUser, faEnvelope, faArrowRight, faArrowLeft, faComment, faCodeBranch, faSignInAlt, faMusic, faBook, faSignOutAlt, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink)
+import { faSearch, faMusic, faSquare, faWindowClose, faExchangeAlt, faPlusCircle, faVideo, faMinusCircle, faHeart, faShareSquare, faLink, faSpinner, faSignInAlt, faSignOutAlt, faBook, faComment, faCodeBranch, faArrowRight, faArrowLeft, faUser, faEnvelope, faCaretDown, faCircle, faExternalLinkAlt, faHandshake, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+library.add(faSearch, faExternalLinkAlt, faWindowClose, faHandshake, faExchangeAlt, faCaretDown, faSquare, faCircle, faVideo, faUser, faEnvelope, faArrowRight, faArrowLeft, faComment, faCodeBranch, faSignInAlt, faMusic, faBook, faSignOutAlt, faSpinner, faPlusCircle, faMinusCircle, faHeart, faShareSquare, faLink, faPaperPlane)
 
 
 export default () => (
@@ -38,11 +38,11 @@ export default () => (
         <Route exact path='/record/masters/:record' component={RecordPage} />
         <Route exact path='/record/releases/:record' component={RecordPage} />
         <Route exact path='/library/' component={Library} />
-        <Route exact path='/messages' component={MessageArea} />
         <Route exact path='/login' component={LogInModule} />
         <Route exact path='/signup' component={SignUpModule} />
         <Route exact path='/about' component={About} />
         <PrivateRoute exact path='/user/:user' componentUser={UserArea} />
+        <PrivateRoute exact path='/user/:user/messages' componentUser={MessageArea} />
         <PrivateRoute exact path='/user/:user/your-library' componentUser={Favourites} />
         <PrivateRoute exact path='/user/:user/your-favourites' componentUser={Favourites} />
         <PrivateRoute exact path='/user/:user/personal-detail' componentUser={PersonalDetail} />
