@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom' 
-//import DatabaseApi from '../../../services/dbApi';
 import AuthApi from '../../../services/authApi'
 import { connect } from 'react-redux';
 
@@ -20,36 +19,10 @@ class SignUpModule extends Component {
     this.setState({
       [e.target.id]: e.target.value
     })
+
+    console.log(this.state)
   }
 
-  // componentDidMount(){
-
-  //   AuthApi.registerAuthObserver((user) => {
-      
-  //     if(!user) return; 
-
-  //     const {uid} = user
-
-  //     const {
-  //       name,
-  //       lastName,
-  //       eMail,
-  //       password,
-  //       userName,
-  //     } = this.state
-
-  //     const newUser = {
-  //       name,
-  //       lastName,
-  //       eMail,
-  //       password,
-  //       userName
-  //     }
-      
-  //     DatabaseApi.createDocumentWithId('user', newUser, uid)
-  //   }
-  //   )
-  // }
 
   handleSubmit = async (e) => {
     e.preventDefault()

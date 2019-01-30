@@ -26,7 +26,7 @@ class RecordList extends Component {
   render () {
 
     const {records, comingFrom} = this.props
-    const year = isNaN(records.year) ? records.year : records.year.toString()
+    // const year = isNaN(records.year) ? records.year : records.year.toString()
     return (
 
       <React.Fragment>
@@ -58,7 +58,7 @@ class RecordList extends Component {
                   cover_image={
                     comingFrom === 'pageDetail' 
                     ? records.thumb : records.cover_image}
-                  year={year}
+                  year={records.year}
                   type={
                     records.type
                     ? records.type

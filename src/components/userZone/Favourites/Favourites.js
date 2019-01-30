@@ -45,13 +45,14 @@ async getArticles(collectionName, filterName, filterValue){
 componentDidMount(){
 
   const {user} = this.props
-
+  const {labels, artists, releases, masters} = this.props.favourites
+  
     this.setState({
       user:user,
-      labelFav: JSON.parse(localStorage.getItem(`${user.id}_favLabel`)),
-      releaseFav: JSON.parse(localStorage.getItem(`${user.id}_favRelease`)),
-      artistFav: JSON.parse(localStorage.getItem(`${user.id}_favArtist`)),
-      masterFav: JSON.parse(localStorage.getItem(`${user.id}_favMaster`)),
+      labelFav: labels,
+      releaseFav: releases,
+      artistFav: artists,
+      masterFav: masters,
       loading: false
     });
   
@@ -93,7 +94,9 @@ componentDidMount(){
 
 const mapStateToProps = (state) => {
   return {
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    favourites: state.favoReducer.favourites,
+    favoIds: state.favoReducer.favoIds
   }
 }
 

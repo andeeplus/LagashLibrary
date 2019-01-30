@@ -5,7 +5,6 @@ import ExchangeTab from '../../components/exchange/ExchangeTab/ExchangeTab'
 import CommentsTab from '../../components/comments/CommentsTab/CommentsTab'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux';
-import { setExchange } from '../../redux/actions/exchangeAction';
 
 class Library extends Component {
 

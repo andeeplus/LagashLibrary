@@ -32,7 +32,7 @@ class Message extends Component {
         date,dateNow
     }
 
-    DatabaseApi.updateItemArrayIntoDoc('messages', message.id, 'message', ...answerToSend)
+    DatabaseApi.updateItemArrayIntoDoc('messages', message.id, 'message', {...answerToSend})
   }
 
   deleteMessage(){
@@ -48,7 +48,7 @@ class Message extends Component {
 
   chooseUser(userName){
     const {user} = this.props
-    return userName === user.userName? 'user-left' : 'user-right'
+    return userName === user.userName? 'user-right' : 'user-left'
   }
 
   choosePhoto(){
@@ -60,12 +60,14 @@ class Message extends Component {
   render() {
 
     const {message} = this.props
-    console.log(message)
+
     return (
       <div className="full-card-message">
       <FontAwesomeIcon onClick={() => this.deleteMessage(message.id)} className='big-x-message' icon='window-close'/>
       <div className='email-line'>
-        <img src={this.choosePhoto()} alt={message.dateNow} />
+        <figure>
+          <img src={this.choosePhoto()} alt={message.dateNow} />
+        </figure>
         <p className='email-subject'><span>From: <strong>{message.userName}</strong> {message.title}</span></p>
         <p>{message.subject}</p>
       </div>

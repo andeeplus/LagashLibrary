@@ -81,13 +81,17 @@
 
 }
 
-@media all and (max-width: 750px) {
+@media all and (max-width: 768px) {
   
   .full-nav{
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-bottom: 5px;
+  }
+
+  .logo-ll{
+    display:none;
   }
 
 }

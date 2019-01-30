@@ -29,7 +29,7 @@ class MessageList extends Component {
       : !messages
       ? <p>No messages yet</p> 
       : <div className="message-list">
-        { messages.map((i,index )=> <Message key={messages.id+index} message={i}/>)} 
+        { messages.map((i,index )=> <Message key={index} message={i}/>)} 
         </div>
     );
   }

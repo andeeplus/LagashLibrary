@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import DatabaseApi from '../../../src/services/dbApi'
 import AuthApi from '../../../src/services/authApi'
 import { setUserInfo } from '../../redux/actions/authActions'
-import { setExchange } from '../../redux/actions/exchangeAction';
+import { setExchange } from '../../redux/actions/exchangeAction'
+import { setFavo } from '../../redux/actions/favoAction'
 
 class NavBar extends Component {
 
@@ -17,8 +18,9 @@ class NavBar extends Component {
   }
 
   componentDidMount(){
-    //this.noUserLoadingBatch()
+ 
     this.props.setExchange()
+
     AuthApi.registerAuthObserver(async (user) => {
      
       let userData = null;
@@ -29,19 +31,14 @@ class NavBar extends Component {
         }
       } 
       this.props.setUser(userData);
-      this.setState({user:userData},
-        () => {user && this.getUserFavourites()}
+      this.setState({user:userData, loading: false},
+        () => {user && this.props.setFavo(this.state.user.id) && this.getUserFavourites()}
         );
     });
 
     
   }
 
-  // async noUserLoadingBatch(){
-  //   const getExchange = await DatabaseApi.getCollection('exchange')
-  //   this.props.setExchange(getExchange);
-    
-  // }
 
   getUserFavourites = async () => {
 
@@ -49,21 +46,21 @@ class NavBar extends Component {
     const getFavArtistPromise = DatabaseApi.getDocumentById('artistFav',this.state.user.id)
     const getFavReleasePromise = DatabaseApi.getDocumentById('releaseFav',this.state.user.id)
     const getFavMasterPromise = DatabaseApi.getDocumentById('masterFav',this.state.user.id)
-    //const getExchangePromise = DatabaseApi.getCollection('exchange')
+
 
     let [getFavLabel, getFavArtist, getFavRelease, getFavMaster, /*getExchange*/] = await Promise.all([getFavLabelPromise, getFavArtistPromise, getFavReleasePromise, getFavMasterPromise, /*getExchangePromise*/])
     
-    // Here I'm deleting the [id] field - Temp Workaround
-    delete getFavLabel.id;
-    delete getFavArtist.id;
-    delete getFavRelease.id;
-    delete getFavMaster.id;
+    
+    getFavLabel !== null && delete getFavLabel.id;
+    getFavArtist !== null && delete getFavArtist.id;
+    getFavRelease !== null && delete getFavRelease.id;
+    getFavMaster !== null  && delete getFavMaster.id;
 
     localStorage.setItem(`${this.state.user.id}_favLabel`, JSON.stringify(getFavLabel));
     localStorage.setItem(`${this.state.user.id}_favArtist`, JSON.stringify(getFavArtist));
     localStorage.setItem(`${this.state.user.id}_favRelease`, JSON.stringify(getFavRelease));
     localStorage.setItem(`${this.state.user.id}_favMaster`, JSON.stringify(getFavMaster));
-    //localStorage.setItem('lagash-global-exchange', JSON.stringify(getExchange));
+
     this.setState({loading: false})
     
   }
@@ -85,6 +82,12 @@ class NavBar extends Component {
 
     </div>
       <ul className="nav-bar">
+        <li className="nav-links">
+          <NavLink to='/home' 
+            activeStyle={activeCss}>
+              Home
+          </NavLink>
+        </li>
         <li className="nav-links">
           <NavLink exact to='/search' 
             activeStyle={activeCss}>
@@ -123,7 +126,8 @@ const activeCss = {backgroundColor: '#de774e', color: 'white'}
 const mapDispatchToProps = (dispatch) => {
   return {
     setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) },
-    setExchange: (exchangeItems) => { dispatch(setExchange(exchangeItems))  }
+    setExchange: (exchangeItems) => { dispatch(setExchange(exchangeItems)) },
+    setFavo: (favourites) => { dispatch(setFavo(favourites)) }
   }
 }
 

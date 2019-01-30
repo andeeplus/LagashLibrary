@@ -46,9 +46,9 @@ class LogInModule extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="loginContainer">
             <label htmlFor="email"><b>E-mail</b></label>
-              <input type="email" id="eMail" onChange={this.handleChange} placeholder="Enter E-Mail" required />
+              <input type="email" id="eMail" onChange={this.handleChange} autoComplete="current-password" placeholder="Enter E-Mail" required />
             <label htmlFor="psw"><b>Password</b></label>
-              <input type="password" id="password" onChange={this.handleChange} placeholder="Enter Password" required />
+              <input type="password" autoComplete="current-password" id="password" onChange={this.handleChange} placeholder="Enter Password" required />
             <button className="buttonSubmit" type="submit">Login</button>
             <div className="low-bar-form">
               <input type="checkbox" defaultChecked="checked" name="remember" /> 
