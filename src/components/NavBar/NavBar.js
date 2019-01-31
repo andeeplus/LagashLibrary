@@ -30,40 +30,18 @@ class NavBar extends Component {
           console.log("Please verify your Firebase setup");
         }
       } 
+      console.log(userData)
       this.props.setUser(userData);
       this.setState({user:userData, loading: false},
-        () => {user && this.props.setFavo(this.state.user.id) && this.getUserFavourites()}
+        () => {user && this.props.setFavo(this.state.user.id)}
         );
     });
 
-    
   }
 
-
-  getUserFavourites = async () => {
-
-    const getFavLabelPromise = DatabaseApi.getDocumentById('labelFav',this.state.user.id)
-    const getFavArtistPromise = DatabaseApi.getDocumentById('artistFav',this.state.user.id)
-    const getFavReleasePromise = DatabaseApi.getDocumentById('releaseFav',this.state.user.id)
-    const getFavMasterPromise = DatabaseApi.getDocumentById('masterFav',this.state.user.id)
-
-
-    let [getFavLabel, getFavArtist, getFavRelease, getFavMaster, /*getExchange*/] = await Promise.all([getFavLabelPromise, getFavArtistPromise, getFavReleasePromise, getFavMasterPromise, /*getExchangePromise*/])
-    
-    
-    getFavLabel !== null && delete getFavLabel.id;
-    getFavArtist !== null && delete getFavArtist.id;
-    getFavRelease !== null && delete getFavRelease.id;
-    getFavMaster !== null  && delete getFavMaster.id;
-
-    localStorage.setItem(`${this.state.user.id}_favLabel`, JSON.stringify(getFavLabel));
-    localStorage.setItem(`${this.state.user.id}_favArtist`, JSON.stringify(getFavArtist));
-    localStorage.setItem(`${this.state.user.id}_favRelease`, JSON.stringify(getFavRelease));
-    localStorage.setItem(`${this.state.user.id}_favMaster`, JSON.stringify(getFavMaster));
-
-    this.setState({loading: false})
-    
-  }
+  // componentDidUpdate(prevProps){
+  //   if (prevProps.user !== this.props.user){this.setState({disabled:false })}
+  // }
 
 
   render() {
@@ -126,8 +104,8 @@ const activeCss = {backgroundColor: '#de774e', color: 'white'}
 const mapDispatchToProps = (dispatch) => {
   return {
     setUser: (userInfo) => { dispatch(setUserInfo(userInfo)) },
-    setExchange: (exchangeItems) => { dispatch(setExchange(exchangeItems)) },
-    setFavo: (favourites) => { dispatch(setFavo(favourites)) }
+    setExchange: () => { dispatch(setExchange()) },
+    setFavo: (userInfo) => { dispatch(setFavo(userInfo)) }
   }
 }
 

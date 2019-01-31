@@ -21,7 +21,8 @@ class PersonalDetail extends Component {
     newLastName:'',
     newUserName:'',
     user: {},
-    permitsUpdate: false
+    permitsUpdate: false,
+    disabled: true
     
   }
 
@@ -31,11 +32,6 @@ class PersonalDetail extends Component {
       [e.target.id]: e.target.value
     })
   }
-
-  // handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   this.updateUser()
-  // }
 
   permitsUpdate = (e) => {
 
@@ -80,14 +76,15 @@ class PersonalDetail extends Component {
 
   onFileSelected = (e) => {
     const file = e.target.files[0];
+    this.setState({disabled: true})
     StorageApi.uploadFile('userPics',file, (imageURL) => {
-      this.setState({newProfilePic: imageURL});
+      this.setState({newProfilePic: imageURL, disabled:false});
     });
   }
 
   render() {
 
-    const {permitsUpdate} = this.state
+    const {permitsUpdate,disabled} = this.state
     const { user } = this.props
 
 
@@ -103,7 +100,7 @@ class PersonalDetail extends Component {
       </figure>
       <form className="app-form" onSubmit={this.updatePic}>
         <input type="file" onChange={(e) => { this.onFileSelected(e) }} ref={(ref) => {this.fileInputRef = ref}}/>
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save" disabled={disabled}/>
       </form>
       </div>
       

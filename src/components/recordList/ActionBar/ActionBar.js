@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import  DatabaseApi from '../../../services/dbApi'
 import { connect } from 'react-redux';
 import { refreshUserFromDb } from '../../../redux/actions/refreshUser'
-
+import { refreshFav } from '../../../redux/actions/refreshFav'
 
 class ActionBar extends Component {
 
@@ -44,15 +44,22 @@ class ActionBar extends Component {
 
 
   componentDidMount(){
-    const {user, favoIds} = this.props
+    
+    
+    this.firstCall()
 
-    if (user && favoIds){
-      const {labelId, artistId, masterId, releaseId} = favoIds
+
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.favoIds !== this.props.favoIds){this.firstCall()}
+  }
+
+  firstCall(){
+    const {user} = this.props   
+
+    if (user){
       this.setState({
-      labelFav: !labelId ? {} : labelId,
-      artistFav: !artistId ? {} : artistId,
-      releaseFav: !masterId ? {} : masterId,
-      masterFav: !releaseId ? {} : releaseId,
       isDisabled: false
     }, () => this.shouldPrintHeart(this.props.id.toString())) 
     } else {
@@ -60,87 +67,53 @@ class ActionBar extends Component {
     }
   }
 
-  addToGlobalFavs = async () => {
+  addToGlobalFavs = async (id) => {
 
     const user = this.props.user
-    const { id= '', cover_image = '', title = '', year = '', catno = '', type = '', artist = '' } = this.props.actionProps
 
-    const {labels, artists, releases, masters} = this.props.favourites
+    const {actionProps, favourites, favoIds} = this.props
+    const {type} = actionProps
     
-    this.setState({id:id.toString(), cover_image, title, year, catno, type, artist },
-    async function() {
-
       switch(type){
+
+          case 'label':
+          if (favoIds.labelId.includes(id.toString())){      
+            this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
+          } else {
+            this.props.refreshFav(user, 'ADD', actionProps, favourites, favoIds)
+          } break;
+
 
         case 'artist':
 
-          const artistFav = {artist: title, cover_image, id, type} 
-
-          if (artists !== null && artists[id]){
-            
-            DatabaseApi.removeItemFromDoc('artistFav', user.id, id)
-            delete artists[id]
-            this.setState({heart: false}) 
-
+          if (favoIds.artistId.includes(id.toString())){            
+            this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
           } else {
-
-            DatabaseApi.updateDocument('artistFav', {[id]:artistFav}, user.id)
-            artists[id] = artistFav
-            this.setState({heart: true})
-          }
-          break;
-
-        case 'label':
-
-          const labelFav = {cover_image, id, title, type}
-
-          if (labels !== null && labels[id]){
-            
-            DatabaseApi.removeItemFromDoc('labelFav', user.id, id)
-            this.setState({heart: false}) 
-
-          } else {
-
-            DatabaseApi.updateDocument('labelFav', {[id]:labelFav}, user.id)
-            this.setState({heart: true})
-          }
-          break;
+            this.props.refreshFav(user, 'ADD', actionProps, favourites, favoIds)
+          } break;
 
         case 'release':
 
-          const releaseFav = {cover_image, id, title, type, year, catno}
-
-          if (releases !== null && releases[id]){
-            
-            DatabaseApi.removeItemFromDoc('releaseFav', user.id, id)
-            this.setState({heart: false}) 
-
+        if (favoIds.releaseId.includes(id.toString())){         
+            this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
           } else {
-
-            DatabaseApi.updateDocument('releaseFav', {[id]:releaseFav}, user.id)
-            this.setState({heart: true})
-          }
-          break;
+            this.props.refreshFav(user, 'ADD', actionProps, favourites, favoIds)
+          } break;
 
         case 'master':
 
-          const masterFav = {cover_image, id, title, type, year, catno}
-
-          if (masters !== null && masters[id]){
-            
-            DatabaseApi.removeItemFromDoc('masterFav', user.id, id)
-            this.setState({heart: false}) 
-
+        if (favoIds.masterId.includes(id.toString())){            
+            this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
           } else {
+            this.props.refreshFav(user, 'ADD', actionProps, favourites, favoIds)
+          } break;
 
-            DatabaseApi.updateDocument('masterFav', {[id]:masterFav}, user.id)
-            this.setState({heart: true})
-          }
-          break;
           default:
       }
-    })
-  }
+
+      this.shouldPrintHeart(id)
+    }
+  
 
   async updateUserFavs (collection, docId, fieldid, itemToAdd){
     await DatabaseApi.updateItemArrayIntoDoc(collection, docId, fieldid, itemToAdd)
@@ -154,20 +127,20 @@ class ActionBar extends Component {
 
 
   shouldPrintHeart = (id) => {
-    const {labelFav, artistFav, masterFav, releaseFav } = this.state
-  
+    const {favoIds} = this.props
+
     switch(this.props.type){
       case 'artist':
-      artistFav.includes(id) && this.setState({heart: true}) 
+      favoIds.artistId.includes(id) ? this.setState({heart: true}) : this.setState({heart: false})
       break;
       case 'label':
-      labelFav.includes(id) && this.setState({heart: true})
+      favoIds.labelId.includes(id) ? this.setState({heart: true}) : this.setState({heart: false})
       break;
       case 'release':
-      releaseFav.includes(id) && this.setState({heart: true})
+      favoIds.releaseId.includes(id) ? this.setState({heart: true}) : this.setState({heart: false})
       break;
       case 'master':
-      masterFav.includes(id) && this.setState({heart: true})
+      favoIds.masterId.includes(id) ? this.setState({heart: true}) : this.setState({heart: false})
       break;
       default:
 
@@ -178,11 +151,10 @@ class ActionBar extends Component {
   render() {
     
     const { id, type } = this.props
-    const {labelFav,artistFav,releaseFav,masterFav } = this.state
 
     return (
 
-      labelFav && artistFav && releaseFav && masterFav &&
+      this.props.favoIds &&
 
       <div className="list-card-action">
         <Link className="list-card-button" to={this.linkTo(type,id)}>
@@ -192,7 +164,7 @@ class ActionBar extends Component {
         { type === 'release' && <button className="list-card-button interchange"><FontAwesomeIcon icon="exchange-alt" /></button>}
         <button 
           className={`list-card-button${this.state.heart ? '-fav' : ''}`} 
-          onClick={() => {this.props.user && this.addToGlobalFavs()}}><FontAwesomeIcon 
+          onClick={() => {this.props.user && this.addToGlobalFavs(this.props.id.toString())}}><FontAwesomeIcon 
           icon="heart" 
           disabled={this.state.user}/></button>
       </div>
@@ -211,7 +183,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    refreshUserFromDb: (userid) => { dispatch(refreshUserFromDb(userid)) }
+    refreshUserFromDb: (userid) => { dispatch(refreshUserFromDb(userid)) },
+    refreshFav: (user, actionType, actionProps, favourites, favoIds) => { dispatch(refreshFav(user, actionType, actionProps, favourites, favoIds))}
   }
 }
 

@@ -22,6 +22,7 @@ class AddArticles extends Component {
     this.setState({[idType[0]]: idType[1].toString(),type})
   }
 
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -83,7 +84,3 @@ class AddArticles extends Component {
 }
 
 export default AddArticles;
-
-// <label htmlFor="img"><b>Image</b></label>
-// <input type="file" id="imgArticle" onChange={this.handleChange} />
-// <input type="submit" value="Upload Image" />

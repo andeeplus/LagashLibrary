@@ -15,9 +15,14 @@ class AddComment extends Component {
     userId: '',
     user:{},
     loading: true,
+    disabled: true
   }
 
   addDocs = (comment) => DatabaseApi.addDocument('comments',comment)
+
+  componentDidUpdate(prevProps){
+    if (prevProps.user !== this.props.user){this.setState({disabled:false })}
+  }
 
 
   handleChange = (e) => {
@@ -71,7 +76,7 @@ class AddComment extends Component {
             placeholder="Write your comment here..." 
             required />
         <div className="comment-controls">
-          <button className="buttonSend" type="submit">Send</button>
+          <button className="buttonSend" type="submit" disabled>Send</button>
         </div>
         </div>
       </form>

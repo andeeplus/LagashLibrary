@@ -10,7 +10,8 @@ export default class Articles extends Component {
   state = {
     fbArticles:[],
     showItem:[],
-    modalShow: false
+    modalShow: false,
+    disabled: true
   }
 
   showModal = e => {this.setState({modalShow: true})};
@@ -24,6 +25,10 @@ export default class Articles extends Component {
   componentDidMount(){
 
     this.getArticles('library', this.identifyType()[0].toString(), this.identifyType()[1].toString())
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.user !== this.props.user){this.setState({disabled:false })}
   }
 
   identifyType(){
@@ -64,6 +69,7 @@ export default class Articles extends Component {
             className="buttonAddArticle" 
             type="submit"
             onClick={e => {this.showModal()}}
+            disabled
             >
           Add Article
           </button>
@@ -82,15 +88,3 @@ export default class Articles extends Component {
     );
   }
 }
-
-
-
-//import AddArticles from '../../library/AddArticles/AddArticles'
-//<AddArticles idLabel={results.id} type={'label'} />
-
-
-// <div className="articles">
-// {fbArticles.map((i,index) => 
-//   <img src={i.imgArticle} alt={i.title} />
-//   <a href={i.link} className="article-mono" key={index}>{i.title}</a>)}
-// </div>

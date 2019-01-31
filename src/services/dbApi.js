@@ -42,6 +42,24 @@ export default class DatabaseApi {
     return resultDoc;
   }
 
+  static async getFavouriteById(collectionName, id){
+    let resultDoc = {};
+    
+    try {
+      const doc = await db.collection(collectionName).doc(id.toString()).get();
+      if (doc.exists) {
+        resultDoc = {
+          id: doc.id,
+          ...doc.data()
+        }
+      }
+    } catch (error) {
+			console.log("​DatabaseApi -> getDocumentById -> error", error)
+    }
+
+    return resultDoc;
+  }
+
   static async createDocumentWithId(collectionName, document, id){
     return await DatabaseApi.updateDocument(collectionName, document, id);
   }

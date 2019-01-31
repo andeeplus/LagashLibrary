@@ -4,25 +4,41 @@ import DatabaseApi from '../../../src/services/dbApi'
 
       return async function(dispatch){
 
-        const getFavLabelPromise = DatabaseApi.getDocumentById('labelFav',userId)
-        const getFavArtistPromise = DatabaseApi.getDocumentById('artistFav',userId)
-        const getFavReleasePromise = DatabaseApi.getDocumentById('releaseFav',userId)
-        const getFavMasterPromise = DatabaseApi.getDocumentById('masterFav',userId)
+        const getFavLabelPromise = DatabaseApi.getFavouriteById('labelFav',userId)
+        const getFavArtistPromise = DatabaseApi.getFavouriteById('artistFav',userId)
+        const getFavReleasePromise = DatabaseApi.getFavouriteById('releaseFav',userId)
+        const getFavMasterPromise = DatabaseApi.getFavouriteById('masterFav',userId)
     
         let [labels, artists, releases, masters] = await Promise.all([getFavLabelPromise, getFavArtistPromise, getFavReleasePromise, getFavMasterPromise])
         
-        let labelId = []
-        let artistId = []
-        let releaseId = []
-        let masterId = []
+        let labelId;
+        let artistId;
+        let releaseId;
+        let masterId;
 
-        labels !== null && delete labels.id; labelId = Object.keys(labels)
-        artists !== null && delete artists.id; artistId = Object.keys(artists)
-        releases !== null && delete releases.id; releaseId = Object.keys(releases)
-        masters !== null  && delete masters.id; masterId = Object.keys(masters)
+        if (labels !== null ) {
+          delete labels.id; 
+          labelId = Object.keys(labels)
+        } else {labelId = []} 
+
+        if (artists !== null ) {
+          delete artists.id; 
+          artistId = Object.keys(artists)
+        } else {artistId = []} 
+
+        if (releases !== null ) {
+          delete releases.id; 
+          releaseId = Object.keys(releases)
+        } else {releaseId = []} 
+
+        if (masters !== null ) {
+          delete masters.id; 
+          masterId = Object.keys(masters)
+        } else {masterId = []} 
         
 
-        if(!labels || !artists || !releases || !masters){ 
+        if(!labels && !artists && !releases && !masters){ 
+          
           dispatch({type: 'SET_FAVO_EMPTY', 
                     favourites:{},
                     favoIds:{},

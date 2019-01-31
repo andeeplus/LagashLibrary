@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom' 
 import AuthApi from '../../../services/authApi'
 import { connect } from 'react-redux';
-
+import DatabaseApi from '../../../services/dbApi'
 
 class SignUpModule extends Component {
 
@@ -24,6 +24,35 @@ class SignUpModule extends Component {
   }
 
 
+  async componentDidMount(){
+
+    AuthApi.registerAuthObserver((user) => {
+
+      if(!user) return; 
+
+      const {uid} = user
+
+      const {
+        name,
+        lastName,
+        eMail,
+        password,
+        userName,
+      } = this.state
+
+      const newUser = {
+        name,
+        lastName,
+        eMail,
+        password,
+        userName
+      }
+
+      DatabaseApi.createDocumentWithId('user', newUser, uid)
+  })
+
+
+}
   handleSubmit = async (e) => {
     e.preventDefault()
     this.setState({registerError: ''});

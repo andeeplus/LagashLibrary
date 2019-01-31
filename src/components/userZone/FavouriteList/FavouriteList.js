@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import vinyl from '../../../img/vinyl.svg'
 import ActionBar from '../../recordList/ActionBar/ActionBar'
 import { truncateString, stripTitle } from '../../../services/helper'
+import { connect } from 'react-redux';
 
 class FavouriteList extends Component {
 
@@ -22,18 +23,7 @@ class FavouriteList extends Component {
 
     const {recordFav, artistFav, labelFav} = this.props
 
-    const { id, cover_image, title, year, catno, type, artist, user } = this.props
-    const actionProps = { 
-      id, 
-      cover_image, 
-      title,
-      year, 
-      catno, 
-      type,
-      user, 
-      artist
-    }
-
+    const { favourites } = this.props
 
     return (
 
@@ -41,6 +31,8 @@ class FavouriteList extends Component {
 
       <div className='RecordList pages-blocks'>
         {artistFav && artistFav.map(artistFav => {
+
+          console.log('Im passing this to props id',artistFav.id)
           return (
             <div key={artistFav.id} className='list-card-sm extra-top'>
               <figure className='figure-card-sm'>
@@ -50,7 +42,7 @@ class FavouriteList extends Component {
                   src={ artistFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : artistFav.cover_image}
                   />
               </figure>
-              <ActionBar id={artistFav.id} type={artistFav.type} actionProps={actionProps}/>
+              <ActionBar id={artistFav.id} type={artistFav.type} actionProps={{...favourites.artists[artistFav.id]}}/>
               <div className='list-card-body-sm'>
                 <div className='list-card-line'>
                   { this.renderLabel(artistFav.type) }
@@ -72,7 +64,7 @@ class FavouriteList extends Component {
                   src={ labelFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : labelFav.cover_image}
                   />
               </figure>
-              <ActionBar id={labelFav.id} type={labelFav.type} actionProps={actionProps}/>
+              <ActionBar id={labelFav.id} type={labelFav.type} actionProps={{...favourites.artists[labelFav.id]}}/>
               <div className='list-card-body-sm'>
                 <div className='list-card-line'>
                   { this.renderLabel(labelFav.type) }
@@ -94,7 +86,7 @@ class FavouriteList extends Component {
                   src={ recordFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : recordFav.cover_image}
                   />
               </figure>
-              <ActionBar id={recordFav.id} type={recordFav.type} actionProps={actionProps}/>
+              <ActionBar id={recordFav.id} type={recordFav.type} actionProps={{...favourites.artists[recordFav.id]}}/>
                 <div className='list-card-body-sm'>
                 <div className='list-card-line'>
                   { this.renderLabel(recordFav.type) }
@@ -122,6 +114,16 @@ class FavouriteList extends Component {
   }
 }
 
-export default FavouriteList;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user,
+    favourites: state.favoReducer.favourites,
+    favoIds: state.favoReducer.favoIds
+  }
+}
+
+export default connect(mapStateToProps)(FavouriteList);
+
 
 

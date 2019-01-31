@@ -1,6 +1,16 @@
 const initState = {
-  favourites: null,
-  favoIds: null
+  favourites: {
+    labels: {},
+    masters: {},
+    releases: {},
+    artists: {}
+  },
+  favoIds: {
+    labelId: [],
+    artistID: [],
+    masterId: [],
+    releaseId: []
+  }
 }
 
 export default (state = initState, action) => {

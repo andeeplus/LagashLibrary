@@ -11,7 +11,10 @@ class RecordCard extends Component {
   static propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
-    year: PropTypes.string,
+    year: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     cover_image: PropTypes.string,
     label: PropTypes.array,
     style: PropTypes.array,

@@ -13,7 +13,8 @@ class ExchangeZone extends Component {
     modalShow: false,
     modalShowMsg: false,
     sendEmailTo: '',
-    infoExchange:''
+    infoExchange:'',
+    disabled: true
   }
 
   showModal = e => {this.setState({modalShow: true})};
@@ -29,8 +30,11 @@ class ExchangeZone extends Component {
       return obj.idRelease === detail.id.toString()
     })
 
-
     this.setState({exchangeItems:filteredEx})
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.user !== this.props.user){this.setState({disabled:false })}
   }
 
   sendMessageToUser(info){
@@ -48,7 +52,7 @@ class ExchangeZone extends Component {
   render() {
 
     
-    const {exchangeItems, modalShow, modalShowMsg, sendEmailTo, infoExchange} = this.state
+    const {exchangeItems, modalShow, modalShowMsg, sendEmailTo, infoExchange,disabled} = this.state
     const {type, detail, user} = this.props
 
     return (
@@ -63,6 +67,7 @@ class ExchangeZone extends Component {
             className="buttonAddArticle" 
             type="submit"
             onClick={e => {this.showModal()}}
+            disabled={disabled}
             >
           Exchange Item
           </button>
@@ -77,7 +82,9 @@ class ExchangeZone extends Component {
           {exchangeItems.map(i =>
             <div key={i.id} className="single-exchange">
             <div className="user-offer-block">
-            <img src={i.userImg} alt={i.id + i.userName}/>
+              <figure>
+                <img src={i.userImg} alt={i.id + i.userName}/>
+              </figure>
             <FontAwesomeIcon onClick={() => this.sendMessageToUser(i)} className="offer-icons" icon="envelope" />
             </div>
             <div className='single-exchange-text'>
@@ -96,11 +103,11 @@ class ExchangeZone extends Component {
         trigger={<ExchangeItem user={user} detail={detail} type={type}/>}
         >Exchange Item</Modal>
         <Modal 
-        onClose={this.onCloseMsg} 
-        show={modalShowMsg} 
-        trigger={<SendMessage user={user} sendTo={sendEmailTo} infoExchange={infoExchange} />}
-        >Exchange Item</Modal>
-      </div>
+          onClose={this.onCloseMsg} 
+          show={modalShowMsg} 
+          trigger={<SendMessage user={user} sendTo={sendEmailTo} infoExchange={infoExchange} />}
+          >Exchange Item</Modal>
+        </div>
 
     );
   }

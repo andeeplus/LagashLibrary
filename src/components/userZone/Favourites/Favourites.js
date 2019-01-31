@@ -44,15 +44,14 @@ async getArticles(collectionName, filterName, filterValue){
 
 componentDidMount(){
 
-  const {user} = this.props
-  const {labels, artists, releases, masters} = this.props.favourites
+  const {user, favourites} = this.props
   
     this.setState({
       user:user,
-      labelFav: labels,
-      releaseFav: releases,
-      artistFav: artists,
-      masterFav: masters,
+      labelFav: favourites.labels,
+      releaseFav: favourites.releases,
+      artistFav: favourites.artists,
+      masterFav: favourites.masters,
       loading: false
     });
   
@@ -62,7 +61,6 @@ componentDidMount(){
 
     const {loading, artistFav, masterFav, labelFav, releaseFav, menuTitle, artistsSelect, labelsSelect, recordsSelect} = this.state
     const fullRecords = {...releaseFav,...masterFav}
-  
 
     return (
       loading 

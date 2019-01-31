@@ -4,10 +4,23 @@ import { connect } from 'react-redux';
 import Loading from '../../../components/Loading/Loading'
 import { truncateString } from '../../../services/helper'
 import { Link } from 'react-router-dom'
+import SendMessage from '../../messageList/SendMessage/SendMessage'
+import Modal from "../../Modal/Modal";
 
 class ExchangeTab extends Component {
 
   state = {exchangeItems: null, user: null, loading: true}
+
+  state = {
+    exchangeItems:[],
+    modalShowMsg: false,
+    sendEmailTo: '',
+    infoExchange:'',
+    disabled: true,
+    user: null,
+    loading: true
+  }
+
 
   componentDidMount(){
     const {exchangeItems} = this.props
@@ -16,8 +29,29 @@ class ExchangeTab extends Component {
   }
 
 
+  showModal = e => {this.setState({modalShow: true})};
+  onClose = e => {this.setState({modalShow: false})};
+
+  showModalMsg = e => {this.setState({modalShowMsg: true})};
+  onCloseMsg = e => {this.setState({modalShowMsg: false})};
+
+  sendMessageToUser(info){
+    this.setState({
+      sendEmailTo: info.user,
+      receiverPic: info.user.profilePic,
+      infoExchange:{
+        id: info.id, 
+        artist:info.artist, 
+        title: info.title, 
+        catno: info.catno}
+      }, () => this.showModalMsg() )
+  }
+
   render() {
-    const {exchangeItems, loading} = this.state
+
+    const {exchangeItems, loading, modalShowMsg, sendEmailTo, infoExchange} = this.state
+    const {user} = this.props
+
     return (
       loading 
       ? <Loading />
@@ -29,11 +63,11 @@ class ExchangeTab extends Component {
       {exchangeItems.map(i =>
         <div key={i.id} className="single-exchange">
         <div className="user-offer-block">
-        <img src={i.userImg} alt={i.id + i.userName}/>
+          <figure>
+            <img src={i.userImg} alt={i.id + i.userName}/>
+          </figure>
         <div className="user-icon-block">
-        <FontAwesomeIcon className="offer-icons" icon="envelope" />
-        <Link to={`/record/releases/${i.idRelease}`}>
-        <FontAwesomeIcon className="offer-icons" icon="link" /></Link>
+        <FontAwesomeIcon onClick={() => this.sendMessageToUser(i)} className="offer-icons" icon="envelope" />
         </div>
         </div>
         <div className='single-exchange-text'>
@@ -48,6 +82,12 @@ class ExchangeTab extends Component {
         </div>
         </div>
       )}
+        <Modal 
+          onClose={this.onCloseMsg} 
+          show={modalShowMsg} 
+          trigger={<SendMessage user={user} sendTo={sendEmailTo} infoExchange={infoExchange} />}
+          >Exchange Item
+        </Modal>
       </div>
     );
   }

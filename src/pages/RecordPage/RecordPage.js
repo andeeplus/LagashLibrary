@@ -17,7 +17,10 @@ class RecordPage extends Component {
   static propTypes = {
     id: PropTypes.number,
     artist: PropTypes.array,
-    year: PropTypes.string,
+    year: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     genres: PropTypes.array,
     styles: PropTypes.array,
     tracklist: PropTypes.array,

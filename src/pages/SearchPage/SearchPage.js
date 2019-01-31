@@ -73,7 +73,7 @@ class SearchPage extends Component {
   render() {
 
     const {loading, results} = this.state
-    
+    console.log(results)
     return (
       loading
       ? <Loading />
