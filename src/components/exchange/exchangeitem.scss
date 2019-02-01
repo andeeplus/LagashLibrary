@@ -20,9 +20,10 @@
 }
 
 .exchange-tab{
-  padding: 10px;
-  background-color: $navbar-text;
-  width: 350px;
+  padding: 8px;
+  background-color: $third-color;;
+  box-shadow: $image-shadow;
+  width: 340px;
   border-radius: $radius-a;
   margin: 0 auto;
 }
@@ -103,7 +104,7 @@
 
 .exchange-record{
   font-family: $font-type-b;
-  font-size: $text-size-s;
+  font-size: $text-size-xs;
   font-weight: $font-w-light;
   text-transform: uppercase;
   background-color: $secondary-darker;
@@ -156,11 +157,12 @@
 @media all and (max-width: 350px) {
 
   .single-exchange{
-    padding: 5px;
-    width: 280px;
+    padding: 8px;
+    width: 260px;
   }
 
   .exchange-tab{
+    padding: 10px;
     width: 280px;
   }
 

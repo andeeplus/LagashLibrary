@@ -67,7 +67,7 @@ class ExchangeTab extends Component {
             <img src={i.userImg} alt={i.id + i.userName}/>
           </figure>
         <div className="user-icon-block">
-        <FontAwesomeIcon onClick={() => this.sendMessageToUser(i)} className="offer-icons" icon="envelope" />
+        {user && <FontAwesomeIcon onClick={() => this.sendMessageToUser(i)} className="offer-icons" icon="envelope" />}
         </div>
         </div>
         <div className='single-exchange-text'>

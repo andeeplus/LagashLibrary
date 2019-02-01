@@ -55,6 +55,14 @@ textarea:focus, input:focus{
   padding-bottom: 50px;
 }
 
+.no-fav-yet{
+  padding-top: 30vh;
+  font-family: $font-type-b;
+  font-size: $text-size-m;
+  font-style: italic;
+  text-align: center;
+}
+
 .extra-top{
   margin-top:50px;
 }

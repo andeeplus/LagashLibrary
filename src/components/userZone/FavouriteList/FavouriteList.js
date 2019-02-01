@@ -31,8 +31,6 @@ class FavouriteList extends Component {
 
       <div className='RecordList pages-blocks'>
         {artistFav && artistFav.map(artistFav => {
-
-          console.log('Im passing this to props id',artistFav.id)
           return (
             <div key={artistFav.id} className='list-card-sm extra-top'>
               <figure className='figure-card-sm'>

@@ -3,7 +3,7 @@ import DatabaseApi from '../../services/dbApi'
 import AddComment from './AddComment/AddComment'
 import CommentBox from './CommentBox/CommentBox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { connect } from 'react-redux'
 class Comments extends Component {
 
   state = {
@@ -47,16 +47,24 @@ class Comments extends Component {
         Comments
         </h1>
         {fbComments && <CommentBox comments={fbComments}/>}
-        <AddComment 
+        {this.props.user && <AddComment 
         id={this.identifyType()} 
         type={type}
         onPage={onPage}
-        />
+        />}
       </React.Fragment>
     );
   }
 }
 
-export default Comments;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user
+  }
+}
+
+
+export default connect(mapStateToProps)(Comments);
+
 
    

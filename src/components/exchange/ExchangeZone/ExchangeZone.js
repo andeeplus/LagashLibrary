@@ -33,10 +33,6 @@ class ExchangeZone extends Component {
     this.setState({exchangeItems:filteredEx})
   }
 
-  componentDidUpdate(prevProps){
-    if (prevProps.user !== this.props.user){this.setState({disabled:false })}
-  }
-
   sendMessageToUser(info){
     this.setState({
       sendEmailTo: info.user,
@@ -73,8 +69,10 @@ class ExchangeZone extends Component {
           </button>
         </h1>
         
-        {exchangeItems.length <= 0 
-          ?<p>Item not available yet for exchange</p>
+        { !user 
+          ? <p>Signup to exchange your records!</p> 
+          : exchangeItems.length <= 0 
+          ? <p>Item not available yet for exchange</p>
           : 
           <React.Fragment>
           <p>There {exchangeItems.length === 1 ? 'is':'are'} {exchangeItems.length} {exchangeItems.length === 1 ? 'item':'items'} on the exchange area</p>
@@ -85,23 +83,23 @@ class ExchangeZone extends Component {
               <figure>
                 <img src={i.userImg} alt={i.id + i.userName}/>
               </figure>
-            <FontAwesomeIcon onClick={() => this.sendMessageToUser(i)} className="offer-icons" icon="envelope" />
+            {user && <FontAwesomeIcon onClick={() => this.sendMessageToUser(i)} className="offer-icons" icon="envelope" />}
             </div>
             <div className='single-exchange-text'>
             <p className="exchange-title">{i.titleOffer}</p>
             <p className="exchange-desc">{i.offerDetail}</p>
             </div>
            
-            </div>
+          </div>
           )}
           </div>
           </React.Fragment>
         }
         <Modal 
-        onClose={this.onClose} 
-        show={modalShow} 
-        trigger={<ExchangeItem user={user} detail={detail} type={type}/>}
-        >Exchange Item</Modal>
+          onClose={this.onClose} 
+          show={modalShow} 
+          trigger={<ExchangeItem user={user} detail={detail} type={type}/>}
+          >Exchange Item</Modal>
         <Modal 
           onClose={this.onCloseMsg} 
           show={modalShowMsg} 

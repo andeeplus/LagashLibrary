@@ -19,7 +19,6 @@
 }
 
 .comment-line{
-  background-color: rgb(250, 249, 249);
   border-radius: $radius-a;
 }
 
@@ -30,6 +29,7 @@
   text-align: right;
   padding: 0 5px;
   border-radius: $radius-a;
+  box-shadow: $image-shadow;
 
 }
 

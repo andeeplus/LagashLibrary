@@ -14,7 +14,8 @@
   border-radius: $radius-a;
   resize: none;
   font-size: $text-size-m;
-  font-family: $font-type-b
+  font-family: $font-type-b;
+  box-shadow: $image-shadow;
   }
 
 }
@@ -29,6 +30,7 @@
   color: white;
   padding: 4px;
   background-color: $primary-color;
+  box-shadow: $image-shadow;
 }
 
 @media all and (max-width: 750px) {

@@ -157,6 +157,19 @@ export default class DatabaseApi {
     });
   }
 
+  static async getRealtimeChat(collectionName, filterName, filterValue, filterName2, callback){
+    db.collection(collectionName)
+      .where(filterName, "==", filterValue)
+      .where(filterName2, "==", filterValue)
+      .onSnapshot((querySnapshot) => {
+        let result = [];
+        querySnapshot.forEach((doc) => {
+          result.push({id:doc.id, ...doc.data()});
+        });
+        callback(result);
+    });
+  }
+
   static async getDocument(collectionName, filterName, filterValue){
     const collectionRef = db.collection(collectionName);
     const query = collectionRef.where(filterName, "==", filterValue);

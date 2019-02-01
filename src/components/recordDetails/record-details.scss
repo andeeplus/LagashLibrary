@@ -46,6 +46,7 @@
   margin: 0 3px;
   background-color: $label-two;
   margin-bottom: 6px;
+  box-shadow: $image-shadow;
 }
 .main-style{
   @extend .main-genre;
@@ -198,6 +199,7 @@
   height: 23px;
   margin-left:5px;
   vertical-align: center;
+  box-shadow: $image-shadow;
 }
 
 .page-h1 .svg-inline--fa{

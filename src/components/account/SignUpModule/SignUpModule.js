@@ -12,7 +12,9 @@ class SignUpModule extends Component {
     eMail: '',
     password: '',
     userName: '',
+    profilePic: 'https://tinyurl.com/yat4mufj',
     checkPassword: '',
+    register: false
   }
 
   handleChange = (e) => {
@@ -30,6 +32,7 @@ class SignUpModule extends Component {
 
       if(!user) return; 
 
+
       const {uid} = user
 
       const {
@@ -38,6 +41,7 @@ class SignUpModule extends Component {
         eMail,
         password,
         userName,
+        profilePic,
       } = this.state
 
       const newUser = {
@@ -45,34 +49,45 @@ class SignUpModule extends Component {
         lastName,
         eMail,
         password,
-        userName
+        userName,
+        profilePic
       }
-
-      DatabaseApi.createDocumentWithId('user', newUser, uid)
+      if (this.state.register){
+        DatabaseApi.createDocumentWithId('user', newUser, uid)
+      }
+      
   })
 
 
 }
   handleSubmit = async (e) => {
     e.preventDefault()
-    this.setState({registerError: ''});
 
-    const { eMail, password, checkPassword } = this.state;
-    let result;
+    if (this.props.user){
 
-    if (password === checkPassword){
-      result = await AuthApi.signUp(eMail, password);
-    } 
+      this.setState({registerError: 'Already logged in!'})
 
-    if (password !== checkPassword){
-      this.setState({registerError: 'Password do not match'})
-    }
+    } else { 
 
-    if(result === 'auth/weak-password') {
-      this.setState({registerError: 'Weak password, at least 6 characters!'})
+      this.setState({registerError: '', register: true});
 
-    } else if(result === 'auth/email-already-in-use'){
-      this.setState({registerError: 'Email already registered'})
+      const { eMail, password, checkPassword } = this.state;
+      let result;
+
+      if (password === checkPassword){
+        result = await AuthApi.signUp(eMail, password);
+      } 
+
+      if (password !== checkPassword){
+        this.setState({registerError: 'Password do not match'})
+      }
+
+      if(result === 'auth/weak-password') {
+        this.setState({registerError: 'Weak password, at least 6 characters!'})
+
+      } else if(result === 'auth/email-already-in-use'){
+        this.setState({registerError: 'Email already registered'})
+      }
     }
   }
 
@@ -101,6 +116,7 @@ class SignUpModule extends Component {
             </div>
           </div>
         </form>
+        <p>{this.state.registerError}</p>
       </div>
       </div>
     );

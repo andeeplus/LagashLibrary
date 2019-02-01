@@ -68,22 +68,23 @@ componentDidMount(){
       :<div>
       <DropDown chooseFavo={this.chooseFavo}>{menuTitle}</DropDown>
 
-      {  Object.entries(artistFav).length === 0  
-        ? <p>No favourites yet, search for it!</p>
+        {Object.entries(artistFav).length === 0  
+        ? artistsSelect && <p className='no-fav-yet'>No favourites yet, search for it!</p>
         :<React.Fragment>
         { artistsSelect && <FavouriteList artistFav={Object.values(artistFav)}/> }
         </React.Fragment>}
 
-      {  Object.entries(labelFav).length === 0  
-        ? <p>No favourites yet, search for it!</p>
+        {Object.entries(labelFav).length === 0  
+        ? labelsSelect && <p className='no-fav-yet'>No favourites yet, search for it!</p>
         :<React.Fragment>
         {labelsSelect && <FavouriteList labelFav={Object.values(labelFav)}/>}
         </React.Fragment>}
 
-      {  Object.entries(releaseFav).length === 0  
-        ? <p>No favourites yet, search for it!</p>
+        {Object.entries(releaseFav).length === 0  
+        ? recordsSelect && <p className='no-fav-yet'>No favourites yet, search for it!</p>
         :<React.Fragment>
         {recordsSelect && <FavouriteList recordFav={Object.values(fullRecords)}/>}
+
       </React.Fragment>}
       </div>
     );
