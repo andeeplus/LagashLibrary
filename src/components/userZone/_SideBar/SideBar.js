@@ -14,7 +14,6 @@ class SideBar extends Component {
   render() {
 
     const {user} = this.props
-    console.log('we have the user',this.state.user)
 
     return (
       

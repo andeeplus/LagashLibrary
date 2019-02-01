@@ -48,7 +48,11 @@ class ArtistDetail extends Component {
                 className="web-page" 
                 href={i}>{
                   i.replace('http://www.','')
-                  .replace('http://','')}</a>)}
+                  .replace('www','')
+                  .replace('http://','')
+                  .replace('https://','')
+                }
+                  </a>)}
                 </React.Fragment>}
           </div>
         </div>

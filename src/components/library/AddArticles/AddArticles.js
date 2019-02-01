@@ -59,7 +59,7 @@ class AddArticles extends Component {
     }
 
     this.addDocs(articleUp)
-
+    this.props.closeModal()
   }
 
 

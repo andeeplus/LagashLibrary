@@ -5,18 +5,25 @@ import ExchangeTab from '../../components/exchange/ExchangeTab/ExchangeTab'
 import CommentsTab from '../../components/comments/CommentsTab/CommentsTab'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux';
+import HotSpot from '../../components/HotSpot/HotSpot'
+import Loading from '../../components/Loading/Loading'
 
 class Library extends Component {
 
   state = {
     fbArticles: null,
     exchangeItems: null,
+    hotSpot: null,
     loading: true
   }
 
   getArticles = async (collectionName) =>{
-    const fbArticles = await DatabaseApi.getCollection(collectionName)
-    this.setState({fbArticles, exchangeItems: this.props.exchangeItems})
+    const fbArticles =  await DatabaseApi.getCollection(collectionName)
+    const hotSpot =  await DatabaseApi.getDocumentById('selections', 'hotNow')
+    delete hotSpot.userId
+    delete hotSpot.id
+  this.setState({fbArticles, hotSpot, exchangeItems: this.props.exchangeItems})
+    
   }
 
   componentDidMount(){
@@ -28,11 +35,12 @@ class Library extends Component {
 
   render() {
 
-    const {fbArticles} = this.state
- 
+    const {fbArticles, hotSpot} = this.state
+
     return (
   
-      this.props.exchangeItems &&
+      this.state.hotSpot === null ?
+      <Loading /> :
       <div className="pages-blocks">
       <h1 className="page-h1">
       <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="book" /> 
@@ -42,8 +50,14 @@ class Library extends Component {
         <Carousel images={fbArticles} 
         size={'header'} 
         dots={{dots:true, dotsType:'square'}}/>}
-        <ExchangeTab exchangeItems={this.props.exchangeItems}/> 
-        <CommentsTab />
+        <div className='main-page-block'>
+          <HotSpot hotSpot={Object.values(hotSpot)} />
+        <div className='main-page-right'>
+            <ExchangeTab exchangeItems={this.props.exchangeItems}/> 
+            <CommentsTab />
+          </div>
+        </div>
+
       </div>
     );
   }

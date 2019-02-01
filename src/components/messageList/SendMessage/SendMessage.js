@@ -6,10 +6,11 @@ class SendMessage extends Component {
   state = {
     fromUser: '',
     userName: '',
-    userImg: '',
+    senderPic: '',
     subject: '',
     message:'',
     toUser:'',
+    receiverPic:'',
     infoExchange:null
   }
 
@@ -21,7 +22,8 @@ class SendMessage extends Component {
     this.setState({
       fromUser: user.id,
       userName: user.userName,
-      userImg: user.profilePic,
+      senderPic: user.profilePic,
+      receiverPic: infoExchange.receiverPic,
       toUser: sendTo,
       infoExchange
     })
@@ -43,26 +45,27 @@ class SendMessage extends Component {
     const { 
       fromUser,
       userName,
-      userImg,
+      senderPic,
       subject,
       message,
       infoExchange,
+      receiverPic,
       toUser
     } = this.state;
     
     const messageToSend = {
       fromUser,
       userName,
-      userImg,
+      senderPic,
+      receiverPic,
       subject,
       message:[{message,date,dateNow,fromUser}],
       infoExchange,
-      toUser,
-      date,
-      dateNow
+      toUser
     }
 
     this.sendMessage(messageToSend)
+    this.props.closeModal()
  
   }
 

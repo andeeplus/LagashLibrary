@@ -79,6 +79,7 @@ class ExchangeItem extends Component {
     this.addDocs(exchangeItemUp)
     const exchangeItems = JSON.parse(localStorage.getItem('lagash-global-exchange'))
     localStorage.setItem('lagash-global-exchange', JSON.stringify({...exchangeItems, ...exchangeItemUp}));
+    this.props.closeModal()
   }
 
 

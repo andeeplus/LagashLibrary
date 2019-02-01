@@ -7,22 +7,29 @@ import Loading from '../Loading/Loading'
 class MessageList extends Component {
 
   state = {
-    messages:null,
+    messagesFrom:[],
+    messagesTo:[],
     user:null,
-    loading: true
+    loading: false
   }
 
   async componentDidMount(){
     const {user} = this.props
-    DatabaseApi.getRealtimeChat('messages', 'toUser', user.id, 'fromUser',
-    (messages) => {this.setState({messages, loading: false})})
+    DatabaseApi.getRealtimeChat('messages', 'fromUser', user.id,
+    (messagesFrom) => {this.setState({messagesFrom})})
+    DatabaseApi.getRealtimeChat('messages', 'toUser', user.id,
+    (messagesTo) => {this.setState({messagesTo})})
+
+
+    console.log(user.id,'here we are')
   }
+
   
 
   render() {
 
-    const {messages, loading} = this.state
-
+    const {messagesFrom, messagesTo, loading} = this.state
+    const messages = [...messagesFrom, ...messagesTo]
     return (
       loading
       ? <Loading />

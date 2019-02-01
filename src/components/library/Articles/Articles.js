@@ -4,14 +4,15 @@ import Modal from "../../Modal/Modal";
 import AddArticles from '../AddArticles/AddArticles'
 import MultiCarousel from '../MultiCarousel/MultiCarousel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { connect } from 'react-redux';
 
-export default class Articles extends Component {
+class Articles extends Component {
 
   state = {
     fbArticles:[],
     showItem:[],
     modalShow: false,
-    disabled: true
+    user: null,
   }
 
   showModal = e => {this.setState({modalShow: true})};
@@ -54,7 +55,7 @@ export default class Articles extends Component {
 
     
     const {fbArticles, modalShow} = this.state
-    const {type} = this.props
+    const {type, user} = this.props
     const relateArticle = this.identifyType()
 
     return (
@@ -65,26 +66,35 @@ export default class Articles extends Component {
         <h1 className="page-h1">
           <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="book" /> 
           Library
-            <button 
+           { user && <button 
             className="buttonAddArticle" 
             type="submit"
             onClick={e => {this.showModal()}}
-            disabled
             >
           Add Article
-          </button>
+          </button>}
         </h1>
         
         {fbArticles.length > 0 
         ?<MultiCarousel images={fbArticles} />
         : <div className="no-articles"><p>Add some articles!</p></div>}
         <Modal 
-        onClose={this.onClose} 
-        show={modalShow} 
-        trigger={<AddArticles idType={relateArticle} type={type}/>}
-        >Add an Article</Modal>
+          onClose={this.onClose} 
+          show={modalShow} 
+          trigger={<AddArticles closeModal={this.onClose} idType={relateArticle} type={type}/>}
+          >Add an Article
+        </Modal>
       </React.Fragment>
 
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user,
+  }
+}
+
+export default connect(mapStateToProps)(Articles);

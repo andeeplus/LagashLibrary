@@ -30,7 +30,7 @@ class NavBar extends Component {
           console.log("Please verify your Firebase setup");
         }
       } 
-      console.log(userData)
+
       this.props.setUser(userData);
       this.setState({user:userData, loading: false},
         () => {user && this.props.setFavo(this.state.user.id)}
@@ -38,11 +38,6 @@ class NavBar extends Component {
     });
 
   }
-
-  // componentDidUpdate(prevProps){
-  //   if (prevProps.user !== this.props.user){this.setState({disabled:false })}
-  // }
-
 
   render() {
 
@@ -64,12 +59,6 @@ class NavBar extends Component {
           <NavLink to='/home' 
             activeStyle={activeCss}>
               Home
-          </NavLink>
-        </li>
-        <li className="nav-links">
-          <NavLink exact to='/search' 
-            activeStyle={activeCss}>
-              Search
           </NavLink>
         </li>
         <li className="nav-links">

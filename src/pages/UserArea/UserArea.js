@@ -17,7 +17,7 @@ class UserArea extends Component {
 
   componentDidMount(){
     AuthApi.registerAuthObserver(async (user) => {
-      console.log("​App -> componentDidMount -> user", user)
+
       let userData = null;
       if (user) {
         userData = await DatabaseApi.getDocumentById('user', user.uid);
@@ -41,12 +41,6 @@ class UserArea extends Component {
       <FontAwesomeIcon className="icon-svg" icon="user" />
         </NavLink>
         <p>Your Details</p>
-      </div>
-      <div className="icon-menu-item">
-      <NavLink to={`/user/${user.id}/your-library`}>
-      <FontAwesomeIcon className="icon-svg" icon="book" />   
-        </NavLink>
-        <p>Your Library</p>
       </div>
       <div className="icon-menu-item">
       <NavLink to={`/user/${user.id}/your-favourites`}>

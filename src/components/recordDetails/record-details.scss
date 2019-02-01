@@ -21,6 +21,8 @@
   font-size: $text-size-xxl;
   font-weight: $font-w-bold;
   margin: 0px;
+  text-shadow: $image-shadow;
+  
 }
 .record-det-title{
   font-size: $text-size-xl;
@@ -144,6 +146,10 @@
     font-size: $text-size-m;
     padding: 3px 0;
 
+    strong{
+      text-shadow: $image-shadow;
+    }
+
     &span{
       font-style: $font-w-bold;
     }
@@ -158,12 +164,20 @@
     font-family: $font-type-b;
     font-size: $text-size-m;
     text-decoration: none;
+    padding: 3px 0;
+    strong{
+      text-shadow: $image-shadow;
+    }
   }
 
   .label-contact{
     font-family: $font-type-b;
     font-size: $text-size-m;
     text-decoration: none;
+    padding: 3px 0;
+    strong{
+      text-shadow: $image-shadow;
+    }
   }
 
 
@@ -176,6 +190,9 @@
     display: flex;
     flex-direction: row;
     line-height: 23px;
+    align-items: center;
+    text-shadow: $image-shadow;
+    
   }
 
   .page-real-name{
@@ -200,6 +217,7 @@
   margin-left:5px;
   vertical-align: center;
   box-shadow: $image-shadow;
+  padding-top: 5px;
 }
 
 .page-h1 .svg-inline--fa{

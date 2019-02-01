@@ -12,21 +12,15 @@ LAGASH, or Sirpurla, one of the oldest centres of Sumerian civilization in Babyl
 
 ## Ok, but why Lagash?
 
-Lagash Library born as an excel sheet on the cloud where some friends used to share new music and forgotten gems.
-<br><br>
-Creating a good channel where to discover relevant information outside the mass channels at our disposal is something we have been always attracted to.
-<br><br>
-Powered by the Discogs API this simple project born to make possible collecting valuable infos from the largest music database on the planet, thanks to the help of a reduced amount of passionate user. 
-This time using a web App.
-<br><br>
+Lagash Library born as an excel sheet on the cloud where some friends used to share new music and forgotten gems. 
+
+Creating a good channel where to discover relevant information outside the mass channels at our disposal is something we have been always attracted to. 
+
+Powered by the Discogs API this project born to make possible collecting valuable infos from the largest music database on the planet, thanks to the help of a reduced amount of passionate user. This time using a web App. 
+
+We integrated also the possibility to interchange records, because sharing is love. 
+
 Join Lagash!
-
-All this information can be seen by everybody on the web but just selected users can edit and add items to it.
-
-As a plus I'd like also the idea of sharing and interchange records, sometimes we are tired about them and we would like to sell it, why not change it?
-
-Not many web platforms are exchange-based, at least musically speaking.
-This small application potentially could fill the gap.
 
 **Sharing is living**
 
@@ -115,71 +109,10 @@ npm install redux-promise-middleware
 
 # Modelo de Datos
 
-## User
-
-```
-  static propTypes = {
-    age: PropTypes.number,
-    name: PropTypes.string,
-    userName: PropTypes.string,
-    profilePic: PropTypes.string,
-    genreFave: PropTypes.array,
-    recordCollection: {
-      faves: PropTypes.array,
-      wantlist: PropTypes.array,
-      collection/interchange? : PropTypes.array,
-    }
-  }
-```
-
-## Record
-
-```
-  static propTypes = {
-    id: PropTypes.number,
-    title: PropTypes.string,
-    year: PropTypes.string,
-    cover_image: PropTypes.string,
-    versions: PropTypes.array,
-    label: PropTypes.array,
-    style: PropTypes.array,
-    genre: PropTypes.array,
-    format: PropTypes.array,
-    country: PropTypes.string,
-    catno: PropTypes.string,
-    tag: PropTypes.string // extra API
-  }
-```
-
-## Artist
-
-```
-  static propTypes = {
-    id: PropTypes.number,
-    name: PropTypes.string,
-    websites: PropTypes.array,
-    aliases: PropTypes.array,
-    country: PropTypes.string,
-    genre: PropTypes.array,
-    labels: PropTypes.array,
-    releases: {
-      albums: PropTypes.array,
-      singles: PropTypes.array, 
-      compilations: PropTypes.array,
-      videos: PropTypes.array,
-      misc: PropTypes.array
-    }
-  }
-
-```
+![Image](https://github.com/andeeplus/web-responsive/blob/master/DB%20Diagram.svg)
+![Image](https://github.com/andeeplus/web-responsive/blob/master/Lagash%20Library%20Web.svg)
 
 # Discogs API
 https://www.discogs.com/applications/edit/21925
 
-```
-Consumer Key	SjjOjqWnqWohCWnuPfro
-Consumer Secret	diyiYYaRVmAMBaqizxudyAhrBdHlVwbd
-Request Token URL	https://api.discogs.com/oauth/request_token
-Authorize URL	https://www.discogs.com/oauth/authorize
-Access Token URL	https://api.discogs.com/oauth/access_token
 ```

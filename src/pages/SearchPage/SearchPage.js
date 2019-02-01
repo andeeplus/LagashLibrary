@@ -65,15 +65,13 @@ class SearchPage extends Component {
 
     window.scrollTo(0, 0)
 
-    console.log(this.state.page)
-
   }
 
 
   render() {
 
     const {loading, results} = this.state
-    console.log(results)
+
     return (
       loading
       ? <Loading />

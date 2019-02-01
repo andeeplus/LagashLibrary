@@ -47,7 +47,7 @@ class RecordCard extends Component {
   
 
   render () {
-    const { id, cover_image, title, year, catno, type, artist, user, comingFrom } = this.props
+    const { id, cover_image, title, year, catno, type, artist, user, comingFrom, exchangeItems } = this.props
     const actionProps = { 
       id, 
       cover_image, 
@@ -61,6 +61,8 @@ class RecordCard extends Component {
 
     return (
 
+      
+
       <div className={this.cssId('list-card')}>
         <figure className={this.cssId('figure-card')}>
           <img
@@ -69,7 +71,7 @@ class RecordCard extends Component {
             src={ cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : cover_image}
             />
         </figure>
-        <ActionBar id={id} type={type} actionProps={actionProps} />
+        {exchangeItems && <ActionBar user={user} id={id} type={type} actionProps={actionProps} exchangeId={exchangeItems.map(a => a.idRelease)}/>}
         <div className={this.cssId('list-card-body')}>
           <div className={this.cssId('list-card-line')}>
             { this.renderLabel(type) }
@@ -100,7 +102,8 @@ class RecordCard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    exchangeItems: state.exchangeReducer.exchangeItems
   }
 }
 

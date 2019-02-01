@@ -14,7 +14,6 @@ class ExchangeZone extends Component {
     modalShowMsg: false,
     sendEmailTo: '',
     infoExchange:'',
-    disabled: true
   }
 
   showModal = e => {this.setState({modalShow: true})};
@@ -23,17 +22,24 @@ class ExchangeZone extends Component {
   showModalMsg = e => {this.setState({modalShowMsg: true})};
   onCloseMsg = e => {this.setState({modalShowMsg: false})};
 
-  componentDidMount(){
-    const {detail,exchangeItems} = this.props
-    
-    const filteredEx = exchangeItems.filter(obj => {
-      return obj.idRelease === detail.id.toString()
-    })
 
-    this.setState({exchangeItems:filteredEx})
+  async componentDidMount(){
+
+    
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.exchangeItems !== this.props.exchangeItems){
+      const {detail,exchangeItems} = this.props
+      const filteredEx = exchangeItems.filter(obj => {
+        return obj.idRelease === detail.id.toString()
+      })
+      this.setState({exchangeItems:filteredEx})
+    }
   }
 
   sendMessageToUser(info){
+
     this.setState({
       sendEmailTo: info.user,
       receiverPic: info.user.profilePic,
@@ -48,25 +54,25 @@ class ExchangeZone extends Component {
   render() {
 
     
-    const {exchangeItems, modalShow, modalShowMsg, sendEmailTo, infoExchange,disabled} = this.state
+    const {exchangeItems, modalShow, modalShowMsg, sendEmailTo, infoExchange} = this.state
     const {type, detail, user} = this.props
 
     return (
       
-
+      exchangeItems &&
       <div className='interchange-on-page'>
 
         <h1 className="page-h1">
           <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="exchange-alt" /> 
           Interchange
+            {user && 
             <button 
-            className="buttonAddArticle" 
-            type="submit"
-            onClick={e => {this.showModal()}}
-            disabled={disabled}
-            >
-          Exchange Item
-          </button>
+              className="buttonAddArticle" 
+              type="submit"
+              onClick={e => {this.showModal()}}
+              >
+              Exchange Item
+            </button>}
         </h1>
         
         { !user 
@@ -98,12 +104,12 @@ class ExchangeZone extends Component {
         <Modal 
           onClose={this.onClose} 
           show={modalShow} 
-          trigger={<ExchangeItem user={user} detail={detail} type={type}/>}
+          trigger={<ExchangeItem user={user} closeModal={this.onClose} detail={detail} type={type}/>}
           >Exchange Item</Modal>
         <Modal 
           onClose={this.onCloseMsg} 
           show={modalShowMsg} 
-          trigger={<SendMessage user={user} sendTo={sendEmailTo} infoExchange={infoExchange} />}
+          trigger={<SendMessage user={user} closeModal={this.onCloseMsg} sendTo={sendEmailTo} infoExchange={infoExchange} />}
           >Exchange Item</Modal>
         </div>
 

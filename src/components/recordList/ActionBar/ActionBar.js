@@ -5,6 +5,7 @@ import  DatabaseApi from '../../../services/dbApi'
 import { connect } from 'react-redux';
 import { refreshUserFromDb } from '../../../redux/actions/refreshUser'
 import { refreshFav } from '../../../redux/actions/refreshFav'
+import AdminChoice from './AdminChoice/AdminChoice'
 
 class ActionBar extends Component {
 
@@ -23,6 +24,8 @@ class ActionBar extends Component {
     releaseFav: [],
     masterFav: [],
     heart: false,
+    exchangeId: [],
+    exchangeable: false,
     isDisabled: true
   }  
 
@@ -48,11 +51,11 @@ class ActionBar extends Component {
     
     this.firstCall()
 
-
   }
 
   componentDidUpdate(prevProps){
     if (prevProps.favoIds !== this.props.favoIds){this.firstCall()}
+
   }
 
   firstCall(){
@@ -60,8 +63,8 @@ class ActionBar extends Component {
 
     if (user){
       this.setState({
-      isDisabled: false
-    }, () => this.shouldPrintHeart(this.props.id.toString())) 
+      isDisabled: false,
+    },  () => this.shouldPrintHeart(this.props.id.toString())) 
     } else {
       this.setState({isDisabled: true})
     }
@@ -148,23 +151,27 @@ class ActionBar extends Component {
 
   }
 
+  exchangeAvalaible = (id) => {
+console.log(this.props.exchangeId)
+    this.props.exchangeId.includes(id) ? this.setState({exchangeable: true}) : this.setState({exchangeable: false})
+  }
+
   render() {
     
-    const { id, type } = this.props
+    const { id, type, user, actionProps, favoIds } = this.props
 
     return (
 
-      this.props.favoIds &&
+      favoIds && user &&
 
       <div className="list-card-action">
         <Link className="list-card-button" to={this.linkTo(type,id)}>
           <FontAwesomeIcon icon="link" />
         </Link>
-        <button style={{disabled: this.state.isDisabled}} className="list-card-button"><FontAwesomeIcon icon="plus-circle" /></button>
-        { type === 'release' && <button className="list-card-button interchange"><FontAwesomeIcon icon="exchange-alt" /></button>}
+        { type === 'release' && user.admin && <AdminChoice actionProps={actionProps} />}
         <button 
           className={`list-card-button${this.state.heart ? '-fav' : ''}`} 
-          onClick={() => {this.props.user && this.addToGlobalFavs(this.props.id.toString())}}><FontAwesomeIcon 
+          onClick={() => {user && this.addToGlobalFavs(this.props.id.toString())}}><FontAwesomeIcon 
           icon="heart" 
           disabled={this.state.user}/></button>
       </div>
@@ -177,7 +184,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.userReducer.user,
     favourites: state.favoReducer.favourites,
-    favoIds: state.favoReducer.favoIds
+    favoIds: state.favoReducer.favoIds,
   }
 }
 
@@ -191,4 +198,8 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps,mapDispatchToProps)(ActionBar);
 
+
+// { type === 'release' && <button 
+// className={`list-card-button${this.state.exchangeable ? '-interchange' : ''}`/}>
+// <FontAwesomeIcon icon="exchange-alt" /></button>}
 

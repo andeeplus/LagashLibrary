@@ -5,7 +5,6 @@ export const refreshFav = (user, actionType, actionProps, favourites, favoIds) =
   const { id, cover_image = '', title = '', year = '', catno = '', type = '', artist = '' } = actionProps
 
   return (dispatch) => {
-    console.log('BEFORE',user, actionType, actionProps, favourites, favoIds)
     
     if(actionType === 'REMOVE'){
 

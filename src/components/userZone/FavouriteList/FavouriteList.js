@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 
 class FavouriteList extends Component {
 
-
-
   renderLabel(param){
     switch(param) {
       case 'artist':

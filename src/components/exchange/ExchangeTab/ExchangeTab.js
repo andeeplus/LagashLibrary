@@ -29,8 +29,6 @@ class ExchangeTab extends Component {
   }
 
 
-  showModal = e => {this.setState({modalShow: true})};
-  onClose = e => {this.setState({modalShow: false})};
 
   showModalMsg = e => {this.setState({modalShowMsg: true})};
   onCloseMsg = e => {this.setState({modalShowMsg: false})};
@@ -55,11 +53,12 @@ class ExchangeTab extends Component {
     return (
       loading 
       ? <Loading />
-      : <div className="exchange-tab">
+      : <div className={!this.props.page ? "exchange-tab" : "exchange-page"}>
       <h1 className="page-h1">
       <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="exchange-alt" /> 
-      Interchange<button 
-      className="buttonAddArticle">View All</button></h1>
+      Interchange
+      <Link to='/exchange' ><button className="buttonAddArticle">View All</button></Link></h1>
+      <div className="page-formatting-offer">
       {exchangeItems.map(i =>
         <div key={i.id} className="single-exchange">
         <div className="user-offer-block">
@@ -82,10 +81,11 @@ class ExchangeTab extends Component {
         </div>
         </div>
       )}
+      </div>
         <Modal 
           onClose={this.onCloseMsg} 
           show={modalShowMsg} 
-          trigger={<SendMessage user={user} sendTo={sendEmailTo} infoExchange={infoExchange} />}
+          trigger={<SendMessage user={user} closeModal={this.onCloseMsg} sendTo={sendEmailTo} infoExchange={infoExchange} />}
           >Exchange Item
         </Modal>
       </div>

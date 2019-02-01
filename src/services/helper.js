@@ -2,14 +2,16 @@
 
 JS Functions Helper
 1. truncateString(string) - Truncate string if too long
-3. stripTitle() - [0]Artist, [1]Title
+2. stripTitle() - [0]Artist, [1]Title
+3. getFormattedDate()
 */
 
 
-export function truncateString(string, value = 20){
-  if(!string){
-     return undefined
-  } else if (string.length > value){
+export function truncateString(string, value = 21){
+  if (string === undefined){return ''} 
+  if(!string){string = string.toString()}
+  
+  if (string.length > value){
    return string.substring(0,value-1)+'...';
   } else if (string.length < value){
    return string;

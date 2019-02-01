@@ -36,6 +36,8 @@ input[type=text], input[type=password], input[type=email]  {
   border-right:white;
   box-sizing: border-box;
   border-radius: $radius-a;
+  text-shadow: $image-shadow;
+  
 }
 
 .buttonSubmit {
@@ -45,7 +47,6 @@ input[type=text], input[type=password], input[type=email]  {
   border-radius: $radius-a;
   padding: 5px;
   cursor: pointer;
-  width: 100%;
   box-shadow: $image-shadow;
 
   &:hover {
@@ -100,6 +101,12 @@ span.psw {
   margin-top: 5px;
   width: 400px;
   height: 200px;
+  padding: 3px;
+  resize: none;
+  border: 1px solid rgb(190, 184, 184);
+  border-radius: $radius-a;
+  box-shadow: $image-shadow;
+  font-family: $font-type-b;
 }
 
 .msgSent{
