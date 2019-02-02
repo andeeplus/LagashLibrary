@@ -15,7 +15,7 @@ class ArtistDetail extends Component {
   render() {
 
     const {results, releases} = this.props
-    console.log(results)
+
     return (
 
       <React.Fragment>

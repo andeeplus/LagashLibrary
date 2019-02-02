@@ -17,7 +17,7 @@ class AdminChoice extends Component {
   render() {
     return (
       <div>
-      <button onClick={() => this.addDocumentToSelection()} className="list-card-button-on">
+      <button onClick={() => this.addDocumentToSelection()} className="list-card-button">
       <FontAwesomeIcon icon="plus-circle" /></button>
       </div>
     );

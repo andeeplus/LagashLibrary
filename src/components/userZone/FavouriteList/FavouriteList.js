@@ -60,7 +60,7 @@ class FavouriteList extends Component {
                   src={ labelFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : labelFav.cover_image}
                   />
               </figure>
-              <ActionBar id={labelFav.id} type={labelFav.type} actionProps={{...favourites.artists[labelFav.id]}}/>
+              <ActionBar id={labelFav.id} type={labelFav.type} actionProps={{...favourites.labels[labelFav.id]}}/>
               <div className='list-card-body-sm'>
                 <div className='list-card-line'>
                   { this.renderLabel(labelFav.type) }
@@ -82,7 +82,7 @@ class FavouriteList extends Component {
                   src={ recordFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : recordFav.cover_image}
                   />
               </figure>
-              <ActionBar id={recordFav.id} type={recordFav.type} actionProps={{...favourites.artists[recordFav.id]}}/>
+              <ActionBar id={recordFav.id} type={recordFav.type} actionProps={{...favourites.records[recordFav.id]}}/>
                 <div className='list-card-body-sm'>
                 <div className='list-card-line'>
                   { this.renderLabel(recordFav.type) }
