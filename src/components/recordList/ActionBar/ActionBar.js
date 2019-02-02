@@ -80,7 +80,7 @@ class ActionBar extends Component {
       switch(type){
 
           case 'label':
-          console.log('DENTRO LABEL')
+
           if (favoIds.labelId.includes(id.toString())){      
             this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
           } else {
@@ -89,7 +89,7 @@ class ActionBar extends Component {
             
 
         case 'artist':
-        console.log('DENTRO ARTIST')
+ 
           if (favoIds.artistId.includes(id.toString())){            
             this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
           } else {
@@ -97,7 +97,7 @@ class ActionBar extends Component {
           } break;
 
         case 'release':
-        console.log('DENTRO RELEAESE')
+  
         if (favoIds.releaseId.includes(id.toString())){         
             this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
           } else {
@@ -105,7 +105,7 @@ class ActionBar extends Component {
           } break;
 
         case 'master':
-        console.log('DENTRO MASTER')
+    
         if (favoIds.masterId.includes(id.toString())){            
             this.props.refreshFav(user, 'REMOVE', actionProps, favourites, favoIds)
           } else {
@@ -132,7 +132,7 @@ class ActionBar extends Component {
 
   shouldPrintHeart = (id) => {
     const {favoIds} = this.props
-    console.log('ENTRAMOS EN SHOULD PRINT', id, favoIds)
+ 
     switch(this.props.type){
       case 'artist':
       favoIds.artistId.includes(id) ? this.setState({heart: true}) : this.setState({heart: false})
@@ -149,13 +149,10 @@ class ActionBar extends Component {
       default:
 
     }
-      console.log('ID - FAVO IDS - TYPE',id, favoIds, this.props.type)
-      console.log('INCLUDES ', favoIds.artistId.includes(id), favoIds.labelId.includes(id), favoIds.releaseId.includes(id), favoIds.masterId.includes(id))
 
   }
 
   exchangeAvalaible = (id) => {
-console.log(this.props.exchangeId)
     this.props.exchangeId.includes(id) ? this.setState({exchangeable: true}) : this.setState({exchangeable: false})
   }
 
