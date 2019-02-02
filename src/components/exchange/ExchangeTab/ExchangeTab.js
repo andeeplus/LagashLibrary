@@ -25,7 +25,6 @@ class ExchangeTab extends Component {
   componentDidMount(){
     const {exchangeItems} = this.props
     this.setState({exchangeItems, loading: false})
-    
   }
 
 
@@ -34,10 +33,11 @@ class ExchangeTab extends Component {
   onCloseMsg = e => {this.setState({modalShowMsg: false})};
 
   sendMessageToUser(info){
+    console.log(info)
     this.setState({
-      sendEmailTo: info.user,
-      receiverPic: info.user.profilePic,
       infoExchange:{
+        sendEmailTo: info.user,
+        receiverPic: info.userImg,
         id: info.id, 
         artist:info.artist, 
         title: info.title, 

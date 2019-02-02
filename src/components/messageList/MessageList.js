@@ -13,13 +13,18 @@ class MessageList extends Component {
     loading: false
   }
 
+
   async componentDidMount(){
     const {user} = this.props
+    const {messagesFrom, messagesTo} = this.state
+
     DatabaseApi.getRealtimeChat('messages', 'fromUser', user.id,
     (messagesFrom) => {this.setState({messagesFrom})})
     DatabaseApi.getRealtimeChat('messages', 'toUser', user.id,
     (messagesTo) => {this.setState({messagesTo})})
-
+    if (messagesFrom !== [] && messagesTo !== []){
+      this.setState({loading: false})
+    }
 
     console.log(user.id,'here we are')
   }
@@ -30,6 +35,7 @@ class MessageList extends Component {
 
     const {messagesFrom, messagesTo, loading} = this.state
     const messages = [...messagesFrom, ...messagesTo]
+    console.log(messagesFrom, messagesTo,messages)  
     return (
       loading
       ? <Loading />

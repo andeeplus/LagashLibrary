@@ -14,16 +14,12 @@
 	padding: 0;
 	font: inherit;
   outline: inherit;
-}
 
-.list-card-button-on{
-  @extend .list-card-button;
-  cursor: pointer;
-  
   & :hover{
     color: $mid-sub;
   }
 }
+
 
 .list-card-button-interchange{
   background: none;

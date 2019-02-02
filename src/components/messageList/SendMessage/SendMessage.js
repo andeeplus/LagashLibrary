@@ -24,7 +24,7 @@ class SendMessage extends Component {
       userName: user.userName,
       senderPic: user.profilePic,
       receiverPic: infoExchange.receiverPic,
-      toUser: sendTo,
+      toUser: infoExchange.sendEmailTo,
       infoExchange
     })
   }
