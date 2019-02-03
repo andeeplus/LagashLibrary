@@ -71,7 +71,7 @@ class RecordCard extends Component {
             src={ cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : cover_image}
             />
         </figure>
-        {exchangeItems && <ActionBar user={user} id={id} type={type} actionProps={actionProps} exchangeId={exchangeItems.map(a => a.idRelease)}/>}
+        <ActionBar user={user} id={id} type={type} actionProps={actionProps}/>
         <div className={this.cssId('list-card-body')}>
           <div className={this.cssId('list-card-line')}>
             { this.renderLabel(type) }

@@ -48,6 +48,7 @@ input[type=text], input[type=password], input[type=email]  {
   padding: 5px;
   cursor: pointer;
   box-shadow: $image-shadow;
+  width: 100%;
 
   &:hover {
   opacity: 0.8;
@@ -107,6 +108,7 @@ span.psw {
   border-radius: $radius-a;
   box-shadow: $image-shadow;
   font-family: $font-type-b;
+  margin-bottom: 5px;
 }
 
 .msgSent{
@@ -127,6 +129,19 @@ span.psw {
   height: 200px;
 }
 
+.page-desc-about{
+  font-family: $font-type-b;
+  font-size: $text-size-m;
+  padding: 3px 15px;
+
+  strong{
+    text-shadow: $image-shadow;
+  }
+
+  &span{
+    font-style: $font-w-bold;
+  }
+}
 
 @media all and (max-width: 750px) {
   .contact-box {
@@ -138,12 +153,12 @@ span.psw {
   }
 }
 
-@media all and (max-width: 350px) {
-  .page-desc {
+@media all and (max-width: 600px) {
+  .page-desc-about {
     font-family: "Lato", sans-serif;
     font-size: 1em;
-    padding: 3px 0;
-    width: 315px;
+    padding: 3px 15px;
+    width: auto;
 }
   .text-area-msg{
     width: 315px; 
@@ -152,4 +167,21 @@ span.psw {
   .signup-block{
     width: 300px;
   }
+
+  .loginContainer {
+    padding: 8px;
+    width: auto;
+  }
+  
+  .contact-box {
+    width: auto;
+    padding: 0 5px;
+
+    form {
+      width: 80%
+    }
+    .text-area-msg{
+      width: 100%
+    }
+}
 }

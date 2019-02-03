@@ -58,7 +58,7 @@
   align-items: center;
   background-color: $secondary-color;
   width: 320px;
-  padding: 0;
+  padding: 5px;
   margin: 0 auto;
   border-radius: $radius-a;
   margin-bottom: 16px;
@@ -171,7 +171,7 @@
   justify-content: space-evenly;
 }
 
-@media all and (max-width: 350px) {
+@media all and (max-width: 600px) {
 
   .single-exchange{
     padding: 8px;
@@ -183,12 +183,24 @@
     width: 280px;
   }
 
-  .textexchange{
-    textarea{
+  textarea.textexchange{
       width: 294px;
       height: 80px;
-    }
 
+  }
+
+}
+
+@media all and (max-width: 350px) {
+
+  .single-exchange{
+    padding: 5px;
+    width: 260px;
+  }
+
+  .exchange-tab{
+    padding: 10px;
+    width: 280px;
   }
 
 }

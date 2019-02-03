@@ -57,7 +57,10 @@ class ExchangeTab extends Component {
       <h1 className="page-h1">
       <FontAwesomeIcon style={{padding: '0', width: '0.7em', paddingRight: '5px'}} icon="exchange-alt" /> 
       Interchange
-      <Link to='/exchange' ><button className="buttonAddArticle">View All</button></Link></h1>
+      { !this.props.page 
+        ? <Link to='/exchange' ><button className="buttonAddArticle">View All</button></Link>
+        : <Link to='/home' ><button className="buttonAddArticle">Back</button></Link>}
+      </h1>
       <div className="page-formatting-offer">
       {exchangeItems.map(i =>
         <div key={i.id} className="single-exchange">

@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { refreshUserFromDb } from '../../../redux/actions/refreshUser'
 import { refreshFav } from '../../../redux/actions/refreshFav'
 import AdminChoice from './AdminChoice/AdminChoice'
+import SignUpModule from '../../account/SignUpModule/SignUpModule'
+import Modal from '../../Modal/Modal'
 
 class ActionBar extends Component {
 
@@ -26,7 +28,8 @@ class ActionBar extends Component {
     heart: false,
     exchangeId: [],
     exchangeable: false,
-    isDisabled: true
+    isDisabled: true,
+    modalShow: false
   }  
 
 
@@ -57,6 +60,9 @@ class ActionBar extends Component {
     if (prevProps.favoIds !== this.props.favoIds){this.firstCall()}
 
   }
+
+  showModal = e => {this.setState({modalShow: true})};
+  onClose = e => {this.setState({modalShow: false})};
 
   firstCall(){
     const {user} = this.props   
@@ -162,19 +168,26 @@ class ActionBar extends Component {
 
     return (
 
-      favoIds && user &&
+      favoIds &&
 
+      <React.Fragment>
       <div className="list-card-action">
         <Link className="list-card-button" to={this.linkTo(type,id)}>
           <FontAwesomeIcon icon="link" />
         </Link>
-        { type === 'release' && user.admin && <AdminChoice actionProps={actionProps} />}
+        { user ? user.admin && type === 'release' && <AdminChoice actionProps={actionProps} /> : undefined}
         <button 
           className={`list-card-button${this.state.heart ? '-fav' : ''}`} 
-          onClick={() => {user && this.addToGlobalFavs(this.props.id.toString())}}><FontAwesomeIcon 
-          icon="heart" 
-          disabled={this.state.user}/></button>
+          onClick={() => {user ? this.addToGlobalFavs(this.props.id.toString()) : this.showModal()}}>
+          <FontAwesomeIcon icon="heart"/></button>
       </div>
+      <Modal 
+        onClose={this.onClose} 
+        show={this.state.modalShow} 
+        trigger={<SignUpModule closeModal={this.onClose} />}
+        >Exchange Item
+      </Modal>
+    </React.Fragment>
 
     );
   }

@@ -19,7 +19,7 @@ class About extends Component {
 
       <div className="about-block">
         <h1 className="title-pages">{this.state.about.title}</h1>
-        <p className="page-desc" dangerouslySetInnerHTML={{__html:this.state.about.desc}} ></p>
+        <p className="page-desc-about" dangerouslySetInnerHTML={{__html:this.state.about.desc}} ></p>
         <ContactBox />
       </div>
     );

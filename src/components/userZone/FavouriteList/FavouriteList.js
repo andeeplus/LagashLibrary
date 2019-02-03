@@ -27,10 +27,10 @@ class FavouriteList extends Component {
 
       <React.Fragment>
 
-      <div className='RecordList pages-blocks'>
+      <div className='RecordList pages-blocks extra-top'>
         {artistFav && artistFav.map(artistFav => {
           return (
-            <div key={artistFav.id} className='list-card-sm extra-top'>
+            <div key={artistFav.id} className='list-card-sm'>
               <figure className='figure-card-sm'>
                 <img
                   className= 'img-card-sm'
@@ -52,7 +52,7 @@ class FavouriteList extends Component {
 
         {labelFav && labelFav.map(labelFav => {
           return (
-            <div key={labelFav.id} className='list-card-sm extra-top'>
+            <div key={labelFav.id} className='list-card-sm'>
               <figure className='figure-card-sm'>
                 <img
                   className= 'img-card-sm'
@@ -74,7 +74,7 @@ class FavouriteList extends Component {
 
         {recordFav && recordFav.map(recordFav => {
           return (
-            <div key={recordFav.id} className='list-card-sm extra-top'>
+            <div key={recordFav.id} className='list-card-sm'>
               <figure className='figure-card-sm'>
                 <img
                   className= 'img-card-sm'
@@ -82,7 +82,9 @@ class FavouriteList extends Component {
                   src={ recordFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : recordFav.cover_image}
                   />
               </figure>
-              <ActionBar id={recordFav.id} type={recordFav.type} actionProps={{...favourites.records[recordFav.id]}}/>
+              <ActionBar id={recordFav.id} type={recordFav.type} actionProps={
+                this.props.type === 'master' ? {...favourites.masters[recordFav.id]} : {...favourites.releases[recordFav.id]} 
+              }/>
                 <div className='list-card-body-sm'>
                 <div className='list-card-line'>
                   { this.renderLabel(recordFav.type) }
