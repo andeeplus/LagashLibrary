@@ -15,7 +15,7 @@ export default class ReleaseDetail extends Component {
   render() {
 
     const {detail, versions} = this.props
-    console.log(detail)
+
       return (
         <React.Fragment>
           <div className="page-block">

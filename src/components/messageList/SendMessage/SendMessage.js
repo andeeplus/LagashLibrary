@@ -18,7 +18,7 @@ class SendMessage extends Component {
 
 
   componentDidMount(){
-    const {user,sendTo,infoExchange} = this.props
+    const {user,infoExchange} = this.props
     this.setState({
       fromUser: user.id,
       userName: user.userName,

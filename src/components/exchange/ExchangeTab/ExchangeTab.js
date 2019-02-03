@@ -33,7 +33,7 @@ class ExchangeTab extends Component {
   onCloseMsg = e => {this.setState({modalShowMsg: false})};
 
   sendMessageToUser(info){
-    console.log(info)
+
     this.setState({
       infoExchange:{
         sendEmailTo: info.user,

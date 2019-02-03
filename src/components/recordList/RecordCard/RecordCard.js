@@ -47,7 +47,7 @@ class RecordCard extends Component {
   
 
   render () {
-    const { id, cover_image, title, year, catno, type, artist, user, comingFrom, exchangeItems } = this.props
+    const { id, cover_image, title, year, catno, type, artist, user, comingFrom } = this.props
     const actionProps = { 
       id, 
       cover_image, 

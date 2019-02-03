@@ -26,7 +26,6 @@ class MessageList extends Component {
       this.setState({loading: false})
     }
 
-    console.log(user.id,'here we are')
   }
 
   
@@ -35,13 +34,13 @@ class MessageList extends Component {
 
     const {messagesFrom, messagesTo, loading} = this.state
     const messages = [...messagesFrom, ...messagesTo]
-    console.log(messagesFrom, messagesTo,messages)  
+
     return (
       loading
       ? <Loading />
-      : !messages
-      ? <p>No messages yet</p> 
-      : <div className="message-list">
+      : messages !== []
+      ? <p className="no-fav-yet">No messages yet</p> 
+      : <div className="title-pages">
         { messages.map((i,index )=> <Message key={index} message={i}/>)} 
         </div>
     );

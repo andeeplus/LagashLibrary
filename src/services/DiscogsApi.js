@@ -15,7 +15,7 @@ export class DiscogsApi {
            timeout: 8000,
            headers: {
                'Content-Type': 'application/json',
-               'Authorization': 'Discogs key=SjjOjqWnqWohCWnuPfro, secret=diyiYYaRVmAMBaqizxudyAhrBdHlVwbd',
+               'Authorization': process.env.REACT_APP_DISCOGS_API_KEY,
                'Accept': 'application/vnd.discogs.v2.html+json'
            }
        })
@@ -30,6 +30,8 @@ export class DiscogsApi {
   }
 
 }
+
+// 'Discogs key=SjjOjqWnqWohCWnuPfro, secret=diyiYYaRVmAMBaqizxudyAhrBdHlVwbd'
 
 
 

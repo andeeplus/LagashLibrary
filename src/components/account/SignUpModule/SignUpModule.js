@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import AuthApi from '../../../services/authApi'
 import { connect } from 'react-redux';
 import DatabaseApi from '../../../services/dbApi'
+import { withRouter } from "react-router";
 
 class SignUpModule extends Component {
 
@@ -21,8 +22,6 @@ class SignUpModule extends Component {
     this.setState({
       [e.target.id]: e.target.value
     })
-
-    console.log(this.state)
   }
 
 
@@ -54,6 +53,9 @@ class SignUpModule extends Component {
       }
       if (this.state.register){
         DatabaseApi.createDocumentWithId('user', newUser, uid)
+        console.log(uid)
+        this.props.history.push(`/home`)
+        
       }
       
   })
@@ -131,4 +133,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(SignUpModule);
+export default withRouter(connect(mapStateToProps)(SignUpModule));

@@ -10,7 +10,7 @@ class HotSpot extends Component {
   render() {
 
   const {hotSpot} = this.props
-    console.log('hotspot-->',hotSpot)
+
     return (
 
       hotSpot &&

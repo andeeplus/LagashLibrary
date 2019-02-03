@@ -30,7 +30,7 @@ class Footer extends Component {
       <FooterAZ />
       <ul className="foot-bar">
         <li className="foot-links"><NavLink to='/'>Home</NavLink></li>
-        <li className="foot-links"><NavLink to='/search'>Search</NavLink></li>
+        {user && <li className="foot-links"><NavLink to={`/user/${user.id}/`}>Profile</NavLink></li>}
         {!user
           ? <li className="foot-links">
             <NavLink to='/login'>

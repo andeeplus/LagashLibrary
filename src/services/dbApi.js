@@ -7,14 +7,14 @@ export default class DatabaseApi {
 
   static initDatabase() {
     var config = {
-      apiKey: "AIzaSyB0q4nBf-HygLdY93x2YDEcXmKeBcaC0B8",
-      authDomain: "lagash-library.firebaseapp.com",
-      databaseURL: "https://lagash-library.firebaseio.com",
-      projectId: "lagash-library",
-      storageBucket: "lagash-library.appspot.com",
-      messagingSenderId: "353626050596"
+      apiKey: process.env.REACT_APP_FIREBASE_KEY,
+      authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+      databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+      projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+      storageBucket:  process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+      messagingSenderId:  process.env.REACT_APP_FIREBASE_SENDER_ID
     };
-    
+
     firebase.initializeApp(config);
 
     db = firebase.firestore();
@@ -161,7 +161,7 @@ export default class DatabaseApi {
     db.collection(collectionName)
       .where(filterName, "==", filterValue)
       .onSnapshot((querySnapshot) => {
-        console.log(querySnapshot)
+
         let result = [];
         querySnapshot.forEach((doc) => {
           result.push({id:doc.id, ...doc.data()});
