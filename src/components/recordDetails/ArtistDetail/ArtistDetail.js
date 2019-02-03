@@ -24,15 +24,18 @@ class ArtistDetail extends Component {
           <div className="page-details">
             <p className="page-name">{results.name}</p>
             { results.realname && <p className="page-real-name">{results.realname}</p>}
-            { results.aliases &&            
-            <p className="page-aliases"><strong>Aliases: </strong>
-            {results.aliases.map((i,index) => <NavLink 
+            { results.aliases &&   
+            <React.Fragment>
+            <p className="page-aliases"><strong>Aliases: </strong></p>
+            <p>{results.aliases.map((i,index) => 
+              <NavLink 
               key={index} 
-              className="web-page" 
+              className="single-aliases" 
               to={`detail/artists/${i.resource_url.replace('https://api.discogs.com/artists/','')}`}>
               {i.name}
               </NavLink>)}
-            </p>}
+              </p>
+            </React.Fragment>}
             {results.profile && 
             <React.Fragment>
               <p className="page-desc"><strong>Info: </strong></p>

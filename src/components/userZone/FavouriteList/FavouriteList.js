@@ -3,6 +3,7 @@ import vinyl from '../../../img/vinyl.svg'
 import ActionBar from '../../recordList/ActionBar/ActionBar'
 import { truncateString, stripTitle } from '../../../services/helper'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 class FavouriteList extends Component {
 
@@ -32,11 +33,12 @@ class FavouriteList extends Component {
           return (
             <div key={artistFav.id} className='list-card-sm'>
               <figure className='figure-card-sm'>
-                <img
+                <Link to={`/detail/artists/${artistFav.id}`}> <img
                   className= 'img-card-sm'
                   alt={artistFav.id}
                   src={ artistFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : artistFav.cover_image}
                   />
+                </Link>
               </figure>
               <ActionBar id={artistFav.id} type={artistFav.type} actionProps={{...favourites.artists[artistFav.id]}}/>
               <div className='list-card-body-sm'>
@@ -54,11 +56,12 @@ class FavouriteList extends Component {
           return (
             <div key={labelFav.id} className='list-card-sm'>
               <figure className='figure-card-sm'>
-                <img
+                <Link to={`/detail/labels/${labelFav.id}`}> <img
                   className= 'img-card-sm'
                   alt={labelFav.id}
                   src={ labelFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : labelFav.cover_image}
                   />
+                </Link>
               </figure>
               <ActionBar id={labelFav.id} type={labelFav.type} actionProps={{...favourites.labels[labelFav.id]}}/>
               <div className='list-card-body-sm'>
@@ -76,14 +79,17 @@ class FavouriteList extends Component {
           return (
             <div key={recordFav.id} className='list-card-sm'>
               <figure className='figure-card-sm'>
-                <img
+                <Link to={
+                  recordFav.type === 'master' ? `/record/masters/${recordFav.id}` : `/record/releases/${recordFav.id}`
+                }> <img
                   className= 'img-card-sm'
                   alt={recordFav.id}
                   src={ recordFav.cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : recordFav.cover_image}
                   />
+                </Link>
               </figure>
               <ActionBar id={recordFav.id} type={recordFav.type} actionProps={
-                this.props.type === 'master' ? {...favourites.masters[recordFav.id]} : {...favourites.releases[recordFav.id]} 
+                recordFav.type === 'master' ? {...favourites.masters[recordFav.id]} : {...favourites.releases[recordFav.id]} 
               }/>
                 <div className='list-card-body-sm'>
                 <div className='list-card-line'>

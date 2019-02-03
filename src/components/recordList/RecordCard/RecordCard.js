@@ -4,7 +4,7 @@ import { truncateString, stripTitle } from '../../../services/helper'
 import ActionBar from '../ActionBar/ActionBar'
 import vinyl from '../../../img/vinyl.svg'
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom'
 
 class RecordCard extends Component {
 
@@ -61,15 +61,15 @@ class RecordCard extends Component {
 
     return (
 
-      
-
       <div className={this.cssId('list-card')}>
         <figure className={this.cssId('figure-card')}>
-          <img
+        {<Link to={`/${type === 'artist' ? 'detail' : type === 'label' ? 'detail' : 'record'}/${type}s/${id}`}>
+            <img
             className= {this.cssId('img-card')}
             alt={id}
             src={ cover_image === 'https://img.discogs.com/images/spacer.gif' ? vinyl : cover_image}
             />
+          </Link>}
         </figure>
         <ActionBar user={user} id={id} type={type} actionProps={actionProps}/>
         <div className={this.cssId('list-card-body')}>
