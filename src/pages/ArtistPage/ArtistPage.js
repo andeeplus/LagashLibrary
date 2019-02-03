@@ -21,9 +21,19 @@ class ArtistPage extends Component {
 
   }
 
-  componentDidMount() {
+  callQuery(){
     const {artist} = this.props.match.params
     this.fetchData(artist)
+  }
+
+  componentDidMount() {
+    this.callQuery()
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.match.params !== this.props.match.params){
+      this.callQuery()
+    }
   }
 
   render() {

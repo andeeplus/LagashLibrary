@@ -82,7 +82,7 @@ class ActionBar extends Component {
 
     const {actionProps, favourites, favoIds} = this.props
     const {type} = actionProps
-    console.log('ENTRAMOS EN ADD FAVO',type)
+
       switch(type){
 
           case 'label':

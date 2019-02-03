@@ -38,9 +38,9 @@ class MessageList extends Component {
     return (
       loading
       ? <Loading />
-      : messages !== []
+      : !messages
       ? <p className="no-fav-yet">No messages yet</p> 
-      : <div className="title-pages">
+      : <div className="messages-block">
         { messages.map((i,index )=> <Message key={index} message={i}/>)} 
         </div>
     );

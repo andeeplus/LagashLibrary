@@ -11,6 +11,7 @@ class ArtistDetail extends Component {
   componentDidMount() {
     window.scrollTo(0, 0)
   }
+
   
   render() {
 
@@ -31,7 +32,7 @@ class ArtistDetail extends Component {
               <NavLink 
               key={index} 
               className="single-aliases" 
-              to={`detail/artists/${i.resource_url.replace('https://api.discogs.com/artists/','')}`}>
+              to={`${i.resource_url.replace('https://api.discogs.com/artists/','')}`}>
               {i.name}
               </NavLink>)}
               </p>
