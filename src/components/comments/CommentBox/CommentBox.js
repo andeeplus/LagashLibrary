@@ -21,6 +21,7 @@ class CommentBox extends Component {
 
   render() {
     const {comments,styler} = this.props
+
     return (
       <div className="comment-box">
         {comments.map((i,index) =>

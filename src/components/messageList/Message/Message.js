@@ -3,6 +3,7 @@ import  DatabaseApi from '../../../services/dbApi'
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+
 class Message extends Component {
   
   state = {
@@ -33,6 +34,7 @@ class Message extends Component {
     }
 
     DatabaseApi.updateItemArrayIntoDoc('messages', message.id, 'message', {...answerToSend})
+    this.refs.answer.value = ''
   }
 
   deleteMessage(){
@@ -44,6 +46,27 @@ class Message extends Component {
     DatabaseApi.getRealtimeDocument('messages',this.props.message.id, this.props.message.fromUser,
       (fbComments) => {
       this.setState({fbComments});})
+      this.scrollToBottom()
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.message !== this.props.message){
+      this.scrollToBottom()
+    }
+  }
+
+  scrollToBottom(){
+    const scrollMessage = document.getElementsByClassName("message-scroll")
+    
+    for (let i = 0; i < scrollMessage.length; i++){
+      scrollMessage[i].scrollTop = scrollMessage[i].scrollHeight
+    }
+  }
+
+  handleKeyPress = (event) => {
+    if(event.key == 'Enter'){
+      this.handleSubmit()
+    }
   }
 
   chooseUser(userName){
@@ -70,19 +93,22 @@ class Message extends Component {
         </figure>
         <p className='email-subject'><span>From: <strong>{message.userName}</strong> {message.title}</span></p>
         <p>{message.subject}</p>
-      </div>
+      </div> 
       <div className="body-message">
+      <div className="message-scroll">
       { message.message.map( message => 
         <div key={message.dateNow} className={'single-message'}>
         <p className={this.chooseUser(message.userName)}>{message.message}</p>
         <p className='email-timestamp'>{message.date.split(',')[0]} <strong>{message.date.split(',')[1]}</strong></p>
         </div>
       )}
-      <div className='write-message'>
-        <textarea id="answer" className='message-textarea' onChange={this.handleChange} placeholder="Write a messages..." required />
-        <FontAwesomeIcon className='send-answer' onClick={()=> this.handleSubmit()} icon='paper-plane'/>
       </div>
+      
+      <div className='write-message'>
+        <textarea id="answer" ref="answer" className='message-textarea' onKeyPress={this.handleKeyPress} onChange={this.handleChange} placeholder="Write a messages..." required />
+        <FontAwesomeIcon className='send-answer' onClick={()=> this.handleSubmit()} icon='paper-plane'/>
         </div>
+      </div>
         
       </div>
     );

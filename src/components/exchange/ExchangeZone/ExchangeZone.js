@@ -24,15 +24,16 @@ class ExchangeZone extends Component {
 
 
   async componentDidMount(){
-
-    const {detail,exchangeItems} = this.props
-    const filteredEx = exchangeItems.filter(obj => {
-      return obj.idRelease === detail.id.toString()
-    })
-
-    this.setState({exchangeItems:filteredEx})
+    this.props.exchangeItems && this.filterExchange()
   }
 
+  filterExchange(){
+    const {detail,exchangeItems} = this.props
+    const filteredEx = exchangeItems.filter(obj => {
+    return obj.idRelease === detail.id.toString()
+  })
+
+  this.setState({exchangeItems:filteredEx})}
 
   sendMessageToUser(info){
 
