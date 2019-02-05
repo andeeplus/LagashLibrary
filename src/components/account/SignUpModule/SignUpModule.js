@@ -38,7 +38,6 @@ class SignUpModule extends Component {
         name,
         lastName,
         eMail,
-        password,
         userName,
         profilePic,
       } = this.state
@@ -47,7 +46,6 @@ class SignUpModule extends Component {
         name,
         lastName,
         eMail,
-        password,
         userName,
         profilePic
       }
