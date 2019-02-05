@@ -28,6 +28,10 @@ class MessageList extends Component {
 
   }
 
+  componentWillUnmount(){
+    DatabaseApi.unsubscribeRealtime('messages')
+  }
+
   
 
   render() {

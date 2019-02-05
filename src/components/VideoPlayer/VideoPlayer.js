@@ -10,12 +10,17 @@ export default class VideoPlayer extends Component {
     playing: false
   }
 
+  changeTrack(i){
+    this.setState({index: i, playing:true})
+  }
+  
 
   render() {
 
 
     const {index,playing} = this.state
     const {videos} = this.props
+
       return (
 
       <div className="video-block">
@@ -28,7 +33,7 @@ export default class VideoPlayer extends Component {
         
         <ul className='playlist'>
         {videos.map((v,i) => 
-          <li onClick={() => this.setState({index: i, playing:true})} 
+          <li onClick={() => this.changeTrack(i)} 
           key={i}>{truncateString(v.title, 42)}</li>)}
         </ul>
       </div>

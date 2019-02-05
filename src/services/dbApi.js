@@ -172,6 +172,13 @@ export default class DatabaseApi {
     });
   }
 
+  static unsubscribeRealtime(collection){
+    var unsubscribe = db.collection(collection)
+    .onSnapshot(function () {});
+    unsubscribe()
+  }
+
+
 
 
   static async getDocument(collectionName, filterName, filterValue){

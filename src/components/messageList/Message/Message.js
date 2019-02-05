@@ -64,7 +64,7 @@ class Message extends Component {
   }
 
   handleKeyPress = (event) => {
-    if(event.key == 'Enter'){
+    if(event.key === 'Enter'){
       this.handleSubmit()
     }
   }
