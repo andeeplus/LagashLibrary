@@ -11,19 +11,27 @@ class Carousel extends Component {
 		dots: false,
 		dotsType: 'square',
 		images: [vinyl],
+		intervalTime: 15000,
 		titleTrig: 60
 	};
+
+
 
 	componentDidMount(){
 		this.sizeSelector(this.props.size)
 		this.dotSelector(this.props.dots)
 		const {images} = this.props
-		images && this.setState({images})
 		window.addEventListener('resize', this.triggerTitle());
+		this.setState({images})
+		
+		if (this.props.size === 'header'){
+			this.interval = setInterval(() => this.nextSlide(), this.state.intervalTime);
+		}
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.triggerTitle());
+		clearInterval(this.interval);
 	}
 
 	triggerTitle(){
@@ -85,7 +93,9 @@ class Carousel extends Component {
 
 
 	render () {
+		
 		const {images, size, currentImageIndex, dots, titleTrig} = this.state
+
 		return (
       <div className={`carousel${size}`}>
         <figure>

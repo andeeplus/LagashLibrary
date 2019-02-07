@@ -16,7 +16,10 @@ class RecordCard extends Component {
       PropTypes.number
     ]),
     cover_image: PropTypes.string,
-    label: PropTypes.array,
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array
+    ]),
     style: PropTypes.array,
     genre: PropTypes.array,
     format: PropTypes.array,

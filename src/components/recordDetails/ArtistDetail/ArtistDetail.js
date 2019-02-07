@@ -5,21 +5,30 @@ import Articles from '../../library/Articles/Articles'
 import Comments from '../../comments/Comments'
 import Carousel from '../../Carousel/Carousel'
 import VideoPlayer from '../../VideoPlayer/VideoPlayer'
+import Loading from '../../Loading/Loading'
 
 class ArtistDetail extends Component {
 
+  state = {
+    results: null,
+    releases: null
+  }
+
   componentDidMount() {
+    const {results, releases} = this.props
     window.scrollTo(0, 0)
+    this.setState({results, releases})
   }
 
   
   render() {
 
-    const {results, releases} = this.props
+    const {results, releases} = this.state
 
     return (
-
-      <React.Fragment>
+      !results && !releases 
+      ? <Loading />
+      : <React.Fragment>
         <div className="page-block">
         <Carousel images={results.images} size={'small-square'}/>
           <div className="page-details">
@@ -27,7 +36,7 @@ class ArtistDetail extends Component {
             { results.realname && <p className="page-real-name">{results.realname}</p>}
             { results.aliases &&   
             <React.Fragment>
-            <p className="page-aliases"><strong>Aliases: </strong></p>
+            <p className="page-desc"><strong>Aliases: </strong></p>
             <p>{results.aliases.map((i,index) => 
               <NavLink 
               key={index} 

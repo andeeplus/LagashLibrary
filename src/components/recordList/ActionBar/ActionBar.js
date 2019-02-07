@@ -12,14 +12,6 @@ import Modal from '../../Modal/Modal'
 class ActionBar extends Component {
 
   state = {
-    article: '',
-    artist: '',
-    catno: '',
-    id: '',
-    cover_image: '',
-    title: '',
-    year: '',
-    type:'',
     user: '',
     labelFav: [],
     artistFav: [],
