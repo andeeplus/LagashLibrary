@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import VersionList from '../VersionList/VersionList'
 import Comments from '../../comments/Comments'
 import Articles from '../../library/Articles/Articles'
 import Carousel from '../../Carousel/Carousel'
 import VideoPlayer from '../../VideoPlayer/VideoPlayer'
-import ExchangeZone from '../../exchange/ExchangeZone/ExchangeZone'
+import Loading from '../../Loading/Loading'
+const ExchangeZone = lazy(() => import('../../exchange/ExchangeZone/ExchangeZone'))
 
 export default class ReleaseDetail extends Component {
   
@@ -47,7 +48,9 @@ export default class ReleaseDetail extends Component {
           </div>
           </div>
           </div>
+          <Suspense fallback={<Loading />}>
           <ExchangeZone detail={detail} type={'release'}/>
+          </Suspense>
           <Articles idRelease={detail.id} type={'release'} />
           {detail.videos && <VideoPlayer videos={detail.videos} />}
           <Comments idRelease={detail.id} type={'release'} onPage={detail.artists[0].name}/>

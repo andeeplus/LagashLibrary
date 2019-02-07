@@ -42,10 +42,10 @@ class Comments extends Component {
     const {fbComments} = this.state
     return (
       <React.Fragment>
-        <h1 className="page-h1">
+        {fbComments &&<h1 className="page-h1">
         <FontAwesomeIcon icon="comment" /> 
         Comments
-        </h1>
+        </h1>}
         {fbComments && <CommentBox comments={fbComments}/>}
         {this.props.user && <AddComment 
         id={this.identifyType()} 

@@ -185,7 +185,7 @@ class ActionBar extends Component {
         onClose={this.onClose} 
         show={this.state.modalShow} 
         trigger={<SignUpModule closeModal={this.onClose} />}
-        >Exchange Item
+        >Register Now
       </Modal>
     </React.Fragment>
 
