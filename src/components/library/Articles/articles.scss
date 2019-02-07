@@ -79,15 +79,16 @@
   }
 }
 
-.no-articles{
+.no-articles-yet{
   display:flex;
   flex-direction: row;
   justify-content: center;
-  p{
-    padding-top: 5px;
-    font-family: $font-type-b;
-    font-size: $text-size-m;
-  }
+  padding-top: 5px;
+  font-family: $font-type-b;
+  font-size: $text-size-m;
+  font-style: italic;
+  padding-bottom: 30px;
+  
 }
 
 

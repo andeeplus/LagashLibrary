@@ -76,8 +76,8 @@ class Articles extends Component {
         </h1>
         
         {fbArticles.length > 0 
-        ?<MultiCarousel images={fbArticles} />
-        : <div className="no-articles"><p>Add some articles!</p></div>}
+        ? <MultiCarousel images={fbArticles} />
+        : <p className="no-articles-yet">Add some articles!</p>}
         <Modal 
           onClose={this.onClose} 
           show={modalShow} 

@@ -40,18 +40,21 @@ class Comments extends Component {
 
     const {type, onPage} = this.props
     const {fbComments} = this.state
+    
     return (
       <React.Fragment>
-        {fbComments &&<h1 className="page-h1">
+        <h1 className="page-h1">
         <FontAwesomeIcon icon="comment" /> 
         Comments
-        </h1>}
-        {fbComments && <CommentBox comments={fbComments}/>}
-        {this.props.user && <AddComment 
-        id={this.identifyType()} 
-        type={type}
-        onPage={onPage}
-        />}
+        </h1>
+        {fbComments.length > 1 
+        ? <CommentBox comments={fbComments}/>
+        : <p className="no-articles-yet">No comments yet</p>}
+          {this.props.user && <AddComment 
+          id={this.identifyType()} 
+          type={type}
+          onPage={onPage}
+          />}
       </React.Fragment>
     );
   }
