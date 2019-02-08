@@ -1,5 +1,7 @@
 # Lagash Library
 
+### [Online Demo](https://lagashlibrary.com/)
+
 ## Why Lagash?
 
 LAGASH, or Sirpurla, one of the oldest centres of Sumerian civilization in Babylonia. It is represented by a rather low, long line of ruin mounds, along the dry bed of an ancient canal, some 3 m. E. of the Shatt-el-Haī and a little less than 10 m. N. of the modern Turkish town of Shatra. These ruins were discovered in 1877 by Ernest de Sarzec, at that time French consul at Basra, who was allowed, by the Montefich chief, Nasir Pasha, the first Wali-Pasha, or governor-general, of Basra, to excavate at his pleasure in the territories subject to that official. At the outset on his own account, and later as a representative of the French government, under a Turkish firman, de Sarzec continued excavations at this site, with various intermissions, until his death in 1901, after which the work was continued under the supervision of the Commandant Cros. The principal excavations were made in two larger mounds, one of which proved to be the site of the temple, E-Ninnu, the shrine of the patron god of Lagash, Nin-girsu or Ninib. This temple had been razed and a fortress built upon its ruins, in the Greek or Seleucid period, some of the bricks found bearing the inscription in Aramaic and Greek of a certain Hadad-nadin-akhe, king of a small Babylonian kingdom. It was beneath this fortress that the numerous statues of Gudea were found, which constitute the gem of the Babylonian collections at the Louvre. These had been decapitated and otherwise mutilated, and thrown into the foundations of the new fortress. From this stratum came also various fragments of bas reliefs of high artistic excellence. [...]
@@ -107,10 +109,13 @@ npm install redux-logger
 npm install redux-promise-middleware
 ```
 
-# Modelo de Datos
+# Data Model
 
-![Image](https://github.com/andeeplus/web-responsive/blob/master/DB%20Diagram.svg)
-![Image](https://github.com/andeeplus/web-responsive/blob/master/Lagash%20Library%20Web.svg)
+![Image](https://github.com/andeeplus/LagashLibrary/blob/develop/DB%20Diagram.svg)
+
+# Web Structure
+
+![Image](https://github.com/andeeplus/LagashLibrary/blob/develop/Lagash%20Library%20Web.svg)
 
 # Discogs API
 https://www.discogs.com/applications/edit/21925
