@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player'
 import {truncateString} from '../../services/helper'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+
 export default class VideoPlayer extends Component {
 
   state={

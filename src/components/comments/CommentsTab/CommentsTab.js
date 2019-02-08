@@ -21,7 +21,8 @@ class CommentsTab extends Component {
   render() {
 
     const {fbComments} = this.state
-    
+    const filteredComments = fbComments.slice(Math.max(fbComments.length - 5, 1)).reverse()
+
     return (
 
       fbComments &&
@@ -30,7 +31,7 @@ class CommentsTab extends Component {
         <FontAwesomeIcon icon="comment" /> 
         Latest Comments
         </h1>
-        {fbComments && <CommentBox comments={fbComments} styler={'no-page'} onPage={this.props.onPage}/>}
+        {fbComments && <CommentBox comments={filteredComments} styler={'no-page'} onPage={this.props.onPage}/>}
       </React.Fragment>
     );
   }
