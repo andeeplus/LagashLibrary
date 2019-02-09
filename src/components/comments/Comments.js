@@ -47,7 +47,7 @@ class Comments extends Component {
         <FontAwesomeIcon icon="comment" /> 
         Comments
         </h1>
-        {fbComments.length > 1 
+        {fbComments.length >= 0 
         ? <CommentBox comments={fbComments}/>
         : <p className="no-articles-yet">No comments yet</p>}
           {this.props.user && <AddComment 
