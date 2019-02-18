@@ -32,20 +32,14 @@ showDropdownMenu = (event) => {
         <div  className="dropdown" >
          <div className="buttonMenu" onClick={this.showDropdownMenu}>{this.props.children} <FontAwesomeIcon icon="caret-down" /></div>
 
-          { this.state.displayMenu ? (
-          <ul>
-         <li><p onClick={() => chooseFavo('artists')}>Artists</p></li>
-         <li><p onClick={() => chooseFavo('labels')}>Labels</p></li>
-         <li><p onClick={() => chooseFavo('records')}>Records</p></li>
-          </ul>
-        ):
-        (
-          null
-        )
-        }
-
+          { this.state.displayMenu 
+            ? ( <ul>
+                  <li><p onClick={() => chooseFavo('artists')}>Artists</p></li>
+                  <li><p onClick={() => chooseFavo('labels')}>Labels</p></li>
+                  <li><p onClick={() => chooseFavo('records')}>Records</p></li>
+                </ul>)
+            :(null)}
        </div>
-
     );
   }
 }

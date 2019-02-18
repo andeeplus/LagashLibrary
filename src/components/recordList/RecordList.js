@@ -32,7 +32,7 @@ class RecordList extends Component {
     return (
 
       <React.Fragment>
-      { cardType && <PageTitle titleProps={this.titleId}/> }
+      { cardType && <PageTitle titleProps={this.titleId()}/> }
 
       <div className='RecordList'>
         {records && records.map((records,index) => {

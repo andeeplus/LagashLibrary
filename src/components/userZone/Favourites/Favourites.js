@@ -14,7 +14,6 @@ state = {
   artistFav:[],
   masterFav:[],
   loading: true,
-
   artistsSelect: true,
   labelsSelect: false,
   recordsSelect:false,
@@ -63,9 +62,8 @@ componentDidMount(){
     const fullRecords = {...releaseFav,...masterFav}
 
     return (
-      loading 
-      ? <Loading />
-      :<div>
+      loading ? <Loading /> :
+      <div>
       <DropDown chooseFavo={this.chooseFavo}>{menuTitle}</DropDown>
       <div className='favoBlocks'>
         {Object.entries(artistFav).length === 0  
