@@ -15,47 +15,46 @@ export default class ReleaseDetail extends Component {
   
   render() {
 
-    const {detail, versions} = this.props
+    const {results, versions} = this.props
 
       return (
         <React.Fragment>
           <div className="page-block">
-          <Carousel images={detail.images} size={'small-square'}/>
-          <div className="page-details">
-            <p className="record-det-artist">{detail.artists_sort}</p>
-            <p className="record-det-title">{detail.title}</p>
-          <div className="genre-block">
-            {detail.genres.map( (i, index) => <p key={index} className="main-genre">{i}</p>)}
-            {detail.styles && detail.styles.map( (i, index)  => <p key={index} className="main-style">{i}</p>)}
-          </div>
-          
-          {detail.labels.map((i,index) => <p key={index} className="rec-label"><span>{i.name}</span>{i.catno}</p>)}
+            <Carousel images={results.images} size={'small-square'}/>
+              <div className="page-resultss">
+                <p className="record-det-artist">{results.artists_sort}</p>
+                <p className="record-det-title">{results.title}</p>
+              <div className="genre-block">
+                {results.genres.map( (i, index) => <p key={index} className="main-genre">{i}</p>)}
+                {results.styles && results.styles.map( (i, index)  => <p key={index} className="main-style">{i}</p>)}
+              </div>
+              
+              {results.labels.map((i,index) => <p key={index} className="rec-label"><span>{i.name}</span>{i.catno}</p>)}
 
-          <div className="format-year">
-            <div className="year">{detail.year}</div>
-            <div className="format-rec">{detail.formats.map(i => i.name)}</div>
-            <div className="country-rec">{detail.country}</div>
-          </div>
+              <div className="format-year">
+                <div className="year">{results.year}</div>
+                <div className="format-rec">{results.formats.map(i => i.name)}</div>
+                <div className="country-rec">{results.country}</div>
+              </div>
 
-          <div className="tracklist-record">
-            {detail.tracklist.map((a, index) => 
-            <p key= {index} className="track-rec">
-            {a.position && <span className="label-track">{a.position}</span> }
-            {a.type_ === 'heading' ? <span className="heading-rec">{a.title}</span>
-            : a.title}
-            <i>{a.duration}</i>
-            </p>)}
-          </div>
-          </div>
+              <div className="tracklist-record">
+                {results.tracklist.map((a, index) => 
+                  <p key= {index} className="track-rec">
+                  {a.position && <span className="label-track">{a.position}</span> }
+                  {a.type_ === 'heading' ? <span className="heading-rec">{a.title}</span>
+                  : a.title}
+                  <i>{a.duration}</i>
+                  </p>)}
+              </div>
+            </div>
           </div>
           <Suspense fallback={<Loading />}>
-          <ExchangeZone detail={detail} type={'release'}/>
+            <ExchangeZone results={results} type={'release'}/>
           </Suspense>
-          <Articles idRelease={detail.id} type={'release'} />
-          {detail.videos && <VideoPlayer videos={detail.videos} />}
-          <Comments idRelease={detail.id} type={'release'} onPage={detail.artists[0].name}/>
-          { versions && versions.versions.length !== 0 &&
-            <VersionList detail={detail} versions={versions}/>}
+          <Articles idRelease={results.id} type={'release'} />
+          {results.videos && <VideoPlayer videos={results.videos} />}
+          <Comments idRelease={results.id} type={'release'} onPage={results.artists[0].name}/>
+          { versions && versions.versions.length !== 0 && <VersionList results={results} versions={versions}/>}
         </React.Fragment>
 
     );

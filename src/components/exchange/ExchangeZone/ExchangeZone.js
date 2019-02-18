@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from "../../Modal/Modal";
 import ExchangeItem from '../ExchangeItem/ExchangeItem'
 import SendMessage from '../../messageList/SendMessage/SendMessage'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { connect } from 'react-redux';
+
 
 
 class ExchangeZone extends Component {
@@ -28,9 +29,9 @@ class ExchangeZone extends Component {
   }
 
   filterExchange(){
-    const {detail,exchangeItems} = this.props
+    const {results,exchangeItems} = this.props
     const filteredEx = exchangeItems.filter(obj => {
-    return obj.idRelease === detail.id.toString()
+    return obj.idRelease === results.id.toString()
   })
 
   this.setState({exchangeItems:filteredEx})}
@@ -52,7 +53,7 @@ class ExchangeZone extends Component {
 
     
     const {exchangeItems, modalShow, modalShowMsg, sendEmailTo, infoExchange} = this.state
-    const {type, detail, user} = this.props
+    const {type, results, user} = this.props
 
     return (
       
@@ -75,8 +76,7 @@ class ExchangeZone extends Component {
         { !user 
           ? <p>Signup to exchange your records!</p> 
           : exchangeItems.length <= 0 
-          ? <p>Item not available yet for exchange</p>
-          : 
+          ? <p>Item not available yet for exchange</p> : 
           <React.Fragment>
           <p>There {exchangeItems.length === 1 ? 'is':'are'} {exchangeItems.length} {exchangeItems.length === 1 ? 'item':'items'} on the exchange area</p>
           <div className="offers-on-page">
@@ -89,8 +89,8 @@ class ExchangeZone extends Component {
             {user && <FontAwesomeIcon onClick={() => this.sendMessageToUser(i)} className="offer-icons" icon="envelope" />}
             </div>
             <div className='single-exchange-text'>
-            <p className="exchange-title">{i.titleOffer}</p>
-            <p className="exchange-desc">{i.offerDetail}</p>
+              <p className="exchange-title">{i.titleOffer}</p>
+              <p className="exchange-desc">{i.offerDetail}</p>
             </div>
            
           </div>
@@ -101,7 +101,7 @@ class ExchangeZone extends Component {
         <Modal 
           onClose={this.onClose} 
           show={modalShow} 
-          trigger={<ExchangeItem user={user} closeModal={this.onClose} detail={detail} type={type}/>}
+          trigger={<ExchangeItem user={user} closeModal={this.onClose} results={results} type={type}/>}
           >Exchange Item</Modal>
         <Modal 
           onClose={this.onCloseMsg} 
@@ -109,7 +109,6 @@ class ExchangeZone extends Component {
           trigger={<SendMessage user={user} closeModal={this.onCloseMsg} sendTo={sendEmailTo} infoExchange={infoExchange} />}
           >Exchange Item</Modal>
         </div>
-
     );
   }
 }

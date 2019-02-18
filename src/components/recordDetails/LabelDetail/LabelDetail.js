@@ -38,7 +38,7 @@ class LabelDetail extends Component {
         <Articles idLabel={results.id} type={'label'} />
         {results.videos && <VideoPlayer videos={results.videos} />}
         <Comments idLabel={results.id} type={'label'} onPage={results.name}/>
-        <RecordList records={releases.releases} comingFrom={'pageDetail'}/>
+        <RecordList records={releases.releases} cardType={'small'}/>
       </React.Fragment>
     );
   }

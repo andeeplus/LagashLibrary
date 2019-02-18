@@ -41,9 +41,8 @@ class HotSpot extends Component {
           </div>
           <div className='list-card-line-sm'>    
             <p className='list-card-title-sm'>
-            {truncateString(stripTitle(i.title)[1],15)}
+            {truncateString(stripTitle(i.title)[1],19)}
             </p>
-            <p className='list-card-catno-sm'>{truncateString(i.catno,12)}</p>
           </div>
         </div>
       </div>)}

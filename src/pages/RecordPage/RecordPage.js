@@ -35,7 +35,6 @@ class RecordPage extends Component {
     const versions = await DiscogsApi.getQuery(`https://api.discogs.com/masters/${query}/versions`)
     Promise.all([results,versions],this.setState({results, versions, loading:false}))
 
- 
   }
 
   componentDidMount() {
@@ -47,25 +46,21 @@ class RecordPage extends Component {
    let url = this.props.location.pathname.split('/')[2]
    switch (url){
      case 'masters':
-      return <MasterDetail detail={results} versions={versions} />
+      return <MasterDetail results={results} versions={versions} />
     case 'releases':
-      return <ReleaseDetail detail={results} versions={versions}/>
+      return <ReleaseDetail results={results} versions={versions}/>
      default:
    }
   }
-
 
   render() {
 
     const {results, versions, loading} = this.state
 
     return (
-      
-          loading 
-          ? <Loading />
-          : <div className='pages-blocks'>
-            {this.recCompo(results, versions)}
-          </div>
+      loading 
+      ? <Loading /> 
+      : <div className='pages-blocks'>{this.recCompo(results, versions)}</div>
     );
   }
 }

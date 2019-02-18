@@ -36,7 +36,7 @@ export const refreshFav = (user, actionType, actionProps, favourites, favoIds) =
         default:
       }
     } else if(actionType === 'ADD'){
-
+      console.log(artist, title)
       switch(type){
 
         case 'label':
@@ -47,21 +47,21 @@ export const refreshFav = (user, actionType, actionProps, favourites, favoIds) =
         break;
 
         case 'artist':
-          const artistFav = {artist, title, cover_image, id, type} 
+          const artistFav = {artist: title, cover_image, id, type} 
           DatabaseApi.updateDocument('artistFav', {[id]:artistFav}, user.id)
           favourites.artists[id] = artistFav
           favoIds.artistId.push(id.toString())
         break;
 
         case 'release':
-          const releaseFav = {cover_image, id, title, type, year, catno}
+          const releaseFav = {cover_image, id, title: (artist,title), type, year, catno}
           DatabaseApi.updateDocument('releaseFav', {[id]:releaseFav}, user.id)
           favourites.releases[id] = releaseFav
           favoIds.releaseId.push(id.toString())
         break;
 
         case 'master':
-          const masterFav = {cover_image, id, title, type, year, catno}
+          const masterFav = {artist, cover_image, id, title, type, year, catno}
           DatabaseApi.updateDocument('masterFav', {[id]:masterFav}, user.id)
           favourites.masters[id] = masterFav
           favoIds.masterId.push(id.toString())

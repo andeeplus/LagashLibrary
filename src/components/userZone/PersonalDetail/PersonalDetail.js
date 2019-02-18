@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DatabaseApi from '../../../services/dbApi';
-import StorageApi from '../../../services/StorageApi'
+import StorageApi from '../../../services/storageApi'
 import { withRouter } from "react-router";
 import { connect } from 'react-redux';
 import { setUserInfo } from '../../../redux/actions/authActions'

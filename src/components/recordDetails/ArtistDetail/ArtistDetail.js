@@ -15,20 +15,18 @@ class ArtistDetail extends Component {
   }
 
   componentDidMount() {
-    const {results, releases} = this.props
     window.scrollTo(0, 0)
+    const {results, releases} = this.props
     this.setState({results, releases})
   }
-
   
   render() {
 
     const {results, releases} = this.state
 
     return (
-      !results && !releases 
-      ? <Loading />
-      : <React.Fragment>
+      !results ? <Loading /> : 
+      <React.Fragment>
         <div className="page-block">
         <Carousel images={results.images} size={'small-square'}/>
           <div className="page-details">
@@ -73,7 +71,7 @@ class ArtistDetail extends Component {
         <Articles idArtist={results.id} type={'artist'} />
         {results.videos && <VideoPlayer videos={results.videos} />}
         <Comments idArtist={results.id} type={'artist'} onPage={results.name} />
-        <RecordList records={releases.releases} comingFrom={'pageDetail'}/>
+        {releases && <RecordList records={releases.releases} cardType={'small'}/>}
       </React.Fragment>
 
     );

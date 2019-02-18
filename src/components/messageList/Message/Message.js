@@ -69,9 +69,9 @@ class Message extends Component {
     }
   }
 
-  chooseUser(userName){
+  chooseUser(userIdMsg){
     const {user} = this.props
-    return userName === user.userName? 'user-right' : 'user-left'
+    return userIdMsg === user.id? 'user-right' : 'user-left'
   }
 
   choosePhoto(){
@@ -98,7 +98,7 @@ class Message extends Component {
       <div className="message-scroll">
       { message.message.map( message => 
         <div key={message.dateNow} className={'single-message'}>
-        <p className={this.chooseUser(message.userName)}>{message.message}</p>
+        <p className={this.chooseUser(message.fromUser)}>{message.message}</p>
         <p className='email-timestamp'>{message.date.split(',')[0]} <strong>{message.date.split(',')[1]}</strong></p>
         </div>
       )}

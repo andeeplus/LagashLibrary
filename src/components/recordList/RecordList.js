@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import RecordCard from '../recordList/RecordCard/RecordCard'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { withRouter} from 'react-router'
 import { connect } from 'react-redux';
+import PageTitle from '../htmlElements/PageTitle'
+
+
 
 class RecordList extends Component {
 
-
-  titleId(){
+  titleId = () => {
 
     switch (this.props.match.path) {
       case '/detail/artists/:artist':
@@ -23,50 +24,35 @@ class RecordList extends Component {
   }
  
 
+
   render () {
 
-    const {records, comingFrom} = this.props
-    // const year = isNaN(records.year) ? records.year : records.year.toString()
+    const {records, cardType} = this.props
+    console.log(records)
     return (
 
       <React.Fragment>
-      { comingFrom &&
-        <h1 className="page-h1">
-        <FontAwesomeIcon icon={this.titleId()[1]} /> 
-        {this.titleId()[0]}
-        </h1>
-      }
-
-       
+      { cardType && <PageTitle titleProps={this.titleId}/> }
 
       <div className='RecordList'>
-        {records && records.map(records => {
-
-
+        {records && records.map((records,index) => {
             return (
-              <div key={records.id} className='RecordList-item'>
-                <RecordCard
-                  id={records.id}
-                  artist={records.artist}
-                  title={records.title}
-                  label={records.label}
-                  style={records.style}
-                  genre={records.genre}
-                  format={records.format = []}
-                  country={records.country}
-                  catno={records.catno}
-                  cover_image={
-                    comingFrom === 'pageDetail' 
-                    ? records.thumb : records.cover_image}
-                  year={records.year}
-                  type={
-                    records.type
-                    ? records.type
-                    : 'release'
-                  }
-                  comingFrom={comingFrom}
-
-                />
+              <div key={records.id+index} className='RecordList-item'>
+                <RecordCard card={{
+                  id:records.id,
+                  artist:records.artist,
+                  title:records.title,
+                  label:records.label,
+                  style:records.style,
+                  genre:records.genre,
+                  format:records.format || [],
+                  country:records.country,
+                  catno:records.catno,
+                  cover_image: cardType === 'small' ? records.thumb : records.cover_image,
+                  year:records.year,
+                  type: records.type ? records.type : 'release',
+                  cardType:cardType
+                  }}/>
               </div>
             )
           })

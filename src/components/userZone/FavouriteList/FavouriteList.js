@@ -23,7 +23,7 @@ class FavouriteList extends Component {
     const {recordFav, artistFav, labelFav} = this.props
 
     const { favourites } = this.props
-
+    console.log(this.props)
     return (
 
       <React.Fragment>
@@ -45,7 +45,7 @@ class FavouriteList extends Component {
                 <div className='list-card-line'>
                   { this.renderLabel(artistFav.type) }
                   <div className='list-card-t-line-sm'>
-                    <p className='list-card-artist-sm'>{truncateString(artistFav.artist,12)}</p>
+                    <p className='list-card-artist-sm'>{truncateString(artistFav.artist,11)}</p>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,6 @@ class FavouriteList extends Component {
                   <p className='list-card-title-sm'>
                   {truncateString(stripTitle(recordFav.title)[1],15)}
                   </p>
-                  <p className='list-card-catno-sm'>{truncateString(recordFav.catno,12)}</p>
                 </div>
             </div>
             </div>
@@ -131,3 +130,4 @@ export default connect(mapStateToProps)(FavouriteList);
 
 
 
+//                  <p className='list-card-catno-sm'>{truncateString(recordFav.catno,12)}</p>

@@ -11,28 +11,26 @@ export default class MasterDetail extends Component {
     window.scrollTo(0, 0)
   }
   
-  
   render() {
 
-    const {detail, versions} = this.props
+    const {results, versions} = this.props
   
-
       return (
         
-        detail &&
+        results &&
         
         <React.Fragment>
           <div className="page-block">
-          <Carousel images={detail.images} size={'small-square'}/>
-            <div className="page-details">
-              <p className="record-det-artist">{detail.artists[0].name}</p>
-              <p className="record-det-title">{detail.title}</p>
+          <Carousel images={results.images} size={'small-square'}/>
+            <div className="page-resultss">
+              <p className="record-det-artist">{results.artists[0].name}</p>
+              <p className="record-det-title">{results.title}</p>
             <div className="genre-block">
-              {detail.genres.map( i => <p key={i} className="main-genre">{i}</p>)}
-              {detail.styles && detail.styles.map( i => <p key={i} className="main-style">{i}</p>)}
+              {results.genres.map( i => <p key={i} className="main-genre">{i}</p>)}
+              {results.styles && results.styles.map( i => <p key={i} className="main-style">{i}</p>)}
             </div>
             <div className="tracklist-record">
-              {detail.tracklist.map((a, index) => 
+              {results.tracklist.map((a, index) => 
               <p key= {index} className="track-rec">
               {a.position && <span className="label-track">{a.position}</span> }
               {a.type_ === 'heading' ? <span className="heading-rec">{a.title}</span>
@@ -42,11 +40,10 @@ export default class MasterDetail extends Component {
             </div>
           </div>
          </div>
-         <Articles idMaster={detail.id} type={'master'} />
-         {detail.videos && <VideoPlayer videos={detail.videos} />}
-         <Comments idMaster={detail.id} type={'master'} onPage={detail.artists[0].name}/>
-         { versions && versions.versions.length !== 0 &&
-          <VersionList versions={versions}/>}
+         <Articles idMaster={results.id} type={'master'} />
+         {results.videos && <VideoPlayer videos={results.videos} />}
+         <Comments idMaster={results.id} type={'master'} onPage={results.artists[0].name}/>
+         {versions && versions.versions.length !== 0 && <VersionList versions={versions}/>}
         </React.Fragment>
         
     );

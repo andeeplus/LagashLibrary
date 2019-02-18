@@ -21,16 +21,16 @@ class ExchangeItem extends Component {
 
 
   componentDidMount(){
-    const {detail, type, user} = this.props
+    const {results, type, user} = this.props
     this.setState({
       user: user.id,
       userName: user.userName,
       userImg: user.profilePic,
-      title: detail.title,
-      catno: detail.labels.map(i => [i.name,i.catno]).join(','),
-      artist: detail.artists_sort,
-      year: detail.year.toString(),
-      idRelease: detail.id.toString(),
+      title: results.title,
+      catno: results.labels.map(i => [i.name,i.catno]).join(','),
+      artist: results.artists_sort,
+      year: results.year.toString(),
+      idRelease: results.id.toString(),
       type: type
     })
   }
@@ -77,8 +77,6 @@ class ExchangeItem extends Component {
     }
 
     this.addDocs(exchangeItemUp)
-    const exchangeItems = JSON.parse(localStorage.getItem('lagash-global-exchange'))
-    localStorage.setItem('lagash-global-exchange', JSON.stringify({...exchangeItems, ...exchangeItemUp}));
     this.props.closeModal()
   }
 
